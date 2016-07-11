@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8289B3A2-2916-451B-AAF2-D0DB80B4554B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{4D33460C-C1DC-47E7-9E5B-E7C278B56060}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LissBinder.Data", "LissBinder.Data\LissBinder.Data.csproj", "{CC51D931-619C-401C-8508-0462E5EFA5B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LissBinder.Data.SqlServer", "LissBinder.Data.SqlServer\LissBinder.Data.SqlServer.csproj", "{2EBFD437-800A-405E-8EA1-AEC4DE2C1C15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LissBinder.Models", "LissBinder.Models\LissBinder.Models.csproj", "{775A76A4-E403-45ED-91AB-B28DDC996D16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LissBinder.Console.App", "LissBinder.Console.App\LissBinder.Console.App.csproj", "{F10F1D74-8BEF-4232-8F93-927D53CB5A70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LissBinder.WinForms.App", "LissBinder.WinForms.App\LissBinder.WinForms.App.csproj", "{7D195BEF-17F1-4FF6-A795-F6A083964D27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{6A24555E-6649-422E-AF9F-12F9B848AF1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC51D931-619C-401C-8508-0462E5EFA5B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC51D931-619C-401C-8508-0462E5EFA5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC51D931-619C-401C-8508-0462E5EFA5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC51D931-619C-401C-8508-0462E5EFA5B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EBFD437-800A-405E-8EA1-AEC4DE2C1C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EBFD437-800A-405E-8EA1-AEC4DE2C1C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EBFD437-800A-405E-8EA1-AEC4DE2C1C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EBFD437-800A-405E-8EA1-AEC4DE2C1C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{775A76A4-E403-45ED-91AB-B28DDC996D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{775A76A4-E403-45ED-91AB-B28DDC996D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{775A76A4-E403-45ED-91AB-B28DDC996D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{775A76A4-E403-45ED-91AB-B28DDC996D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F10F1D74-8BEF-4232-8F93-927D53CB5A70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F10F1D74-8BEF-4232-8F93-927D53CB5A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F10F1D74-8BEF-4232-8F93-927D53CB5A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F10F1D74-8BEF-4232-8F93-927D53CB5A70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D195BEF-17F1-4FF6-A795-F6A083964D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D195BEF-17F1-4FF6-A795-F6A083964D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D195BEF-17F1-4FF6-A795-F6A083964D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D195BEF-17F1-4FF6-A795-F6A083964D27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC51D931-619C-401C-8508-0462E5EFA5B0} = {8289B3A2-2916-451B-AAF2-D0DB80B4554B}
+		{2EBFD437-800A-405E-8EA1-AEC4DE2C1C15} = {8289B3A2-2916-451B-AAF2-D0DB80B4554B}
+		{775A76A4-E403-45ED-91AB-B28DDC996D16} = {8289B3A2-2916-451B-AAF2-D0DB80B4554B}
+		{F10F1D74-8BEF-4232-8F93-927D53CB5A70} = {4D33460C-C1DC-47E7-9E5B-E7C278B56060}
+		{7D195BEF-17F1-4FF6-A795-F6A083964D27} = {4D33460C-C1DC-47E7-9E5B-E7C278B56060}
+	EndGlobalSection
+EndGlobal
