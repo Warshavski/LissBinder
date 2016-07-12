@@ -26,8 +26,9 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
                 var commandText = "dbo.azure_liss_user_select_by_login";
                 var commandType = CommandType.StoredProcedure;
                 var commandParameters = new SqlParameter[] {
-                    new SqlParameter("@RETURN_VALUE", SqlDbType.Int, 4, ParameterDirection.ReturnValue, false, ((byte)(0)), ((byte)(0)), "", DataRowVersion.Current, null),
-                    new SqlParameter("@login", SqlDbType.NVarChar, 50) };
+                    new SqlParameter("@RETURN_VALUE", SqlDbType.Int, 4, 
+                        ParameterDirection.ReturnValue, false, ((byte)(0)), ((byte)(0)), "", DataRowVersion.Current, null),
+                    new SqlParameter("@login", SqlDbType.NVarChar, 50)};
 
                 using (var command = SqlAccessHelper.CreateCommand(
                     connection, commandText, commandType, commandParameters))

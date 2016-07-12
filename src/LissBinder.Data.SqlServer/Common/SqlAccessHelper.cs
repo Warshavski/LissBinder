@@ -96,8 +96,8 @@ namespace Escyug.LissBinder.Data.SqlServer.Common
 
                 while (await reader.ReadAsync())
                 {
-                    var entitie = ReaderParser(reader);
-                    entitiesList.Add(entitie);
+                    var entity = ReaderParser(reader);
+                    entitiesList.Add(entity);
                 }
 
                 return entitiesList;
@@ -126,8 +126,8 @@ namespace Escyug.LissBinder.Data.SqlServer.Common
                 // Always use ReadAsync
                 if (await reader.ReadAsync())
                 {
-                    var entitie = ReaderParser(reader);
-                    return entitie;
+                    var entity = ReaderParser(reader);
+                    return entity;
                 }
                 else
                 {

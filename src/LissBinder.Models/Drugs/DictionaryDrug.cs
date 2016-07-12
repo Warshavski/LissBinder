@@ -1,6 +1,8 @@
-﻿
+﻿using System;
+
 namespace Escyug.LissBinder.Models.Drugs
 {
+    //[Serializable]
     public class DictionaryDrug
     {
         public string Name { get; private set; }

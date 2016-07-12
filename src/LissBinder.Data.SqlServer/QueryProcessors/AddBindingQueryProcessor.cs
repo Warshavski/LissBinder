@@ -10,7 +10,7 @@ using Escyug.LissBinder.Data.SqlServer.Common;
 
 namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
 {
-    class AddBindingQueryProcessor
+    public class AddBindingQueryProcessor : IAddBindingQueryProcessor
     {
         private readonly DbContext _context;
 
