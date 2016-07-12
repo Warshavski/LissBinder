@@ -20,16 +20,16 @@ namespace Escyug.LissBinder.Models.Drugs
         public int ManufacturerCode { get; private set; }
 
         public PharmacyDrug(
-            long drugCode, string drugName, string manufacturerName, decimal drugQnt, 
-            decimal drugPrice, string drugSeries, string drugBarcode, int manufacturerCode)
+            long code, string name, string manufacturerName, decimal quantity,
+            decimal price, string series, string barcode, int manufacturerCode)
         {
-            Code = drugCode;
-            Name = drugName;
+            Code = code;
+            Name = name;
             ManufacturerName = manufacturerName;
-            Quantity = drugQnt;
-            Price = drugPrice;
-            Series = drugSeries;
-            Barcode = drugBarcode;
+            Quantity = quantity;
+            Price = price;
+            Series = series;
+            Barcode = barcode;
             ManufacturerCode = manufacturerCode;
         }
     }

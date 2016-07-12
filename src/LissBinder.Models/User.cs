@@ -7,10 +7,10 @@ namespace Escyug.LissBinder.Models
 
         public string Name { get; private set; }
 
-        public User(int userId, string userName)
+        public User(int id, string name)
         {
-            Id = userId;
-            Name = userName;
+            Id = id;
+            Name = name;
         }
     }
 }
