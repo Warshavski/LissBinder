@@ -9,5 +9,6 @@ namespace Escyug.LissBinder.Models.Repositories
     public interface IPharmacyDrugsRepository
     {
         Task<IEnumerable<Models.Drugs.PharmacyDrug>> GetDrugsByNameAsync(string drugName, int pharmacyId);
+        Task<int> AddDrugs(IEnumerable<Models.Drugs.PharmacyDrug> drugsList, int pharmacyId);
     }
 }

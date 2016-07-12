@@ -16,10 +16,14 @@ namespace Escyug.LissBinder.Models.Repositories
     public class PharmacyDrugsRepository : IPharmacyDrugsRepository
     {
         private readonly IPharmacyDrugsByNameQueryProcessor _drugByNameQueryProcessor;
+        private readonly IAddPharmacyDrugsQueryProcessor _drugsAddQueryProcessor;
 
-        public PharmacyDrugsRepository(IPharmacyDrugsByNameQueryProcessor drugByNameQueryProcessor)
+        public PharmacyDrugsRepository(
+            IPharmacyDrugsByNameQueryProcessor drugByNameQueryProcessor,
+            IAddPharmacyDrugsQueryProcessor drugsAddQueryProcessor)
         {
             _drugByNameQueryProcessor = drugByNameQueryProcessor;
+            _drugsAddQueryProcessor = drugsAddQueryProcessor;
         }
 
         public async Task<IEnumerable<Drugs.PharmacyDrug>> GetDrugsByNameAsync(string drugName, int pharmacyId)
@@ -40,6 +44,20 @@ namespace Escyug.LissBinder.Models.Repositories
             {
                 return null;
             }
+        }
+
+        public async Task<int> AddDrugs(IEnumerable<Drugs.PharmacyDrug> drugsList, int pharmacyId)
+        {
+            var pharmacyDrugsEntities = new List<Data.Entities.PharmacyDrug>();
+            foreach (var model in drugsList)
+            {
+                pharmacyDrugsEntities.Add(PharmacyDrugMappings.ModelToEntity(model));
+            }
+
+            var rowsTotal = await _drugsAddQueryProcessor.AddDrugsAsync(
+                pharmacyDrugsEntities, pharmacyId);
+
+            return rowsTotal;
         }
     }
 }

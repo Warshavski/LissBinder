@@ -14,13 +14,23 @@ namespace Escyug.LissBinder.Data.Entities
         // represents pharmacy drug name
         public string Name { get; set; }
 
-        // represents pharmacy drug manufacturer code
-        public int ManufacturerCode { get; set; }
-
         // represents pharmacy drug manufacturer name
         public string ManufacturerName { get; set; }
 
+        // repsenets drug quantity
+        public decimal Quantity { get; set; }
+
+        // repsenets drug price
+        public decimal Price { get; set; }
+
         // represents drug series
-        //public string Series { get; set; }
+        public string Series { get; set; }
+
+        // represents drug barcode (EAN13)
+        public string Barcode { get; set; }
+
+        // represents pharmacy drug manufacturer code
+        public int ManufacturerCode { get; set; }
+
     }
 }
