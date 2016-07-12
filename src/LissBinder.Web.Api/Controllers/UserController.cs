@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 
 using Escyug.LissBinder.Models;
 using Escyug.LissBinder.Models.Repositories;
-using System.Threading.Tasks;
+
+using Escyug.LissBinder.Web.Api.ViewModels;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
@@ -21,21 +18,18 @@ namespace Escyug.LissBinder.Web.Api.Controllers
         }
 
 
-        //*** create view model for post
+        /**
+         * POST api/user/{user credentials}
+         * 
+         * Validate user
+         */
         [Route("api/user")]
         [HttpPost]
-        public async Task<User> PostAsync([FromBody]string login)
+        public async Task<User> PostAsync([FromBody]UserCredentials credentials)
         {
-            var user = await _userRepository.GetUserByCredentialsAsync(login, "");
+            var login = credentials.Login;
+            var password = credentials.Password;
 
-            return user;
-        }
-
-        //*** should be only post
-        [Route("api/user/{login}/{password}")]
-        [HttpGet]
-        public async Task<User> GetAsync(string login, string password)
-        {
             var user = await _userRepository.GetUserByCredentialsAsync(login, password);
 
             return user;
