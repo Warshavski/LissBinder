@@ -22,11 +22,37 @@ namespace Escyug.LissBinder.App.WinForms
 
             InitializeComponent();
 
-            this.button1.Click += async (sender, e) => 
+            this.buttonSearch.Click += async (sender, e) => 
                 await Invoker.InvokeAsync(SearchDrugsAsync);
+
+            this.buttonDictionaryOpen.Click += (sender, e) => Invoker.Invoke(OpenDictionary);
+
+            this.dataGridViewDrugs.MouseClick += (sender, e) =>
+                {
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        ContextMenu m = new ContextMenu();
+
+                        int currentMouseOverRow = dataGridViewDrugs.HitTest(e.X, e.Y).RowIndex;
+
+                        if (currentMouseOverRow >= 0)
+                        {
+                            //contextMenuStrip1.MenuItems.Add(new MenuItem(string.Format("Do something to row {0}", currentMouseOverRow.ToString())));
+                            contextMenuStrip1.Show(dataGridViewDrugs, new Point(e.X, e.Y));
+                        }
+                    }
+                };
+
+            this.Resize += (sender, e) => CenterProgressBox();
+
+            this.contextMenuStrip1.Items[0].Click += (sender, e) => 
+                Invoker.Invoke(ShowDrugDetails);
         }
 
+      
+
         #region IView members
+
 
         public new void Show()
         {
@@ -52,6 +78,7 @@ namespace Escyug.LissBinder.App.WinForms
             }
         }
 
+
         #endregion IView members
 
 
@@ -62,6 +89,10 @@ namespace Escyug.LissBinder.App.WinForms
 
 
         public event Func<Task> SearchDrugsAsync;
+
+        public event Action OpenDictionary;
+
+        public event Action ShowDrugDetails;
 
         public string SearchDrugName
         {
@@ -79,16 +110,57 @@ namespace Escyug.LissBinder.App.WinForms
         {
             get
             {
-                return dataGridView1.DataSource as IEnumerable<Models.Drugs.PharmacyDrug>;
+                return dataGridViewDrugs.DataSource as IEnumerable<Models.Drugs.PharmacyDrug>;
             }
             set
             {
-                dataGridView1.DataSource = value;
+                dataGridViewDrugs.DataSource = value;
             }
         }
 
+        public Models.Drugs.PharmacyDrug SelectedPharmacyDrug 
+        {
+            get
+            {
+                return this.dataGridViewDrugs.SelectedRows[0].DataBoundItem as Models.Drugs.PharmacyDrug;
+            }
+        }
+
+        public bool IsProgress 
+        {
+            set
+            {
+                progressBox.Visible = value;
+            }
+        }
 
         #endregion IMainView members
 
+
+        //-------------------------------------------------
+
+
+        #region Helper methods
+
+
+        private void CenterProgressBox()
+        {
+            var gridWidth = this.dataGridViewDrugs.Width;
+            var gridHeight = this.dataGridViewDrugs.Height;
+
+            var progressWidth = this.progressBox.Width;
+            var progressHeight = this.progressBox.Height;
+
+            var progressPosX = (gridWidth / 2) - (progressWidth / 2);
+            var progressPosY = (gridHeight / 2) - (progressHeight / 2);
+
+            this.progressBox.Location =
+                new System.Drawing.Point(progressPosX, progressPosY);
+        }
+
+
+        #endregion Helper methods 
+    
+    
     }
 }

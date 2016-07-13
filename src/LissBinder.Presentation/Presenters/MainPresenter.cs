@@ -19,6 +19,8 @@ namespace Escyug.LissBinder.Presentation.Presenters
             : base (view, appController)
         {
             View.SearchDrugsAsync += () => OnSearchDrugsAsync();
+            View.OpenDictionary += () => OnOpenDictionary();
+            View.ShowDrugDetails += () => OnShowDrugDetails();
         }
 
         private async Task OnSearchDrugsAsync()
@@ -27,6 +29,8 @@ namespace Escyug.LissBinder.Presentation.Presenters
 
             if (String.Compare(drugName, string.Empty) != 0)
             {
+                View.IsProgress = true;
+
                 // async wep api method call
                 using (var client = new HttpClient())
                 {
@@ -48,11 +52,25 @@ namespace Escyug.LissBinder.Presentation.Presenters
                         View.Notify = "No avaliable result(Drug not found).";
                     }
                 }
+
+                View.IsProgress = false;
             }
             else
             {
                 View.Notify = "Please, enter drug name.";
             }
+        }
+
+        private void OnOpenDictionary()
+        {
+            var pharmacyDrug = View.SelectedPharmacyDrug;
+            AppController.Run<DictionaryPresenter, PharmacyDrug>(pharmacyDrug);
+        }
+
+        private void OnShowDrugDetails()
+        {
+            var pharmacyDrug = View.SelectedPharmacyDrug;
+            AppController.Run<DetailsPresenter, PharmacyDrug>(pharmacyDrug);
         }
     }
 }

@@ -13,8 +13,16 @@ namespace Escyug.LissBinder.Presentation.Views
     {
         event Func<Task> SearchDrugsAsync;
 
+        event Action OpenDictionary;
+
+        event Action ShowDrugDetails;
+
         string SearchDrugName { get; set; }
 
         IEnumerable<PharmacyDrug> PharmacyDrugs { get; set; }
+
+        PharmacyDrug SelectedPharmacyDrug { get; }
+
+        bool IsProgress { set; }
     }
 }
