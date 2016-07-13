@@ -25,14 +25,20 @@ namespace Escyug.LissBinder.Web.Api.Controllers
          */
         [Route("api/user")]
         [HttpPost]
-        public async Task<User> PostAsync([FromBody]UserCredentials credentials)
+        public async Task<IHttpActionResult> PostAsync([FromBody]UserCredentials credentials)
         {
             var login = credentials.Login;
             var password = credentials.Password;
 
             var user = await _userRepository.GetUserByCredentialsAsync(login, password);
-
-            return user;
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

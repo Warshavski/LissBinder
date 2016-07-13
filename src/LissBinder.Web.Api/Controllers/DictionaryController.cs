@@ -20,12 +20,25 @@ namespace Escyug.LissBinder.Web.Api.Controllers
             _dictionaryRepository = dictionaryRepository;
         }
 
+
+        /**
+         * GET: api/dictionary/{name}
+         * 
+         * Returns rls dictionary
+         */
         [Route("api/dictionary/{name}")]
         [HttpGet]
-        public async Task<IEnumerable<DictionaryDrug>> GetAsync(string name)
+        public async Task<IHttpActionResult> GetAsync(string name)
         {
             var dictionary = await _dictionaryRepository.GetDrugsByNameAsync(name);
-            return dictionary;
+            if (dictionary != null)
+            {
+                return Ok(dictionary);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

@@ -21,12 +21,25 @@ namespace Escyug.LissBinder.Web.Api.Controllers
             _pharmacyDrugsRepository = pharmacyDrugsRepository;
         }
 
-        [Route("api/drugs/{pharmacyID}/{name}")]
+
+        /**
+         * GET: api/drugs/{pharmacyId}/{name}
+         * 
+         * Returns pharmacy drugs
+         */
+        [Route("api/drugs/{pharmacyId}/{name}")]
         [HttpGet]
-        public async Task<IEnumerable<PharmacyDrug>> GetAsync(int pharmacyId, string name)
+        public async Task<IHttpActionResult> GetAsync(int pharmacyId, string name)
         {
             var drugsList = await _pharmacyDrugsRepository.GetDrugsByNameAsync(name, pharmacyId);
-            return drugsList;
+            if (drugsList != null && drugsList.Count() != 0)
+            {
+                return Ok(drugsList);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
