@@ -49,19 +49,28 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
         private PharmacyDrug GetDrugFromReader(SqlDataReader reader)
         {
             /** Data columns order : 
-             *   0. name        - string
-             *   1. producer    - string
-             *   2. prodcode    - int
-             *   3. code        - long
+             *   0. code        - long
+             *   1. name        - string
+             *   2. producer    - string
+             *   3. quantity    - decimal
+             *   4. price       - decical
+             *   5. seria       - string
+             *   6. barcode     - string
+             *   7. prodcode    - int
              */
 
+            //code, name, producer, quantity, price, seria, barcode, prodcode
             var pharmacyDrug = new PharmacyDrug();
 
-            pharmacyDrug.Name = reader.GetFieldValue<string>(0);
-            pharmacyDrug.ManufacturerName = reader.GetFieldValue<string>(1);
-            pharmacyDrug.ManufacturerCode = reader.GetFieldValue<int>(2);
-            pharmacyDrug.Code = reader.GetFieldValue<long>(3);
-
+            pharmacyDrug.Code = reader.GetFieldValue<long>(0);
+            pharmacyDrug.Name = reader.GetFieldValue<string>(1);
+            pharmacyDrug.ManufacturerName = reader.GetFieldValue<string>(2);
+            pharmacyDrug.Quantity = reader.GetFieldValue<decimal>(3);
+            pharmacyDrug.Price = reader.GetFieldValue<decimal>(4);
+            pharmacyDrug.Series = reader.TryGetFieldValue<string>(5);
+            pharmacyDrug.Barcode = reader.TryGetFieldValue<string>(6);
+            pharmacyDrug.ManufacturerCode = reader.GetFieldValue<int>(7);
+            
             return pharmacyDrug;
         }
     }
