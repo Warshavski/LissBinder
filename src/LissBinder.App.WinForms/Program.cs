@@ -27,7 +27,7 @@ namespace Escyug.LissBinder.App.WinForms
 
             var controller = new ApplicationController(new LightInjectAdapter())
                .RegisterView<IMainView, MainForm>()
-               .RegisterView<IDictionaryView, DictionaryForm>()
+               //.RegisterView<IDictionaryView, DictionaryForm>()
                .RegisterView<IDetailsView, DetailsForm>()
                .RegisterInstance(new ApplicationContext());
 

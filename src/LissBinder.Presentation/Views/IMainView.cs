@@ -11,18 +11,23 @@ namespace Escyug.LissBinder.Presentation.Views
 {
     public interface IMainView : IView
     {
-        event Func<Task> SearchDrugsAsync;
+        event Func<Task> DrugsSearchAsync;
 
-        event Action OpenDictionary;
+        event Action DrugDetailsShow;
 
-        event Action ShowDrugDetails;
+        event Func<Task> DictionarySearchAsync;
 
         string SearchDrugName { get; set; }
 
-        IEnumerable<PharmacyDrug> PharmacyDrugs { get; set; }
-
         PharmacyDrug SelectedPharmacyDrug { get; }
 
-        bool IsProgress { set; }
+        IEnumerable<PharmacyDrug> PharmacyDrugs { get; set; }
+
+        IEnumerable<DictionaryDrug> DictionaryDrugs { get; set; }
+
+        bool IsDrugsSearch { set; }
+
+        bool IsDictionarySearch { set; }
+
     }
 }

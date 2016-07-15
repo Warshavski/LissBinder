@@ -14,22 +14,22 @@ namespace Escyug.LissBinder.Presentation.Presenters
     public class MainPresenter : BasePresenter<IMainView>
     {
         // web api url context
+        private string _lastSearchName;
 
         public MainPresenter(IMainView view, IApplicationController appController)
             : base (view, appController)
         {
-            View.SearchDrugsAsync += () => OnSearchDrugsAsync();
-            View.OpenDictionary += () => OnOpenDictionary();
-            View.ShowDrugDetails += () => OnShowDrugDetails();
+            _lastSearchName = string.Empty;
+            View.DrugsSearchAsync += () => OnDrugsSearchAsync(View.SearchDrugName);
+            View.DictionarySearchAsync += () => OnDictionarySearch(View.SelectedPharmacyDrug);
+            View.DrugDetailsShow += () => OnDrugDetailsShow(View.SelectedPharmacyDrug);
         }
 
-        private async Task OnSearchDrugsAsync()
+        private async Task OnDrugsSearchAsync(string drugName)
         {
-            var drugName = View.SearchDrugName.Trim();
-
-            if (String.Compare(drugName, string.Empty) != 0)
+            if (String.Compare(drugName.Trim(), string.Empty) != 0)
             {
-                View.IsProgress = true;
+                View.IsDrugsSearch = true;
 
                 // async wep api method call
                 using (var client = new HttpClient())
@@ -53,7 +53,7 @@ namespace Escyug.LissBinder.Presentation.Presenters
                     }
                 }
 
-                View.IsProgress = false;
+                View.IsDrugsSearch = false;
             }
             else
             {
@@ -61,15 +61,41 @@ namespace Escyug.LissBinder.Presentation.Presenters
             }
         }
 
-        private void OnOpenDictionary()
+        private async Task OnDictionarySearch(PharmacyDrug pharmacyDrug)
         {
-            var pharmacyDrug = View.SelectedPharmacyDrug;
-            AppController.Run<DictionaryPresenter, PharmacyDrug>(pharmacyDrug);
+            var searchName = pharmacyDrug.Name.Split(' ')[0];
+
+            if (_lastSearchName != searchName)
+            {
+                View.IsDictionarySearch = true;
+                // async wep api method call
+                using (var client = new HttpClient())
+                {
+                    // HttpClient setup
+                    client.BaseAddress = new Uri("http://localhost:49623/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    // cal web api controller method
+                    var responseAddress = "api/dictionary/" + searchName;
+                    var response = await client.GetAsync(responseAddress);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var drugs = await response.Content.ReadAsAsync<IEnumerable<DictionaryDrug>>();
+                        View.DictionaryDrugs = drugs;
+                    }
+                    else
+                    {
+                        View.Notify = "No avaliable result(Drug not found).";
+                    }
+                }
+                View.IsDictionarySearch = false;
+                _lastSearchName = searchName;
+            }
         }
 
-        private void OnShowDrugDetails()
+        private void OnDrugDetailsShow(PharmacyDrug pharmacyDrug)
         {
-            var pharmacyDrug = View.SelectedPharmacyDrug;
             AppController.Run<DetailsPresenter, PharmacyDrug>(pharmacyDrug);
         }
     }

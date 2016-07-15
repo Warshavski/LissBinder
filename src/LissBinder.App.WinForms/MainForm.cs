@@ -22,10 +22,14 @@ namespace Escyug.LissBinder.App.WinForms
 
             InitializeComponent();
 
-            this.buttonSearch.Click += async (sender, e) => 
-                await Invoker.InvokeAsync(SearchDrugsAsync);
+            this.buttonSearch.Click += async (sender, e) =>
+                await Invoker.InvokeAsync(DrugsSearchAsync);
 
-            this.buttonDictionaryOpen.Click += (sender, e) => Invoker.Invoke(OpenDictionary);
+            this.dataGridViewDrugs.CellClick += async (sender, e) =>
+                await Invoker.InvokeAsync(DictionarySearchAsync);
+
+            this.dataGridViewDrugs.RowHeaderMouseClick += async (sender, e) =>
+                await Invoker.InvokeAsync(DictionarySearchAsync);
 
             this.dataGridViewDrugs.MouseClick += (sender, e) =>
                 {
@@ -37,7 +41,9 @@ namespace Escyug.LissBinder.App.WinForms
 
                         if (currentMouseOverRow >= 0)
                         {
-                            //contextMenuStrip1.MenuItems.Add(new MenuItem(string.Format("Do something to row {0}", currentMouseOverRow.ToString())));
+                            //contextMenuStrip1.MenuItems.Add(
+                            //    new MenuItem(
+                            //        string.Format("Do something to row {0}", currentMouseOverRow.ToString())));
                             contextMenuStrip1.Show(dataGridViewDrugs, new Point(e.X, e.Y));
                         }
                     }
@@ -45,8 +51,8 @@ namespace Escyug.LissBinder.App.WinForms
 
             this.Resize += (sender, e) => CenterProgressBox();
 
-            this.contextMenuStrip1.Items[0].Click += (sender, e) => 
-                Invoker.Invoke(ShowDrugDetails);
+            this.contextMenuStrip1.Items[0].Click += (sender, e) =>
+                Invoker.Invoke(DrugDetailsShow);
         }
 
       
@@ -88,11 +94,11 @@ namespace Escyug.LissBinder.App.WinForms
         #region IMainView members
 
 
-        public event Func<Task> SearchDrugsAsync;
+        public event Func<Task> DrugsSearchAsync;
 
-        public event Action OpenDictionary;
+        public event Action DrugDetailsShow;
 
-        public event Action ShowDrugDetails;
+        public event Func<Task> DictionarySearchAsync;
 
         public string SearchDrugName
         {
@@ -106,6 +112,15 @@ namespace Escyug.LissBinder.App.WinForms
             }
         }
 
+        public Models.Drugs.PharmacyDrug SelectedPharmacyDrug
+        {
+            get
+            {
+                return this.dataGridViewDrugs.SelectedRows[0].DataBoundItem as Models.Drugs.PharmacyDrug;
+            }
+        }
+
+
         public IEnumerable<Escyug.LissBinder.Models.Drugs.PharmacyDrug> PharmacyDrugs
         {
             get
@@ -118,20 +133,30 @@ namespace Escyug.LissBinder.App.WinForms
             }
         }
 
-        public Models.Drugs.PharmacyDrug SelectedPharmacyDrug 
+        public IEnumerable<Models.Drugs.DictionaryDrug> DictionaryDrugs
         {
             get
             {
-                return this.dataGridViewDrugs.SelectedRows[0].DataBoundItem as Models.Drugs.PharmacyDrug;
+                return dataGridViewDictionary.DataSource as IEnumerable<Models.Drugs.DictionaryDrug>;
+            }
+            set
+            {
+                dataGridViewDictionary.DataSource = value;
             }
         }
 
-        public bool IsProgress 
+        public bool IsDictionarySearch
         {
-            set
+            set 
             {
-                progressBox.Visible = value;
+                dataGridViewDrugs.Enabled = !value;
+                progressBoxDictionary.Visible = value; 
             }
+        }
+
+        public bool IsDrugsSearch 
+        {
+            set { progressBoxDrugs.Visible = value; }
         }
 
         #endregion IMainView members
@@ -142,25 +167,28 @@ namespace Escyug.LissBinder.App.WinForms
 
         #region Helper methods
 
-
+        //*** not so good
         private void CenterProgressBox()
         {
-            var gridWidth = this.dataGridViewDrugs.Width;
-            var gridHeight = this.dataGridViewDrugs.Height;
+            CenterProgressBox(progressBoxDictionary, dataGridViewDictionary);
+            CenterProgressBox(progressBoxDrugs, dataGridViewDrugs);
+        }
 
-            var progressWidth = this.progressBox.Width;
-            var progressHeight = this.progressBox.Height;
+        /// <summary>
+        /// Center the progress box relative to the container.
+        /// </summary>
+        /// <param name="progressBox">UI Control that represent progress box.</param>
+        /// <param name="container">UI Control that contains progress box.</param>
+        private void CenterProgressBox(Control progressBox, Control container)
+        {
+            var progressPosX = (container.Width / 2) - (progressBox.Width / 2);
+            var progressPosY = (container.Height / 2) - (progressBox.Height / 2);
 
-            var progressPosX = (gridWidth / 2) - (progressWidth / 2);
-            var progressPosY = (gridHeight / 2) - (progressHeight / 2);
-
-            this.progressBox.Location =
+            progressBox.Location =
                 new System.Drawing.Point(progressPosX, progressPosY);
         }
 
-
         #endregion Helper methods 
-    
     
     }
 }

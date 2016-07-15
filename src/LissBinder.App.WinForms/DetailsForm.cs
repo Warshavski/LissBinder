@@ -20,6 +20,10 @@ namespace Escyug.LissBinder.App.WinForms
 
         #region IView members 
 
+        public new void Show()
+        {
+            ShowDialog();
+        }
 
         public string Error
         {
