@@ -19,7 +19,7 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
             _context = context;
         }
 
-        public async Task<bool> AddBindingAsync(Binding binding, int pharmacyId)
+        public async Task<bool> AddBindingAsync(Binding binding)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
                         command.Parameters["@nomenid"].Value = binding.NomenId;
                         command.Parameters["@prepid"].Value = binding.PrepId;
                         command.Parameters["@drugformid"].Value = binding.DrugformId;
-                        command.Parameters["@id_pharmacy"].Value = pharmacyId;
+                        command.Parameters["@id_pharmacy"].Value = binding.PharmacyId;
                         command.Parameters["@descid"].Value = binding.DescriptionId;
                         command.Parameters["@prodcode"].Value = binding.PharmacyDrugProdCode;
 

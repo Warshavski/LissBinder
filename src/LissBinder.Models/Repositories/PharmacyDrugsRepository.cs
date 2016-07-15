@@ -17,13 +17,16 @@ namespace Escyug.LissBinder.Models.Repositories
     {
         private readonly IPharmacyDrugsByNameQueryProcessor _drugByNameQueryProcessor;
         private readonly IAddPharmacyDrugsQueryProcessor _drugsAddQueryProcessor;
+        private readonly IAddBindingQueryProcessor _bindingAddQueryProcessor;
 
         public PharmacyDrugsRepository(
             IPharmacyDrugsByNameQueryProcessor drugByNameQueryProcessor,
-            IAddPharmacyDrugsQueryProcessor drugsAddQueryProcessor)
+            IAddPharmacyDrugsQueryProcessor drugsAddQueryProcessor,
+            IAddBindingQueryProcessor bindingAddQueryProcessor)
         {
             _drugByNameQueryProcessor = drugByNameQueryProcessor;
             _drugsAddQueryProcessor = drugsAddQueryProcessor;
+            _bindingAddQueryProcessor = bindingAddQueryProcessor;
         }
 
         public async Task<IEnumerable<Drugs.PharmacyDrug>> GetDrugsByNameAsync(string drugName, int pharmacyId)
@@ -46,7 +49,7 @@ namespace Escyug.LissBinder.Models.Repositories
             }
         }
 
-        public async Task<int> AddDrugs(IEnumerable<Drugs.PharmacyDrug> drugsList, int pharmacyId)
+        public async Task<int> AddDrugsAsync(IEnumerable<Drugs.PharmacyDrug> drugsList, int pharmacyId)
         {
             var pharmacyDrugsEntities = new List<Data.Entities.PharmacyDrug>();
             foreach (var model in drugsList)
@@ -58,6 +61,14 @@ namespace Escyug.LissBinder.Models.Repositories
                 pharmacyDrugsEntities, pharmacyId);
 
             return rowsTotal;
+        }
+
+
+        public async Task<bool> AddBindingAsync(Models.Binding binding)
+        {
+            var bindingEntity = BindingMappings.ModelToEntity(binding);
+
+            return await _bindingAddQueryProcessor.AddBindingAsync(bindingEntity);
         }
     }
 }

@@ -10,6 +10,6 @@ namespace Escyug.LissBinder.Data.QueryProcessors
 {
     public interface IAddBindingQueryProcessor
     {
-        Task<bool> AddBindingAsync(Binding binding, int pharmacyId);
+        Task<bool> AddBindingAsync(Binding binding);
     }
 }

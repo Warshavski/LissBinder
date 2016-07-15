@@ -39,8 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binding.cs" />
     <Compile Include="Drugs\DictionaryDrug.cs" />
     <Compile Include="Drugs\PharmacyDrug.cs" />
+    <Compile Include="Mappings\BindingMappings.cs" />
     <Compile Include="Mappings\DictionaryDrugMappings.cs" />
     <Compile Include="Mappings\PharmacyDrugMappings.cs" />
     <Compile Include="Mappings\PharmacyMappings.cs" />
