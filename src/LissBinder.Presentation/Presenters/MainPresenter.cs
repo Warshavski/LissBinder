@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -9,16 +10,16 @@ using Escyug.LissBinder.Models.Drugs;
 
 using Escyug.LissBinder.Presentation.Common;
 using Escyug.LissBinder.Presentation.Views;
-using System.Linq.Expressions;
 
 namespace Escyug.LissBinder.Presentation.Presenters
 {
     public class MainPresenter : BasePresenter<IMainView>
     {
         // web api url context
+        private readonly string _apiUri;
+        
         private string _lastSearchName;
-        private string _apiUri;
-
+        
         public MainPresenter(IMainView view, IApplicationController appController)
             : base (view, appController)
         {
@@ -30,6 +31,12 @@ namespace Escyug.LissBinder.Presentation.Presenters
             View.DrugDetailsShow += () => OnDrugDetailsShow(View.SelectedPharmacyDrug);
             View.DrugBindAsync += () => OnDrugBindAsync(View.SelectedPharmacyDrug, View.SelectedDictionaryDrug);
         }
+
+
+        //--------------------------------------------------------
+
+
+        #region Presenter methods
 
         private async Task OnDrugsSearchAsync(string drugName)
         {
@@ -80,24 +87,6 @@ namespace Escyug.LissBinder.Presentation.Presenters
             }
         }
 
-        private async Task<TEntity> TryGetEntityAsync<TEntity>(string apiUri, string responseAddress)
-        {
-            try
-            {
-                var entity = await HttpHelper.GetEntityAsync<TEntity>(_apiUri, responseAddress);
-                if (EqualityComparer<TEntity>.Default.Equals(entity, default(TEntity)))
-                {
-                    View.Notify = "Entity not found.";
-                }
-                return entity;
-            }
-            catch (HttpRequestException ex)
-            {
-                View.Error = ex.Message;
-                return default(TEntity);
-            }
-        }
-
         private void OnDrugDetailsShow(PharmacyDrug pharmacyDrug)
         {
             AppController.Run<DetailsPresenter, PharmacyDrug>(pharmacyDrug);
@@ -119,32 +108,69 @@ namespace Escyug.LissBinder.Presentation.Presenters
             var binding = new Models.Binding(pharmacyDrugCode, pharmacyDrugProdCode, 
                 descriptionId, drugformId, nomenId, prepId, pharmacyId);
 
-            using (var client = new HttpClient())
+            var responseAddress = "api/bind";
+
+            var isBindSuccessful = await TryPostEntityAsync(_apiUri, responseAddress, binding);
+            if (isBindSuccessful)
             {
-                client.BaseAddress = new Uri("http://localhost:49623/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                View.Notify = "Binding done";
 
-                var wat = await client.PostAsJsonAsync("api/bind", binding);
-                if (wat.IsSuccessStatusCode)
+                //*** create separate method
+                var newList = View.PharmacyDrugs;
+                View.PharmacyDrugs = null;
+
+                newList.RemoveAll(x => x.Code == pharmacyDrugCode);
+                View.PharmacyDrugs = newList;
+                //***
+
+                View.IsBinding = false;
+            }
+            //else
+            //{
+            //    View.Error = "Some error was occured";
+            //}
+        }
+
+        #endregion Presenter methods
+
+
+        //--------------------------------------------------------
+
+
+        #region Helper(HTTP) methods
+
+        private async Task<TEntity> TryGetEntityAsync<TEntity>(string apiUri, string responseAddress)
+        {
+            try
+            {
+                var entity = await HttpHelper.GetEntityAsync<TEntity>(_apiUri, responseAddress);
+                if (EqualityComparer<TEntity>.Default.Equals(entity, default(TEntity)))
                 {
-                    //*** create separate method
-                    var newList = View.PharmacyDrugs;
-                    View.PharmacyDrugs = null;
-
-                    newList.RemoveAll(x => x.Code == pharmacyDrugCode);
-                    View.PharmacyDrugs = newList;
-                    //***
-
-                    View.Notify = "Binding done";
-                    View.IsBinding = false;
+                    View.Notify = "Entity not found.";
                 }
-                else
-                {
-                    View.Error = "Some error was occured";
-                }
+                return entity;
+            }
+            catch (HttpRequestException ex)
+            {
+                View.Error = ex.Message;
+                return default(TEntity);
             }
         }
 
+        private async Task<bool> TryPostEntityAsync<TEntity>(string apiUri, string responseAddress, TEntity postValue)
+        {
+            try
+            {
+                var isSuccess = await HttpHelper.PostEntityAsync<TEntity>(_apiUri, responseAddress, postValue);
+                return isSuccess;
+            }
+            catch (HttpRequestException ex)
+            {
+                View.Error = ex.Message;
+                return false;
+            }
+        }
+
+        #endregion Helper(HTTP) methods
     }
 }

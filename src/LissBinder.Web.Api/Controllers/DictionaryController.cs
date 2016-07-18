@@ -5,8 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-using Escyug.LissBinder.Models.Drugs;
-using Escyug.LissBinder.Models.Repositories;
+using Escyug.LissBinder.Web.Models.Drugs;
+using Escyug.LissBinder.Web.Models.Repositories;
 using System.Threading.Tasks;
 
 namespace Escyug.LissBinder.Web.Api.Controllers

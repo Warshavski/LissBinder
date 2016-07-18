@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Escyug.LissBinder.Models.Services
+namespace Escyug.LissBinder.Web.Models.Services
 {
     public class SimpleLoginService : ILoginService
     {

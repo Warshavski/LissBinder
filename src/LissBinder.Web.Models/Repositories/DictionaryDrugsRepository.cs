@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using Escyug.LissBinder.Data.Entities;
 using Escyug.LissBinder.Data.QueryProcessors;
 
-using Escyug.LissBinder.Models.Drugs;
-using Escyug.LissBinder.Models.Mappings;
+using Escyug.LissBinder.Web.Models.Drugs;
+using Escyug.LissBinder.Web.Models.Mappings;
 
-namespace Escyug.LissBinder.Models.Repositories
+namespace Escyug.LissBinder.Web.Models.Repositories
 {
     public class DictionaryDrugsRepository : IDictionaryDrugsRepository
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Escyug.LissBinder.Models.Repositories
+namespace Escyug.LissBinder.Web.Models.Repositories
 {
     public interface IPharmacyDrugsRepository
     {

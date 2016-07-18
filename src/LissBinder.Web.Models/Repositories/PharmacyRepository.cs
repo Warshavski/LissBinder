@@ -2,9 +2,9 @@
 
 using Escyug.LissBinder.Data.QueryProcessors;
 
-using Escyug.LissBinder.Models.Mappings;
+using Escyug.LissBinder.Web.Models.Mappings;
 
-namespace Escyug.LissBinder.Models.Repositories
+namespace Escyug.LissBinder.Web.Models.Repositories
 {
     public class PharmacyRepository : IPharmacyRepository
     {

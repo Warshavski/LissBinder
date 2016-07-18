@@ -1,5 +1,5 @@
 ﻿
-namespace Escyug.LissBinder.Models.Mappings
+namespace Escyug.LissBinder.Web.Models.Mappings
 {
     internal static class PharmacyDrugMappings
     {

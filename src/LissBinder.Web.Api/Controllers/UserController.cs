@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 
-using Escyug.LissBinder.Models;
-using Escyug.LissBinder.Models.Repositories;
+using Escyug.LissBinder.Web.Models;
+using Escyug.LissBinder.Web.Models.Repositories;
 
 using Escyug.LissBinder.Web.Api.ViewModels;
 

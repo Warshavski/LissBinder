@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{775A76A4-E403-45ED-91AB-B28DDC996D16}</ProjectGuid>
+    <ProjectGuid>{F7D7BC9C-D43E-4964-900D-E585183E3388}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Escyug.LissBinder.Models</RootNamespace>
-    <AssemblyName>LissBinder.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Escyug.LissBinder.Web.Models</RootNamespace>
+    <AssemblyName>LissBinder.Web.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -42,9 +42,27 @@
     <Compile Include="Binding.cs" />
     <Compile Include="Drugs\DictionaryDrug.cs" />
     <Compile Include="Drugs\PharmacyDrug.cs" />
+    <Compile Include="Mappings\BindingMappings.cs" />
+    <Compile Include="Mappings\DictionaryDrugMappings.cs" />
+    <Compile Include="Mappings\PharmacyDrugMappings.cs" />
+    <Compile Include="Mappings\PharmacyMappings.cs" />
+    <Compile Include="Mappings\UserMappings.cs" />
     <Compile Include="Pharmacy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DictionaryDrugsRepository.cs" />
+    <Compile Include="Repositories\IDictionaryDrugsRepository.cs" />
+    <Compile Include="Repositories\IPharmacyDrugsRepository.cs" />
+    <Compile Include="Repositories\IPharmacyRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\PharmacyDrugsRepository.cs" />
+    <Compile Include="Repositories\PharmacyRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Services\ILoginService.cs" />
+    <Compile Include="Services\SimpleLoginService.cs" />
     <Compile Include="User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Repositories\todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LissBinder.Data.SqlServer\LissBinder.Data.SqlServer.csproj">
@@ -55,9 +73,6 @@
       <Project>{cc51d931-619c-401c-8508-0462e5efa5b0}</Project>
       <Name>LissBinder.Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

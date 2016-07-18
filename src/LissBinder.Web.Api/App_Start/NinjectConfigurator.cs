@@ -11,7 +11,7 @@ using Escyug.LissBinder.Data;
 using Escyug.LissBinder.Data.QueryProcessors;
 using Escyug.LissBinder.Data.SqlServer.QueryProcessors;
 
-using Escyug.LissBinder.Models.Repositories;
+using Escyug.LissBinder.Web.Models.Repositories;
 
 namespace Escyug.LissBinder.Web.Api
 {

@@ -141,13 +141,13 @@
       <Project>{cc51d931-619c-401c-8508-0462e5efa5b0}</Project>
       <Name>LissBinder.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LissBinder.Models\LissBinder.Models.csproj">
-      <Project>{775a76a4-e403-45ed-91ab-b28ddc996d16}</Project>
-      <Name>LissBinder.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LissBinder.Web.Common\LissBinder.Web.Common.csproj">
       <Project>{00bf7fdf-3f9a-4278-8736-fc9cdf609a7f}</Project>
       <Name>LissBinder.Web.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LissBinder.Web.Models\LissBinder.Web.Models.csproj">
+      <Project>{f7d7bc9c-d43e-4964-900d-e585183e3388}</Project>
+      <Name>LissBinder.Web.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
