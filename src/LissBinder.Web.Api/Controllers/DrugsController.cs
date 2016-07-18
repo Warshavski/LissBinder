@@ -41,5 +41,27 @@ namespace Escyug.LissBinder.Web.Api.Controllers
                 return NotFound();
             }
         }
+
+
+        /**
+         * POST: api/drugs/{list of drugs}
+         * 
+         * Add list of drugs to storage
+         */
+        [Route("api/drugs/{pharmacyId}/")]
+        [HttpPost]
+        public async Task<IHttpActionResult> PostAsync(int pharmacyId, [FromBody]IEnumerable<PharmacyDrug> pharmacyDrugs)
+        {
+            var rowsCopied = 
+                await _pharmacyDrugsRepository.AddDrugsAsync(pharmacyDrugs, pharmacyId);
+            if (rowsCopied != -1)
+            {
+                return Ok(rowsCopied);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
