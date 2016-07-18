@@ -25,6 +25,9 @@ namespace Escyug.LissBinder.App.WinForms
             this.buttonSearch.Click += async (sender, e) =>
                 await Invoker.InvokeAsync(DrugsSearchAsync);
 
+            this.buttonBind.Click += async (sender, e) =>
+                await Invoker.InvokeAsync(DrugBindAsync);
+
             this.dataGridViewDrugs.CellClick += async (sender, e) =>
                 await Invoker.InvokeAsync(DictionarySearchAsync);
 
@@ -100,6 +103,8 @@ namespace Escyug.LissBinder.App.WinForms
 
         public event Func<Task> DictionarySearchAsync;
 
+        public event Func<Task> DrugBindAsync;
+
         public string SearchDrugName
         {
             get
@@ -120,12 +125,19 @@ namespace Escyug.LissBinder.App.WinForms
             }
         }
 
-
-        public IEnumerable<Escyug.LissBinder.Models.Drugs.PharmacyDrug> PharmacyDrugs
+        public Models.Drugs.DictionaryDrug SelectedDictionaryDrug 
         {
             get
             {
-                return dataGridViewDrugs.DataSource as IEnumerable<Models.Drugs.PharmacyDrug>;
+                return this.dataGridViewDictionary.SelectedRows[0].DataBoundItem as Models.Drugs.DictionaryDrug;
+            }
+        }
+
+        public List<Escyug.LissBinder.Models.Drugs.PharmacyDrug> PharmacyDrugs
+        {
+            get
+            {
+                return dataGridViewDrugs.DataSource as List<Models.Drugs.PharmacyDrug>;
             }
             set
             {
@@ -158,6 +170,8 @@ namespace Escyug.LissBinder.App.WinForms
         {
             set { progressBoxDrugs.Visible = value; }
         }
+
+        public bool IsBinding { set { if (!value) dataGridViewDrugs.Refresh(); } }
 
         #endregion IMainView members
 

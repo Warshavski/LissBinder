@@ -55,6 +55,7 @@
     <Compile Include="Common\IContainer.cs" />
     <Compile Include="Common\IPresenter.cs" />
     <Compile Include="Common\IView.cs" />
+    <Compile Include="HttpHelper.cs" />
     <Compile Include="Presenters\DetailsPresenter.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />

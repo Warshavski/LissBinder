@@ -17,17 +17,22 @@ namespace Escyug.LissBinder.Presentation.Views
 
         event Func<Task> DictionarySearchAsync;
 
+        event Func<Task> DrugBindAsync;
+
         string SearchDrugName { get; set; }
 
         PharmacyDrug SelectedPharmacyDrug { get; }
+        DictionaryDrug SelectedDictionaryDrug { get; }
 
-        IEnumerable<PharmacyDrug> PharmacyDrugs { get; set; }
+        List<PharmacyDrug> PharmacyDrugs { get; set; }
 
         IEnumerable<DictionaryDrug> DictionaryDrugs { get; set; }
 
         bool IsDrugsSearch { set; }
 
         bool IsDictionarySearch { set; }
+
+        bool IsBinding { set; }
 
     }
 }
