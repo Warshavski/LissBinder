@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,7 +8,7 @@ using Escyug.LissBinder.Presentation.Views;
 
 namespace Escyug.LissBinder.App.WinForms
 {
-    public partial class MainForm : Form, IMainView
+    public partial class MainForm : BaseForm, IMainView
     {
         private readonly ApplicationContext _context;
 
@@ -62,6 +58,8 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
       
+        //---------------------------------------------------------------------
+
 
         #region IView members
 
@@ -72,29 +70,11 @@ namespace Escyug.LissBinder.App.WinForms
             Application.Run(_context);
         }
 
-        public string Error
-        {
-            set
-            {
-                MessageBox.Show(value, "Application error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
-        public string Notify
-        {
-            set
-            {
-                MessageBox.Show(value, "Application information",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+        #endregion
 
 
-        #endregion IView members
-
-
-        //-------------------------------------------------
+        //---------------------------------------------------------------------
 
 
         #region IMainView members
@@ -181,7 +161,7 @@ namespace Escyug.LissBinder.App.WinForms
         #endregion IMainView members
 
 
-        //-------------------------------------------------
+        //---------------------------------------------------------------------
 
 
         #region Helper methods

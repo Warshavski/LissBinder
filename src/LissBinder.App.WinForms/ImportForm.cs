@@ -12,7 +12,7 @@ using Escyug.LissBinder.Presentation.Views;
 
 namespace Escyug.LissBinder.App.WinForms
 {
-    public partial class ImportForm : Form, IImportView
+    public partial class ImportForm : BaseForm, IImportView
     {
         public ImportForm()
         {
@@ -27,36 +27,21 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
 
+
         //---------------------------------------------------------------------
 
 
         #region IView members 
+
 
         public new void Show()
         {
             ShowDialog();
         }
 
-        public string Error
-        {
-            set
-            {
-                MessageBox.Show(value, "Application error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
-        public string Notify
-        {
-            set
-            {
-                MessageBox.Show(value, "Application information",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+        #endregion
 
-
-        #endregion IView members
 
 
         //---------------------------------------------------------------------
@@ -135,7 +120,5 @@ namespace Escyug.LissBinder.App.WinForms
 
         #endregion IImportView members
 
-
-        
     }
 }

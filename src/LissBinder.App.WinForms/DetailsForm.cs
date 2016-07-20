@@ -5,7 +5,7 @@ using Escyug.LissBinder.Presentation.Views;
 
 namespace Escyug.LissBinder.App.WinForms
 {
-    public partial class DetailsForm : Form, IDetailsView
+    public partial class DetailsForm : BaseForm, IDetailsView
     {
         public DetailsForm()
         {
@@ -15,39 +15,22 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
 
-        //-------------------------------------------------
+        //---------------------------------------------------------------------
 
 
         #region IView members 
 
+       
         public new void Show()
         {
             ShowDialog();
-        }
-
-        public string Error
-        {
-            set
-            {
-                MessageBox.Show(value, "Application error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public string Notify
-        {
-            set
-            {
-                MessageBox.Show(value, "Application information",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
 
         #endregion IView members
 
 
-        //-------------------------------------------------
+        //---------------------------------------------------------------------
 
 
         #region IDetailsView members

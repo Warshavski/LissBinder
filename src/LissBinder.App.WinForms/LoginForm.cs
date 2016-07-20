@@ -12,7 +12,7 @@ using Escyug.LissBinder.Presentation.Views;
 
 namespace Escyug.LissBinder.App.WinForms
 {
-    public partial class LoginForm : Form, ILoginView
+    public partial class LoginForm : BaseForm, ILoginView
     {
         public LoginForm()
         {
@@ -20,35 +20,7 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
 
-        //-------------------------------------------------
-
-
-        #region IView members 
-
-
-        public string Error
-        {
-            set
-            {
-                MessageBox.Show(value, "Application error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public string Notify
-        {
-            set
-            {
-                MessageBox.Show(value, "Application information",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-
-        #endregion IView members
-
-
-        //-------------------------------------------------
+        //---------------------------------------------------------------------
 
 
         #region ILoginView members
