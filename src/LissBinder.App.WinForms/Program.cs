@@ -33,6 +33,8 @@ namespace Escyug.LissBinder.App.WinForms
                .RegisterView<IMainView, MainForm>()
                .RegisterView<IImportView, ImportForm>()
                .RegisterView<IDetailsView, DetailsForm>()
+               .RegisterInstance<IDictionaryService>(new DictionaryService(apiUri))
+               .RegisterInstance<IPharmacyService>(new PharmacyService(apiUri))
                .RegisterInstance<IImportService>(new ImportService(apiUri))
                .RegisterInstance(new ApplicationContext());
 

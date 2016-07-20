@@ -7,6 +7,8 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 using Escyug.LissBinder.Models.Drugs;
+using Escyug.LissBinder.Models.Services;
+using Escyug.LissBinder.Models.Services.Exceptions;
 
 using Escyug.LissBinder.Presentation.Common;
 using Escyug.LissBinder.Presentation.Views;
@@ -15,17 +17,25 @@ namespace Escyug.LissBinder.Presentation.Presenters
 {
     public class MainPresenter : BasePresenter<IMainView>
     {
-        // web api url context
-        private readonly string _apiUri;
-        
         private string _lastSearchName;
-        
-        public MainPresenter(IMainView view, IApplicationController appController)
-            : base (view, appController)
+
+        private readonly IDictionaryService _dictionaryService;
+        private readonly IPharmacyService _pharmacyService;
+
+        public MainPresenter(IMainView view, IApplicationController appController, 
+            IDictionaryService dictionaryService,
+            IPharmacyService pharmacyService) : base(view, appController)
         {
             _lastSearchName = string.Empty;
-            _apiUri = "http://localhost:49623/";
 
+            
+            // injected members
+            //-------------------------
+            _dictionaryService = dictionaryService;
+            _pharmacyService = pharmacyService;
+            
+            // events subscription
+            //-------------------------
             View.DrugsSearchAsync += () => OnDrugsSearchAsync(View.SearchDrugName);
             View.DictionarySearchAsync += () => OnDictionarySearchAsync(View.SelectedPharmacyDrug);
             View.DrugDetailsShow += () => OnDrugDetailsShow(View.SelectedPharmacyDrug);
@@ -45,18 +55,28 @@ namespace Escyug.LissBinder.Presentation.Presenters
             {
                 View.IsDrugsSearch = true;
                
-                var responseAddress = "api/drugs/1/" + drugName;
-
-                var pharmacyDrugsList = 
-                    await TryGetEntityAsync<List<PharmacyDrug>>(_apiUri, responseAddress);
-
-                if (pharmacyDrugsList != null)
+                try
                 {
-                    //View.PharmacyDrugs = null;
-                    View.PharmacyDrugs = pharmacyDrugsList;
+                    var pharmacyDrugsList = await _pharmacyService.GetDrugsAsync(drugName);
+
+                    if (pharmacyDrugsList != null)
+                    {
+                        //View.PharmacyDrugs = null;
+                        View.PharmacyDrugs = pharmacyDrugsList.ToList();
+                    }
+                    else
+                    {
+                        View.Notify = "Drug not found";
+                    }
                 }
-               
-                View.IsDrugsSearch = false;
+                catch (ServiceException ex)
+                {
+                    View.Error = ex.Message;
+                }
+                finally
+                {
+                    View.IsDrugsSearch = false;
+                }
             }
             else
             {
@@ -72,64 +92,69 @@ namespace Escyug.LissBinder.Presentation.Presenters
             {
                 View.IsDictionarySearch = true;
 
-                var responseAddress = "api/dictionary/" + searchName;
-                var dictionaryDrugsList =
-                    await TryGetEntityAsync<List<DictionaryDrug>>(_apiUri, responseAddress);
-
-                if (dictionaryDrugsList != null)
+                try
                 {
-                    //View.DictionaryDrugs = null;
-                    View.DictionaryDrugs = dictionaryDrugsList;
+                    var dictionaryDrugsList = await _dictionaryService.GetDrugsAsync(searchName);
+                    
+                    if (dictionaryDrugsList != null)
+                    {
+                        //View.DictionaryDrugs = null;
+                        View.DictionaryDrugs = dictionaryDrugsList;
+
+                        _lastSearchName = searchName;
+                    }
                 }
-
-                _lastSearchName = searchName;
-
-                View.IsDictionarySearch = false;
+                catch (ServiceException ex)
+                {
+                    View.Error = ex.Message;
+                }
+                finally
+                {
+                    View.IsDictionarySearch = false;
+                }
             }
         }
 
-        private void OnDrugDetailsShow(PharmacyDrug pharmacyDrug)
-        {
-            AppController.Run<DetailsPresenter, PharmacyDrug>(pharmacyDrug);
-        }
+       
 
         //*** create binding presenter
         private async Task OnDrugBindAsync(PharmacyDrug pharmacyDrug, DictionaryDrug dictionaryDrug)
         {
             View.IsBinding = true;
 
-            var pharmacyDrugCode = pharmacyDrug.Code;
-            var pharmacyDrugProdCode = pharmacyDrug.ManufacturerCode;
-            var descriptionId = dictionaryDrug.DescriptionId;
-            var drugformId = dictionaryDrug.DrugformId;
-            var nomenId = dictionaryDrug.NomenId;
-            var prepId = dictionaryDrug.PrepId;
-            var pharmacyId = 1;//model.PharmacyId;
-
-            var binding = new Models.Binding(pharmacyDrugCode, pharmacyDrugProdCode, 
-                descriptionId, drugformId, nomenId, prepId, pharmacyId);
-
-            var responseAddress = "api/bind";
-
-            var isBindSuccessful = await TryPostEntityAsync(_apiUri, responseAddress, binding);
-            if (isBindSuccessful)
+            try
             {
-                View.Notify = "Binding done";
+                var isBindSuccessful =
+                    await _pharmacyService.BindPharmacyDrugAsync(pharmacyDrug, dictionaryDrug, 1);
 
-                //*** create separate method
-                var newList = View.PharmacyDrugs;
-                View.PharmacyDrugs = null;
+                if (isBindSuccessful)
+                {
+                    View.Notify = "Binding done";
 
-                newList.RemoveAll(x => x.Code == pharmacyDrugCode);
-                View.PharmacyDrugs = newList;
-                //***
+                    //*** create separate method
+                    var newList = View.PharmacyDrugs;
+                    View.PharmacyDrugs = null;
 
+                    newList.RemoveAll(x => x.Code == pharmacyDrug.Code);
+                    View.PharmacyDrugs = newList;
+                    //***  
+                }
+            }
+
+            catch (ServiceException ex)
+            {
+                View.Error = ex.Message;
+            }
+            finally
+            {
                 View.IsBinding = false;
             }
-            //else
-            //{
-            //    View.Error = "Some error was occured";
-            //}
+        }
+
+
+        private void OnDrugDetailsShow(PharmacyDrug pharmacyDrug)
+        {
+            AppController.Run<DetailsPresenter, PharmacyDrug>(pharmacyDrug);
         }
 
         private void OnImportShow()
@@ -139,44 +164,5 @@ namespace Escyug.LissBinder.Presentation.Presenters
 
         #endregion Presenter methods
 
-
-        //---------------------------------------------------------------------
-
-
-        #region Helper methods (HTTP)
-
-        private async Task<TEntity> TryGetEntityAsync<TEntity>(string apiUri, string responseAddress)
-        {
-            try
-            {
-                var entity = await HttpHelper.GetEntityAsync<TEntity>(_apiUri, responseAddress);
-                if (EqualityComparer<TEntity>.Default.Equals(entity, default(TEntity)))
-                {
-                    View.Notify = "Entity not found.";
-                }
-                return entity;
-            }
-            catch (HttpRequestException ex)
-            {
-                View.Error = ex.Message;
-                return default(TEntity);
-            }
-        }
-
-        private async Task<bool> TryPostEntityAsync<TEntity>(string apiUri, string responseAddress, TEntity postValue)
-        {
-            try
-            {
-                var isSuccess = await HttpHelper.PostEntityAsync<TEntity>(_apiUri, responseAddress, postValue);
-                return isSuccess;
-            }
-            catch (HttpRequestException ex)
-            {
-                View.Error = ex.Message;
-                return false;
-            }
-        }
-
-        #endregion Helper methods (HTTP)
     }
 }

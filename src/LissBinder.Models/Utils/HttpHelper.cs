@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Escyug.LissBinder.Models.Services
+namespace Escyug.LissBinder.Models.Utils
 {
     public static class HttpHelper
     {

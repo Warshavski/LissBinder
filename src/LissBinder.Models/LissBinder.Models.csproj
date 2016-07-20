@@ -55,7 +55,12 @@
     <Compile Include="Metadata\TableMetadata.cs" />
     <Compile Include="Pharmacy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\HttpHelper.cs" />
+    <Compile Include="Services\DictionaryService.cs" />
+    <Compile Include="Services\Exceptions\ServiceException.cs" />
+    <Compile Include="Services\IPharmacyService.cs" />
+    <Compile Include="Services\PharmacyService.cs" />
+    <Compile Include="Utils\HttpHelper.cs" />
+    <Compile Include="Services\IDictionaryService.cs" />
     <Compile Include="Services\IImportService.cs" />
     <Compile Include="Services\ImportService.cs" />
     <Compile Include="User.cs" />
@@ -73,6 +78,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

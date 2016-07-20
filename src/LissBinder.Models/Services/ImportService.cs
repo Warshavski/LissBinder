@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using Escyug.LissBinder.Models.Drugs;
 using Escyug.LissBinder.Models.Metadata;
+using Escyug.LissBinder.Models.Utils;
 
 namespace Escyug.LissBinder.Models.Services
 {
