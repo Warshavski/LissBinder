@@ -30,10 +30,11 @@ namespace Escyug.LissBinder.Presentation.Presenters
             View.DictionarySearchAsync += () => OnDictionarySearchAsync(View.SelectedPharmacyDrug);
             View.DrugDetailsShow += () => OnDrugDetailsShow(View.SelectedPharmacyDrug);
             View.DrugBindAsync += () => OnDrugBindAsync(View.SelectedPharmacyDrug, View.SelectedDictionaryDrug);
+            View.ImportShow += () => OnImportShow();
         }
 
 
-        //--------------------------------------------------------
+        //---------------------------------------------------------------------
 
 
         #region Presenter methods
@@ -131,13 +132,18 @@ namespace Escyug.LissBinder.Presentation.Presenters
             //}
         }
 
+        private void OnImportShow()
+        {
+            AppController.Run<ImportPresenter>();
+        }
+
         #endregion Presenter methods
 
 
-        //--------------------------------------------------------
+        //---------------------------------------------------------------------
 
 
-        #region Helper(HTTP) methods
+        #region Helper methods (HTTP)
 
         private async Task<TEntity> TryGetEntityAsync<TEntity>(string apiUri, string responseAddress)
         {
@@ -171,6 +177,6 @@ namespace Escyug.LissBinder.Presentation.Presenters
             }
         }
 
-        #endregion Helper(HTTP) methods
+        #endregion Helper methods (HTTP)
     }
 }

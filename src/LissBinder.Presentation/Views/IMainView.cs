@@ -14,6 +14,7 @@ namespace Escyug.LissBinder.Presentation.Views
         event Func<Task> DrugsSearchAsync;
 
         event Action DrugDetailsShow;
+        event Action ImportShow;
 
         event Func<Task> DictionarySearchAsync;
 

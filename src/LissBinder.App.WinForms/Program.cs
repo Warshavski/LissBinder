@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Escyug.LissBinder.Models.Services;
 
 using Escyug.LissBinder.Presentation.Common;
 using Escyug.LissBinder.Presentation.Views;
@@ -25,10 +27,13 @@ namespace Escyug.LissBinder.App.WinForms
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new LoginForm());
 
+            var apiUri = ConfigurationManager.ConnectionStrings["test"].ConnectionString;
+
             var controller = new ApplicationController(new LightInjectAdapter())
                .RegisterView<IMainView, MainForm>()
-               //.RegisterView<IDictionaryView, DictionaryForm>()
+               .RegisterView<IImportView, ImportForm>()
                .RegisterView<IDetailsView, DetailsForm>()
+               .RegisterInstance<IImportService>(new ImportService(apiUri))
                .RegisterInstance(new ApplicationContext());
 
             controller.Run<MainPresenter>();

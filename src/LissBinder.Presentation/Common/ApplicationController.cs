@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Linq.Expressions;
 namespace Escyug.LissBinder.Presentation.Common
 {
     public sealed class ApplicationController : IApplicationController
@@ -10,6 +12,11 @@ namespace Escyug.LissBinder.Presentation.Common
             _container = container;
             _container.RegisterInstance<IApplicationController>(this);
         }
+
+
+
+        // IOC CONTAINER
+        //---------------------------------------------------------------------
 
         public IApplicationController RegisterView<TView, TImplementation>()
             where TView : IView
@@ -25,12 +32,29 @@ namespace Escyug.LissBinder.Presentation.Common
             return this;
         }
 
+        public IApplicationController RegisterInstance(string instanceName, string serviceName)
+        {
+            _container.RegisterInstance(instanceName, serviceName);
+            return this;
+        }
+
         public IApplicationController RegisterService<TModel, TImplementation>()
             where TImplementation : class, TModel
         {
             _container.Register<TModel, TImplementation>();
             return this;
         }
+
+        public IApplicationController RegisterService<TModel, TArgument>(Expression<Func<TArgument, TModel>> factory)
+        {
+            _container.Register<TModel, TArgument>(factory);
+            return this;
+        }
+
+       
+
+        // PRESENTER WORKFLOW
+        //---------------------------------------------------------------------
 
         public void Run<TPresenter>()
             where TPresenter : class, IPresenter

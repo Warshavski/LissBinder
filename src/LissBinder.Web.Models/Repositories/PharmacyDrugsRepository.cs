@@ -18,15 +18,18 @@ namespace Escyug.LissBinder.Web.Models.Repositories
         private readonly IPharmacyDrugsByNameQueryProcessor _drugByNameQueryProcessor;
         private readonly IAddPharmacyDrugsQueryProcessor _drugsAddQueryProcessor;
         private readonly IAddBindingQueryProcessor _bindingAddQueryProcessor;
+        private readonly IDeletePharmacyDrugsQueryProcessor _deleteDrugsQueryProcessor;
 
         public PharmacyDrugsRepository(
             IPharmacyDrugsByNameQueryProcessor drugByNameQueryProcessor,
             IAddPharmacyDrugsQueryProcessor drugsAddQueryProcessor,
-            IAddBindingQueryProcessor bindingAddQueryProcessor)
+            IAddBindingQueryProcessor bindingAddQueryProcessor,
+            IDeletePharmacyDrugsQueryProcessor deleteDrugsQueryProcessor)
         {
             _drugByNameQueryProcessor = drugByNameQueryProcessor;
             _drugsAddQueryProcessor = drugsAddQueryProcessor;
             _bindingAddQueryProcessor = bindingAddQueryProcessor;
+            _deleteDrugsQueryProcessor = deleteDrugsQueryProcessor;
         }
 
         public async Task<IEnumerable<Drugs.PharmacyDrug>> GetDrugsByNameAsync(string drugName, int pharmacyId)
@@ -57,10 +60,19 @@ namespace Escyug.LissBinder.Web.Models.Repositories
                 pharmacyDrugsEntities.Add(PharmacyDrugMappings.ModelToEntity(model));
             }
 
-            var rowsTotal = await _drugsAddQueryProcessor.AddDrugsAsync(
+            var isDeleted = await _deleteDrugsQueryProcessor.DeleteDrugsAsync(pharmacyId);
+
+            if (isDeleted)
+            {
+                var rowsTotal = await _drugsAddQueryProcessor.AddDrugsAsync(
                 pharmacyDrugsEntities, pharmacyId);
 
-            return rowsTotal;
+                return rowsTotal;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
 

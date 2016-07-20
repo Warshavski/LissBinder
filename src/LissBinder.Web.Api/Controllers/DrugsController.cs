@@ -46,7 +46,7 @@ namespace Escyug.LissBinder.Web.Api.Controllers
         /**
          * POST: api/drugs/{list of drugs}
          * 
-         * Add list of drugs to storage
+         * Add list of drugs to the storage
          */
         [Route("api/drugs/{pharmacyId}/")]
         [HttpPost]

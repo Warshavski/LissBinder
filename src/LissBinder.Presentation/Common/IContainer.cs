@@ -15,6 +15,8 @@ namespace Escyug.LissBinder.Presentation.Common
 
         void RegisterInstance<T>(T instance);
 
+        void RegisterInstance(string instanceName, string serviceName);
+
         TService Resolve<TService>();
 
         bool IsRegistered<TService>();

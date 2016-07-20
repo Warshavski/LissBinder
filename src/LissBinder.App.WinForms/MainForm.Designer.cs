@@ -51,11 +51,12 @@
             this.showDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonBind = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.progressBoxDictionary = new System.Windows.Forms.PictureBox();
             this.dataGridViewDictionary = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.drugformColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -94,6 +95,8 @@
             // toolStripDropDownButton1
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -183,7 +186,6 @@
             // dataGridViewDrugs
             // 
             this.dataGridViewDrugs.AllowUserToAddRows = false;
-            this.dataGridViewDrugs.AutoGenerateColumns = false;
             this.dataGridViewDrugs.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewDrugs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewDrugs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -267,6 +269,16 @@
             this.panel2.Size = new System.Drawing.Size(765, 153);
             this.panel2.TabIndex = 0;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(7, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Справочник РЛС :";
+            // 
             // progressBoxDictionary
             // 
             this.progressBoxDictionary.BackColor = System.Drawing.SystemColors.Window;
@@ -282,7 +294,6 @@
             // 
             this.dataGridViewDictionary.AllowUserToAddRows = false;
             this.dataGridViewDictionary.AllowUserToDeleteRows = false;
-            this.dataGridViewDictionary.AutoGenerateColumns = false;
             this.dataGridViewDictionary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -328,15 +339,11 @@
             this.drugformColumn.Name = "drugformColumn";
             this.drugformColumn.ReadOnly = true;
             // 
-            // label1
+            // importToolStripMenuItem
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(7, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Справочник РЛС :";
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importToolStripMenuItem.Text = "Import";
             // 
             // MainForm
             // 
@@ -394,6 +401,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn drugformColumn;
         private System.Windows.Forms.PictureBox progressBoxDictionary;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
 
     }
 }

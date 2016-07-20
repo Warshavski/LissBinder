@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Linq.Expressions;
 namespace Escyug.LissBinder.Presentation.Common
 {
     /// <summary>
@@ -30,10 +32,28 @@ namespace Escyug.LissBinder.Presentation.Common
         /// <summary>
         /// 
         /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TArgument"></typeparam>
+        /// <param name="factory"></param>
+        /// <returns></returns>
+        IApplicationController RegisterService<TModel, TArgument>(Expression<Func<TArgument, TModel>> factory);
+        
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <typeparam name="TArgument"></typeparam>
         /// <param name="instance"></param>
         /// <returns></returns>
         IApplicationController RegisterInstance<TArgument>(TArgument instance);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TArgument"></typeparam>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        IApplicationController RegisterInstance(string instanceName, string serviceName);
 
         /// <summary>
         /// 

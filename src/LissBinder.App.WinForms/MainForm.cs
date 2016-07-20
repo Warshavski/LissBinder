@@ -56,6 +56,9 @@ namespace Escyug.LissBinder.App.WinForms
 
             this.contextMenuStrip1.Items[0].Click += (sender, e) =>
                 Invoker.Invoke(DrugDetailsShow);
+
+            importToolStripMenuItem.Click += (sender, e) =>
+                Invoker.Invoke(ImportShow);
         }
 
       
@@ -100,6 +103,8 @@ namespace Escyug.LissBinder.App.WinForms
         public event Func<Task> DrugsSearchAsync;
 
         public event Action DrugDetailsShow;
+
+        public event Action ImportShow;
 
         public event Func<Task> DictionarySearchAsync;
 
@@ -203,6 +208,6 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
         #endregion Helper methods 
-    
+
     }
 }

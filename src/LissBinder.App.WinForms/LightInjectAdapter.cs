@@ -27,6 +27,11 @@ namespace Escyug.LissBinder.App.WinForms
             _container.RegisterInstance(instance);
         }
 
+        public void RegisterInstance(string instanceName, string serviceName)
+        {
+            _container.RegisterInstance(instanceName, serviceName);
+        }
+
         public TService Resolve<TService>()
         {
             return _container.GetInstance<TService>();
