@@ -58,6 +58,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LissBinder.Common\LissBinder.Common.csproj">
+      <Project>{8caf47db-84fb-4159-bc35-6b87a8d83cbc}</Project>
+      <Name>LissBinder.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LissBinder.Models\LissBinder.Models.csproj">
       <Project>{775a76a4-e403-45ed-91ab-b28ddc996d16}</Project>
       <Name>LissBinder.Models</Name>

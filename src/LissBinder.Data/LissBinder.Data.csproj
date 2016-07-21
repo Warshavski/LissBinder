@@ -48,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryProcessors\IAddBindingQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IAddPharmacyDrugsQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\IAddUserQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IDeletePharmacyDrugsQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IPharmacyByUserQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IPharmacyDrugsByNameQueryProcessor.cs" />

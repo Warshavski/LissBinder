@@ -38,8 +38,8 @@ namespace Escyug.LissBinder.Presentation.Presenters
             //-------------------------
             View.DrugsSearchAsync += () => OnDrugsSearchAsync(View.SearchDrugName);
             View.DictionarySearchAsync += () => OnDictionarySearchAsync(View.SelectedPharmacyDrug);
-            View.DrugDetailsShow += () => OnDrugDetailsShow(View.SelectedPharmacyDrug);
             View.DrugBindAsync += () => OnDrugBindAsync(View.SelectedPharmacyDrug, View.SelectedDictionaryDrug);
+            View.DrugDetailsShow += () => OnDrugDetailsShow(View.SelectedPharmacyDrug);
             View.ImportShow += () => OnImportShow();
         }
 

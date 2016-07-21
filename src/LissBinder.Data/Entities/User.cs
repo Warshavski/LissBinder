@@ -18,9 +18,9 @@ namespace Escyug.LissBinder.Data.Entities
         public string Login {get; set;}
 
         // represents pwd column
-        public string PwdHash {get; set;}
+        public byte[] PwdHash { get; set; }
 
         // represents datakey column
-        public string Salt {get; set;} 
+        public byte[] Salt { get; set; } 
     }
 }

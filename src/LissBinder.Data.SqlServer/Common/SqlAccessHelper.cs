@@ -73,6 +73,34 @@ namespace Escyug.LissBinder.Data.SqlServer.Common
             return command;
         }
 
+        public static SqlCommand CreateCommand(SqlConnection connection, string commandText,
+           CommandType commandType, SqlParameter[] parameters, SqlTransaction transaction)
+        {
+            SqlCommand command = null;
+
+            if (commandText != null)
+            {
+                try
+                {
+                    command = connection.CreateCommand();
+                    command.CommandText = commandText;
+                    command.CommandType = commandType;
+                    command.Transaction = transaction;
+
+                    if (parameters != null)
+                        command.Parameters.AddRange(parameters);
+                }
+                catch (SqlException)
+                {
+                    // Set the command to null if it was created.
+                    if (command != null)
+                        command = null;
+                }
+            }
+            // Return the connection.
+            return command;
+        }
+
         /// <summary>
         /// Creates a list of TEntities(generic) from the current sql query result set (async)
         /// </summary>

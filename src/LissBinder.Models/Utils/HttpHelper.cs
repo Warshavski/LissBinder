@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Escyug.LissBinder.Models.Utils
@@ -43,6 +40,7 @@ namespace Escyug.LissBinder.Models.Utils
             }
         }
 
+        //*** create generic method (return TValue)
          public static async Task<bool> PostEntityAsync<TValue>(string apiUri, string responseAddress,
             TValue postValue)
         {
@@ -69,5 +67,6 @@ namespace Escyug.LissBinder.Models.Utils
                 }
             }
         }
+        //*** create generic method (return TValue)
     }
 }

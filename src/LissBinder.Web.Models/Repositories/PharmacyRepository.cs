@@ -17,7 +17,8 @@ namespace Escyug.LissBinder.Web.Models.Repositories
 
         public async Task<Pharmacy> GetPharmacyByUserAsync(User user)
         {
-            var pharmacyEntity = await _pharmacyByUserQueryProcessor.GetPharmacyAsync(user.Id);
+            var id = int.Parse(user.Id);
+            var pharmacyEntity = await _pharmacyByUserQueryProcessor.GetPharmacyAsync(id);
 
             if (pharmacyEntity != null)
             {

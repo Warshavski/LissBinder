@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
+using Escyug.LissBinder.Common.Utils;
 using Escyug.LissBinder.Models.Drugs;
 
 namespace Escyug.LissBinder.App.Console
@@ -16,7 +17,18 @@ namespace Escyug.LissBinder.App.Console
         {
             //Task.Run(TestHttpClient).Wait();
             //Task.WaitAll(TestHttpClient);
-            TestHttpClient().Wait();
+            //TestHttpClient().Wait();
+            GenerateCredentials("test");
+        }
+
+        private static void GenerateCredentials(string password)
+        {
+            var salt = Security.GenerateSalt();
+            var bytePass = Encoding.UTF8.GetBytes(password);
+            var passHash = Security.GenerateSaltedHash(bytePass, salt);
+
+            System.Console.WriteLine("salt: " + Encoding.UTF8.GetString(salt));
+            System.Console.WriteLine("hash: " + Encoding.UTF8.GetString(passHash));
         }
 
         private static async Task TestHttpClient()

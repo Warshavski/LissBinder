@@ -58,8 +58,8 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
             user.Id = reader.GetFieldValue<int>(0);
             user.Name = reader.GetFieldValue<string>(1);
             user.Login = reader.GetFieldValue<string>(2);
-            user.PwdHash = reader.GetFieldValue<string>(3);
-            user.Salt = reader.GetFieldValue<string>(4);
+            user.PwdHash = reader.GetFieldValue<byte[]>(3);
+            user.Salt = reader.GetFieldValue<byte[]>(4);
 
             return user;
         }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+
+using Microsoft.AspNet.Identity;
 
 namespace Escyug.LissBinder.Web.Models.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IUserStore<User>
     {
         Task<User> GetUserByCredentialsAsync(string login, string password);
     }

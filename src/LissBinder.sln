@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LissBinder.Web.Models", "Li
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{4E7CDB41-55F8-48D2-A5B7-AB30A725F03E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LissBinder.Common", "LissBinder.Common\LissBinder.Common.csproj", "{8CAF47DB-84FB-4159-BC35-6B87A8D83CBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{F7D7BC9C-D43E-4964-900D-E585183E3388}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7D7BC9C-D43E-4964-900D-E585183E3388}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7D7BC9C-D43E-4964-900D-E585183E3388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CAF47DB-84FB-4159-BC35-6B87A8D83CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CAF47DB-84FB-4159-BC35-6B87A8D83CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CAF47DB-84FB-4159-BC35-6B87A8D83CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CAF47DB-84FB-4159-BC35-6B87A8D83CBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
