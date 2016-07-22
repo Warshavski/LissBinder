@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
+    [Authorize]
     public class BindingsController : ApiController
     {
         private readonly IPharmacyDrugsRepository _pharmacyDrugRepository;

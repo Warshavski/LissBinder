@@ -8,6 +8,7 @@ using Escyug.LissBinder.Web.Api.ViewModels;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
+    [Authorize]
     public class UserController : ApiController
     {
         private readonly IUserRepository _userRepository;

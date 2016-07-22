@@ -12,6 +12,7 @@ using Escyug.LissBinder.Web.Models.Repositories;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
+    [Authorize]
     public class DrugsController : ApiController
     {
         private readonly IPharmacyDrugsRepository _pharmacyDrugsRepository;

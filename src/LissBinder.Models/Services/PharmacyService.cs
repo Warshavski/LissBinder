@@ -42,7 +42,7 @@ namespace Escyug.LissBinder.Models.Services
             try
             {
                 var responseAddress = "api/bind";
-                var isBindSuccessful = await HttpHelper.PostEntityAsync<Binding>(_apiUri, responseAddress, binding);
+                var isBindSuccessful = await HttpHelper.PostEntityAsync<bool, Binding>(_apiUri, responseAddress, binding);
 
                 return isBindSuccessful;
             }

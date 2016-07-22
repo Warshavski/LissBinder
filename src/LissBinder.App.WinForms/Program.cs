@@ -29,16 +29,18 @@ namespace Escyug.LissBinder.App.WinForms
 
             var apiUri = ConfigurationManager.ConnectionStrings["test"].ConnectionString;
 
-            var controller = new ApplicationController(new LightInjectAdapter())
-               .RegisterView<IMainView, MainForm>()
-               .RegisterView<IImportView, ImportForm>()
-               .RegisterView<IDetailsView, DetailsForm>()
-               .RegisterInstance<IDictionaryService>(new DictionaryService(apiUri))
-               .RegisterInstance<IPharmacyService>(new PharmacyService(apiUri))
-               .RegisterInstance<IImportService>(new ImportService(apiUri))
-               .RegisterInstance(new ApplicationContext());
+            var controller = new ApplicationController(new LightInjectAdapter()).
+                RegisterView<ILoginView, LoginForm>().
+                RegisterView<IMainView, MainForm>().
+                RegisterView<IImportView, ImportForm>().
+                RegisterView<IDetailsView, DetailsForm>().
+                RegisterInstance<ILoginService>(new LoginService(apiUri)).
+                RegisterInstance<IDictionaryService>(new DictionaryService(apiUri)).
+                RegisterInstance<IPharmacyService>(new PharmacyService(apiUri)).
+                RegisterInstance<IImportService>(new ImportService(apiUri)).
+                RegisterInstance(new ApplicationContext());
 
-            controller.Run<MainPresenter>();
+            controller.Run<LoginPresenter>();
         }
     }
 }

@@ -14,10 +14,34 @@ namespace Escyug.LissBinder.App.WinForms
 {
     public partial class LoginForm : BaseForm, ILoginView
     {
-        public LoginForm()
+        private readonly ApplicationContext _context;
+
+        public LoginForm(ApplicationContext context)
         {
+            _context = context;
+
             InitializeComponent();
+
+            this.button1.Click += async (sender, e) => 
+                await Invoker.InvokeAsync(LoginExecuteAsync);
         }
+
+
+
+        //---------------------------------------------------------------------
+
+
+        #region IView member
+
+        
+        public new void Show()
+        {
+            _context.MainForm = this;
+            Application.Run(_context);
+        }
+
+
+        #endregion IView member
 
 
         //---------------------------------------------------------------------
@@ -26,7 +50,7 @@ namespace Escyug.LissBinder.App.WinForms
         #region ILoginView members
 
 
-        public event Action LoginExecute;
+        public event Func<Task> LoginExecuteAsync;
 
         public string Login
         {

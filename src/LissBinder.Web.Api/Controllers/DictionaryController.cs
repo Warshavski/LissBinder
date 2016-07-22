@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
+    [Authorize]
     public class DictionaryController : ApiController
     {
         private readonly IDictionaryDrugsRepository _dictionaryRepository;

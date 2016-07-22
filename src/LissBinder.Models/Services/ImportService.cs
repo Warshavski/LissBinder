@@ -170,7 +170,7 @@ namespace Escyug.LissBinder.Models.Services
                         var responseAddress = "api/drugs/" + pharmacyId;
 
                         rowsCopied = 
-                            await HttpHelper.PostEntityAsync<List<PharmacyDrug>>(_apiUri, responseAddress, drugsList);
+                            await HttpHelper.PostEntityAsync<bool, List<PharmacyDrug>>(_apiUri, responseAddress, drugsList);
                     }
                 }  
             }

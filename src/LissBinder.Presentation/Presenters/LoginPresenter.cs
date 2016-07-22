@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Escyug.LissBinder.Models.Services;
+
 using Escyug.LissBinder.Presentation.Common;
 using Escyug.LissBinder.Presentation.Views;
 
@@ -11,13 +13,17 @@ namespace Escyug.LissBinder.Presentation.Presenters
 {
     public class LoginPresenter : BasePresenter<ILoginView>
     {
-        public LoginPresenter(ILoginView view, IApplicationController appController)
-            : base(view, appController)
+        private readonly ILoginService _loginService;
+
+        public LoginPresenter(ILoginView view, IApplicationController appController,
+            ILoginService loginService) : base(view, appController)
         {
-            View.LoginExecute += () => OnLoginExecute();
+            _loginService = loginService;
+
+            View.LoginExecuteAsync += () => OnLoginExecuteAsync();
         }
 
-        private void OnLoginExecute()
+        private async Task OnLoginExecuteAsync()
         {
             string login = View.Login.Trim();
             string password = View.Password.Trim();
@@ -27,6 +33,7 @@ namespace Escyug.LissBinder.Presentation.Presenters
             {
                 // call api auth method 
                 // create user and auth token
+                var token = await _loginService.SignInAsync(login, password);
             }
             else
             {

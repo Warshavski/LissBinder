@@ -8,6 +8,6 @@ namespace Escyug.LissBinder.Models.Services
 {
     public interface ILoginService
     {
-
+        Task<ServiceToken> SignInAsync(string login, string password);
     }
 }

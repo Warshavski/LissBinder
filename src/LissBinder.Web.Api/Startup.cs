@@ -41,7 +41,7 @@ namespace Escyug.LissBinder.Web.Api
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/token"),
+                TokenEndpointPath = new PathString("/api/account/auth"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 Provider = new AuthorizationServerProvider((UserManager<User>)config.DependencyResolver.GetService(typeof(UserManager<User>)))
             };
