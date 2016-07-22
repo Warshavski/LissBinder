@@ -1,114 +1,63 @@
-﻿using System;
+﻿using Escyug.LissBinder.Data.Entities;
+using Escyug.LissBinder.Data;
+using Escyug.LissBinder.Data.SqlServer.DataMappers;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Escyug.LissBinder.Common.Utils;
-
-using Escyug.LissBinder.Data.QueryProcessors;
-
-using Escyug.LissBinder.Web.Models.Mappings;
 
 namespace Escyug.LissBinder.Web.Models.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUserPasswordStore<User>
     {
-        private readonly IUserByLoginQueryProcessor _userByLoginQueryProcessor;
-        private readonly IAddUserQueryProcessor _userAddQueryProcessor;
+        private readonly UserDataMapper _userDataMapper;
 
-        public UserRepository(IUserByLoginQueryProcessor userByLoginQueryProcessor,
-            IAddUserQueryProcessor userAddQueryProcessor)
+        public UserRepository(UserDataMapper userDataMapper)
         {
-            _userByLoginQueryProcessor = userByLoginQueryProcessor;
-            _userAddQueryProcessor = userAddQueryProcessor;
+            _userDataMapper = userDataMapper;
         }
 
-
-        //---------------------------------------------------------------------
-
-
-        #region IUserRepository members
-
-
-        //*** create separate layer for login check
-        public async Task<User> GetUserByCredentialsAsync(string login, string password)
-        {
-            throw new NotImplementedException();
-            //var userEntity = await _userByLoginQueryProcessor.GetUserAsync(login);
-
-            //if (userEntity != null)
-            //{
-            //    var masterHash = userEntity.PwdHash;
-            //    var salt = userEntity.Salt;
-
-            //    // create hash from salt and input password
-            //    // check master hash and input password hash
-            //    // if true create user model
-            //    // else return null
-
-            //    var compHash = Security.GenerateSaltedHash(
-            //        Encoding.UTF8.GetBytes(password),
-            //        Encoding.UTF8.GetBytes(salt));
-
-            //    var isHashMatch = Security.CompareByteArrays(masterHash, compHash);
-
-            //    if (isHashMatch)
-            //    {
-            //        var user = UserMappings.EntityToModel(userEntity);
-            //        return user;
-            //    }
-            //    else
-            //    {
-            //        return null;
-            //    }
-            //}
-            //else
-            //{
-            //    return null;
-            //}
-        }
-
-
-        #endregion IUserRepository members
-
-
-        //---------------------------------------------------------------------
-
-
-        #region IUserStore<User> members
-
-
-        public async Task CreateAsync(User user)
-        {
-            var userEntity = UserMappings.ModelToEntity(user);
-            var isUserCreated = await _userAddQueryProcessor.AddUserAsync(userEntity, 1);
-        }
-
-        public Task DeleteAsync(User user)
+        public Task<string> GetPasswordHashAsync(Models.User user)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> FindByIdAsync(string userId)
+        public Task<bool> HasPasswordAsync(Models.User user)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<User> FindByNameAsync(string userName)
+        public Task SetPasswordHashAsync(Models.User user, string passwordHash)
         {
-            var userEntity = await _userByLoginQueryProcessor.GetUserAsync(userName);
-
-            if (userEntity != null)
-            {
-                var user = UserMappings.EntityToModel(userEntity);
-                return user;
-            }
-            else
-            {
-                return null;
-            }
+            throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(User user)
+        public Task CreateAsync(Models.User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(Models.User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Models.User> FindByIdAsync(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Models.User> FindByNameAsync(string userName)
+        {
+            var user = await _userDataMapper.SelectByLogin(userName);
+
+            return user;
+        }
+
+        public Task UpdateAsync(Models.User user)
         {
             throw new NotImplementedException();
         }
@@ -117,8 +66,5 @@ namespace Escyug.LissBinder.Web.Models.Repositories
         {
             throw new NotImplementedException();
         }
-
-
-        #endregion IUserStore<User> members
     }
 }

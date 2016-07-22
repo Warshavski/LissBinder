@@ -17,10 +17,13 @@ namespace Escyug.LissBinder.Data.Entities
         // represents login column
         public string Login {get; set;}
 
-        // represents pwd column
+        // represents hash column
         public byte[] PwdHash { get; set; }
 
-        // represents datakey column
-        public byte[] Salt { get; set; } 
+        // represents salt column
+        public byte[] Salt { get; set; }
+
+        // represents liss_pharmacys.id_pharmacy column
+        public int PharmacyId { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace Escyug.LissBinder.Web.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new User("1", userModel.UserName, userModel.Login, null, null);
+            var user = new User("1", userModel.UserName, userModel.Login, null, null, userModel.PharmacyId);
 
             IdentityResult result = await _userManager.CreateAsync(user, userModel.Password);
 

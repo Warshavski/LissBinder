@@ -1,5 +1,6 @@
-﻿using Escyug.LissBinder.Data.QueryProcessors;
-using Escyug.LissBinder.Data.SqlServer.QueryProcessors;
+﻿//using Escyug.LissBinder.Data.QueryProcessors;
+//using Escyug.LissBinder.Data.SqlServer.QueryProcessors;
+//using Escyug.LissBinder.Web.Models.Repositories;
 using Escyug.LissBinder.Web.Models;
 using Escyug.LissBinder.Web.Providers.Api;
 using Microsoft.AspNet.Identity;
@@ -12,9 +13,10 @@ using System.Reflection;
 using System.Web;
 
 
-using Escyug.LissBinder.Web.Models.Repositories;
+
 using System.Configuration;
 using Escyug.LissBinder.Data;
+using Escyug.LissBinder.Data.SqlServer;
 
 namespace Escyug.LissBinder.Web.Api
 {
@@ -30,43 +32,43 @@ namespace Escyug.LissBinder.Web.Api
             ConfigureDbContext(container);
 
 
-            // QUERY PROCESSORS SECTION
-            //--------------------------------------------
-            container.Bind<IAddBindingQueryProcessor>().
-                To<AddBindingQueryProcessor>();
-            container.Bind<IAddUserQueryProcessor>().
-                To<AddUserQueryProcessor>();
-            container.Bind<IAddPharmacyDrugsQueryProcessor>().
-                To<AddPharmacyDrugsQueryProcessor>();
-            container.Bind<IDeletePharmacyDrugsQueryProcessor>().
-                To<DeletePharmacyDrugsQueryProcessor>();
-            container.Bind<IDictionaryDrugsByNameQueryProcessor>().
-                To<DictionaryDrugsByNameQueryProcessor>();
-            container.Bind<IPharmacyByUserQueryProcessor>().
-                To<PharmacyByUserQueryProcessor>();
-            container.Bind<IPharmacyDrugsByNameQueryProcessor>().
-                To<PharmacyDrugsByNameQueryProcessor>();
-            container.Bind<IUserByLoginQueryProcessor>().
-                To<UserByLoginQueryProcessor>();
+            //// QUERY PROCESSORS SECTION
+            ////--------------------------------------------
+            //container.Bind<IAddBindingQueryProcessor>().
+            //    To<AddBindingQueryProcessor>();
+            //container.Bind<IAddUserQueryProcessor>().
+            //    To<AddUserQueryProcessor>();
+            //container.Bind<IAddPharmacyDrugsQueryProcessor>().
+            //    To<AddPharmacyDrugsQueryProcessor>();
+            //container.Bind<IDeletePharmacyDrugsQueryProcessor>().
+            //    To<DeletePharmacyDrugsQueryProcessor>();
+            //container.Bind<IDictionaryDrugsByNameQueryProcessor>().
+            //    To<DictionaryDrugsByNameQueryProcessor>();
+            //container.Bind<IPharmacyByUserQueryProcessor>().
+            //    To<PharmacyByUserQueryProcessor>();
+            //container.Bind<IPharmacyDrugsByNameQueryProcessor>().
+            //    To<PharmacyDrugsByNameQueryProcessor>();
+            //container.Bind<IUserByLoginQueryProcessor>().
+            //    To<UserByLoginQueryProcessor>();
 
 
-            // REPOSITORY SECTION
-            //--------------------------------------------
-            container.Bind<IDictionaryDrugsRepository>().
-                To<DictionaryDrugsRepository>();
-            container.Bind<IPharmacyDrugsRepository>().
-                To<PharmacyDrugsRepository>();
-            container.Bind<IPharmacyRepository>().
-                To<PharmacyRepository>();
-            container.Bind<IUserRepository>().
-                To<UserRepository>();
+            //// REPOSITORY SECTION
+            ////--------------------------------------------
+            //container.Bind<IDictionaryDrugsRepository>().
+            //    To<DictionaryDrugsRepository>();
+            //container.Bind<IPharmacyDrugsRepository>().
+            //    To<PharmacyDrugsRepository>();
+            //container.Bind<IPharmacyRepository>().
+            //    To<PharmacyRepository>();
+            //container.Bind<IUserRepository>().
+            //    To<UserRepository>();
 
 
             // AUTH SECTION
             //--------------------------------------------
-            container.Bind<UserManager<User>>().
-                To<IdentityUserManager>();
-            container.Bind<AuthorizationServerProvider>().ToSelf();
+            //container.Bind<UserManager<User>>().
+            //    To<IdentityUserManager>();
+            //container.Bind<AuthorizationServerProvider>().ToSelf();
 
             return container;
         }
@@ -76,7 +78,7 @@ namespace Escyug.LissBinder.Web.Api
             var connectionString =
                 ConfigurationManager.ConnectionStrings["local"].ConnectionString;
 
-            var context = new DbContext(connectionString);
+            var context = new SqlContext(connectionString);
 
             container.Bind<DbContext>().ToConstant(context);
         }

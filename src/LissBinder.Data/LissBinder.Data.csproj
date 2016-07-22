@@ -39,23 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataMapper.cs" />
     <Compile Include="Entities\Binding.cs" />
+    <Compile Include="Entities\DictionaryDrug.cs" />
     <Compile Include="Entities\Pharmacy.cs" />
     <Compile Include="Entities\PharmacyDrug.cs" />
-    <Compile Include="Entities\DictionaryDrug.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Extensions\DbCommandExtensions.cs" />
     <Compile Include="DbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryProcessors\IAddBindingQueryProcessor.cs" />
-    <Compile Include="QueryProcessors\IAddPharmacyDrugsQueryProcessor.cs" />
-    <Compile Include="QueryProcessors\IAddUserQueryProcessor.cs" />
-    <Compile Include="QueryProcessors\IDeletePharmacyDrugsQueryProcessor.cs" />
-    <Compile Include="QueryProcessors\IPharmacyByUserQueryProcessor.cs" />
-    <Compile Include="QueryProcessors\IPharmacyDrugsByNameQueryProcessor.cs" />
-    <Compile Include="QueryProcessors\IDictionaryDrugsByNameQueryProcessor.cs" />
-    <Compile Include="QueryProcessors\IUserByLoginQueryProcessor.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

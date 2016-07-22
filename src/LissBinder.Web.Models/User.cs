@@ -12,9 +12,11 @@ namespace Escyug.LissBinder.Web.Models
 
         public string Login { get; private set; }
 
-        public byte[] PwdHash { get;  set; }
+        //public byte[] PwdHash { get; set; }
 
-        public byte[] Salt { get;  set; }
+        //public byte[] Salt { get; set; }
+
+        public int PharmacyId { get; private set; }
 
         //public User(string id, string name)
         //{
@@ -35,13 +37,20 @@ namespace Escyug.LissBinder.Web.Models
         //    Salt = byteSalt;
         //}
 
+        public User(string id, string name, string login, int pharmacyId)
+            : this(id, name, login, null, null)
+        {
+            PharmacyId = pharmacyId;
+        }
+
         public User(string id, string name, string login, byte[] hash, byte[] salt)
         {
             Id = id;
             UserName = name;
             Login = login;
-            PwdHash = hash;
-            Salt = salt;
+            //PwdHash = hash;
+            //Salt = salt;
         }
+
     }
 }
