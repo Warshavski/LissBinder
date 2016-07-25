@@ -12,7 +12,7 @@ using Ninject;
 using System.Reflection;
 using System.Configuration;
 using Escyug.LissBinder.Data;
-using Escyug.LissBinder.Web.Providers.Api;
+//using Escyug.LissBinder.Web.Providers.Api;
 using Escyug.LissBinder.Web.Models;
 using Microsoft.AspNet.Identity;
 using Escyug.LissBinder.Web.Models.Repositories;
@@ -43,7 +43,7 @@ namespace Escyug.LissBinder.Web.Api
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/api/account/auth"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new AuthorizationServerProvider((UserManager<User>)config.DependencyResolver.GetService(typeof(UserManager<User>)))
+                //Provider = new AuthorizationServerProvider((UserManager<User>)config.DependencyResolver.GetService(typeof(UserManager<User>)))
             };
 
             // Token Generation

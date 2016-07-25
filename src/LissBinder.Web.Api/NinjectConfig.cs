@@ -1,22 +1,19 @@
-﻿//using Escyug.LissBinder.Data.QueryProcessors;
-//using Escyug.LissBinder.Data.SqlServer.QueryProcessors;
-//using Escyug.LissBinder.Web.Models.Repositories;
-using Escyug.LissBinder.Web.Models;
-using Escyug.LissBinder.Web.Providers.Api;
+﻿using System.Configuration;
+
 using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security.OAuth;
+
 using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Web;
 
-
-
-using System.Configuration;
 using Escyug.LissBinder.Data;
+using Escyug.LissBinder.Data.QueryProcessors;
 using Escyug.LissBinder.Data.SqlServer;
+using Escyug.LissBinder.Data.SqlServer.QueryProcessors;
+
+using Escyug.LissBinder.Web.Api.Providers;
+
+using Escyug.LissBinder.Web.Models;
+using Escyug.LissBinder.Web.Models.Repositories;
+using Escyug.LissBinder.Web.Models.Services;
 
 namespace Escyug.LissBinder.Web.Api
 {
@@ -25,50 +22,34 @@ namespace Escyug.LissBinder.Web.Api
         public static IKernel CreateKernel()
         {
             var container = new StandardKernel();
-            //Create the bindings
+
+            /* Create the bindings */
 
             // COMMON SECTION
             //--------------------------------------------
             ConfigureDbContext(container);
 
 
-            //// QUERY PROCESSORS SECTION
-            ////--------------------------------------------
-            //container.Bind<IAddBindingQueryProcessor>().
-            //    To<AddBindingQueryProcessor>();
-            //container.Bind<IAddUserQueryProcessor>().
-            //    To<AddUserQueryProcessor>();
-            //container.Bind<IAddPharmacyDrugsQueryProcessor>().
-            //    To<AddPharmacyDrugsQueryProcessor>();
-            //container.Bind<IDeletePharmacyDrugsQueryProcessor>().
-            //    To<DeletePharmacyDrugsQueryProcessor>();
-            //container.Bind<IDictionaryDrugsByNameQueryProcessor>().
-            //    To<DictionaryDrugsByNameQueryProcessor>();
-            //container.Bind<IPharmacyByUserQueryProcessor>().
-            //    To<PharmacyByUserQueryProcessor>();
-            //container.Bind<IPharmacyDrugsByNameQueryProcessor>().
-            //    To<PharmacyDrugsByNameQueryProcessor>();
-            //container.Bind<IUserByLoginQueryProcessor>().
-            //    To<UserByLoginQueryProcessor>();
+            // QUERY PROCESSORS SECTION
+            //--------------------------------------------
+            container.Bind<IUserQueryProcessor>().To<UserQueryProcessor>();
+            container.Bind<IDictionaryQueryProcessor>().To<DictionaryQueryProcessor>();
 
 
-            //// REPOSITORY SECTION
-            ////--------------------------------------------
-            //container.Bind<IDictionaryDrugsRepository>().
-            //    To<DictionaryDrugsRepository>();
-            //container.Bind<IPharmacyDrugsRepository>().
-            //    To<PharmacyDrugsRepository>();
-            //container.Bind<IPharmacyRepository>().
-            //    To<PharmacyRepository>();
-            //container.Bind<IUserRepository>().
-            //    To<UserRepository>();
+            // REPOSITORY SECTION
+            //--------------------------------------------
+            container.Bind<IUserStore<User>>().To<UserRepository>();
+            container.Bind<IDictionaryRepository>().To<DictionaryRepository>();
+
+
+            // SERVICES SECTION
+            //--------------------------------------------
+            container.Bind<UserManager<User>>().To<UserService>();
 
 
             // AUTH SECTION
             //--------------------------------------------
-            //container.Bind<UserManager<User>>().
-            //    To<IdentityUserManager>();
-            //container.Bind<AuthorizationServerProvider>().ToSelf();
+            container.Bind<AuthorizationServerProvider>().ToSelf();
 
             return container;
         }

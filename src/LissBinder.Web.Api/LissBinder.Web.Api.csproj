@@ -157,7 +157,6 @@
     <Compile Include="Startup.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\UserCredentials.cs" />
     <Compile Include="ViewModels\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>

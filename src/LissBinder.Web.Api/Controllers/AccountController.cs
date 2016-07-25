@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 
 using Microsoft.AspNet.Identity;
-using Escyug.LissBinder.Web.Models;
-using System.Threading.Tasks;
+
 using Escyug.LissBinder.Web.Api.ViewModels;
+using Escyug.LissBinder.Web.Models;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
@@ -31,7 +27,7 @@ namespace Escyug.LissBinder.Web.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new User("1", userModel.UserName, userModel.Login, null, null, userModel.PharmacyId);
+            var user = new User(userModel.UserName, userModel.NameDescription, userModel.PharmacyId);
 
             IdentityResult result = await _userManager.CreateAsync(user, userModel.Password);
 

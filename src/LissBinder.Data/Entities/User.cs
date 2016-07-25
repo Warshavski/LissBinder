@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Escyug.LissBinder.Data.Entities
 {
     public class User
@@ -15,13 +10,13 @@ namespace Escyug.LissBinder.Data.Entities
         public string Name { get; set; }
 
         // represents login column
-        public string Login {get; set;}
+        public string NameDescription { get; set; }
 
         // represents hash column
-        public byte[] PwdHash { get; set; }
+        public string PasswordHash { get; set; }
 
         // represents salt column
-        public byte[] Salt { get; set; }
+        //public byte[] Salt { get; set; }
 
         // represents liss_pharmacys.id_pharmacy column
         public int PharmacyId { get; set; }

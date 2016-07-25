@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataMapper.cs" />
     <Compile Include="Entities\Binding.cs" />
     <Compile Include="Entities\DictionaryDrug.cs" />
     <Compile Include="Entities\Pharmacy.cs" />
@@ -48,6 +47,10 @@
     <Compile Include="Extensions\DbCommandExtensions.cs" />
     <Compile Include="DbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryProcessors\IDictionaryQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\IPharmacyDrugsQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\IQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\IUserQueryProcessor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

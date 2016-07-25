@@ -21,7 +21,6 @@ namespace Escyug.LissBinder.Data.SqlServer.DataMappers
             _context = context;
         }
 
-
         public async Task<User> SelectByLogin(string login)
         {
             var commandText = "dbo.azure_liss_user_select_by_login";

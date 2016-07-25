@@ -1,18 +1,14 @@
-﻿using Microsoft.Owin.Security.OAuth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.OAuth;
 
 using Escyug.LissBinder.Web.Models;
 
-namespace Escyug.LissBinder.Web.Providers.Api
+namespace Escyug.LissBinder.Web.Api.Providers
 {
-    public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
+    public sealed class AuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
         private readonly UserManager<User> _userManager;
 
@@ -28,7 +24,6 @@ namespace Escyug.LissBinder.Web.Providers.Api
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
             var user = await _userManager.FindAsync(context.UserName, context.Password);
@@ -39,11 +34,11 @@ namespace Escyug.LissBinder.Web.Providers.Api
             }
            
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+            identity.AddClaim(new Claim("id", user.Id));
             identity.AddClaim(new Claim("sub", context.UserName));
             identity.AddClaim(new Claim("role", "user"));
 
             context.Validated(identity);
-
         }
     }
 }

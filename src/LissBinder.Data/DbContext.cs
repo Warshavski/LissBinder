@@ -10,6 +10,8 @@ namespace Escyug.LissBinder.Data
 
         public string ProviderName { get; private set; }
 
+        //public DbConnection Conneciton { get; private set; }
+
         public DbContext(string connectionString, string providerName)
         {
             ConnectionString = connectionString;

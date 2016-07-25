@@ -3,8 +3,6 @@ namespace Escyug.LissBinder.Data.Entities
 {
     public class Pharmacy
     {
-        #region Properties
-
         // represents id_drugstore column
         public int Id { get; set; }
 
@@ -23,6 +21,5 @@ namespace Escyug.LissBinder.Data.Entities
         // represents worktime column
         public string WorkTime { get; set; }
 
-        #endregion Properties
     }
 }

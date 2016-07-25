@@ -1,6 +1,8 @@
-﻿using Escyug.LissBinder.Common.Utils;
+﻿using System;
 
 using Microsoft.AspNet.Identity;
+
+using Escyug.LissBinder.Common.Utils;
 
 namespace Escyug.LissBinder.Web.Models
 {
@@ -8,49 +10,30 @@ namespace Escyug.LissBinder.Web.Models
     {
         public string Id { get; private set; }
 
-        public string UserName { get; set; }
-
-        public string Login { get; private set; }
-
-        //public byte[] PwdHash { get; set; }
-
-        //public byte[] Salt { get; set; }
-
         public int PharmacyId { get; private set; }
 
-        //public User(string id, string name)
-        //{
-        //    Id = id;
-        //    UserName = name;
-        //}
+        public string UserName { get; set; }
 
-        //*** hmmm.... default hashing
-        //public User(string id, string name, string password, string login)
-        //    : this (id, name)
-        //{
-        //    Login = login;
+        public string NameDescription { get; private set; }
 
-        //    var byteSalt = Security.GenerateSalt();
-        //    var bytePassword = System.Text.Encoding.UTF8.GetBytes(password);
+        public string PasswordHash { get; private set; }
 
-        //    PwdHash = Security.GenerateSaltedHash(bytePassword, byteSalt);
-        //    Salt = byteSalt;
-        //}
-
-        public User(string id, string name, string login, int pharmacyId)
-            : this(id, name, login, null, null)
+        public User(string id, string userName, string login, int pharmacyId)
+            : this(userName, login, pharmacyId)
         {
+            Id = id;
+        }
+
+        public User(string userName, string nameDescription, int pharmacyId)
+        {
+            UserName = userName;
+            NameDescription = nameDescription;
             PharmacyId = pharmacyId;
         }
 
-        public User(string id, string name, string login, byte[] hash, byte[] salt)
+        public void SetPasswordHash(string passwordHash)
         {
-            Id = id;
-            UserName = name;
-            Login = login;
-            //PwdHash = hash;
-            //Salt = salt;
+            PasswordHash = passwordHash;
         }
-
     }
 }

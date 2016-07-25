@@ -14,7 +14,7 @@ namespace Escyug.LissBinder.Web.Api.ViewModels
 
         [Required]
         [Display(Name = "User login")]
-        public string Login { get; set; }
+        public string NameDescription { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

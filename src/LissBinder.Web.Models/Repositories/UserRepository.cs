@@ -1,63 +1,87 @@
-﻿using Escyug.LissBinder.Data.Entities;
-using Escyug.LissBinder.Data;
-using Escyug.LissBinder.Data.SqlServer.DataMappers;
-using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
-using Escyug.LissBinder.Common.Utils;
+
+using Microsoft.AspNet.Identity;
+
+using Escyug.LissBinder.Data.QueryProcessors;
+
+using Escyug.LissBinder.Web.Models.Mappings;
 
 namespace Escyug.LissBinder.Web.Models.Repositories
 {
-    public class UserRepository : IUserPasswordStore<User>
+    public class UserRepository : IUserStore<User>, IUserPasswordStore<User>
     {
-        private readonly UserDataMapper _userDataMapper;
+        private readonly IUserQueryProcessor _userQueryProcessor;
 
-        public UserRepository(UserDataMapper userDataMapper)
+        public UserRepository(IUserQueryProcessor userQueryProcessor)
         {
-            _userDataMapper = userDataMapper;
+            _userQueryProcessor = userQueryProcessor;
         }
 
-        public Task<string> GetPasswordHashAsync(Models.User user)
+        public Task<string> GetPasswordHashAsync(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            return Task.FromResult<string>(user.PasswordHash);
+        }
+
+        public Task<bool> HasPasswordAsync(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            return Task.FromResult<bool>(user.PasswordHash != null);
+        }
+
+        public Task SetPasswordHashAsync(User user, string passwordHash)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            user.SetPasswordHash(passwordHash);
+
+            return Task.FromResult(0);
+        }
+
+        public async Task CreateAsync(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            var userEntity = UserMappings.ModelToEntity(user);
+            
+            await _userQueryProcessor.InsertAsync(userEntity);
+        }
+
+        public Task DeleteAsync(User user)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> HasPasswordAsync(Models.User user)
+        public async Task<User> FindByIdAsync(string userId)
         {
-            throw new NotImplementedException();
+            var userEntity = await _userQueryProcessor.SelectByIdAsync(int.Parse(userId));
+
+            return ConvertToModel(userEntity);
         }
 
-        public Task SetPasswordHashAsync(Models.User user, string passwordHash)
+        public async Task<User> FindByNameAsync(string userName)
         {
-            throw new NotImplementedException();
-        }
+            var userEntity = await _userQueryProcessor.SelectByNameAsync(userName);
 
-        public Task CreateAsync(Models.User user)
-        {
-            throw new NotImplementedException();
-        }
+            return ConvertToModel(userEntity);
+        }   
 
-        public Task DeleteAsync(Models.User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Models.User> FindByIdAsync(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Models.User> FindByNameAsync(string userName)
-        {
-            var user = await _userDataMapper.SelectByLogin(userName);
-
-            return user;
-        }
-
-        public Task UpdateAsync(Models.User user)
+        public Task UpdateAsync(User user)
         {
             throw new NotImplementedException();
         }
@@ -66,5 +90,27 @@ namespace Escyug.LissBinder.Web.Models.Repositories
         {
             throw new NotImplementedException();
         }
+
+
+        //---------------------------------------------------------------------
+
+
+        #region Helper methods 
+
+        private User ConvertToModel(Data.Entities.User userEntity)
+        {
+            if (userEntity != null)
+            {
+                var userModel = UserMappings.EntityToModel(userEntity);
+
+                return userModel;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        #endregion Helper methods
     }
 }
