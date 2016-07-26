@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
 using Escyug.LissBinder.Data.Entities;
+using Escyug.LissBinder.Data.Extensions;
 using Escyug.LissBinder.Data.QueryProcessors;
-using System.Collections.Generic;
 
 namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
 {
@@ -31,11 +32,11 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
 
             using (var conneciton = _context.CreateConnection())
             {
-                await conneciton.OpenAsync();
-
                 using (var command = _context.CreateCommand(conneciton, commandText, commandType))
                 {
                     command.AddParameter("name", name);
+
+                    await conneciton.OpenAsync();
 
                     var drugsList = await base.SelectEntityListAsync(command);
 

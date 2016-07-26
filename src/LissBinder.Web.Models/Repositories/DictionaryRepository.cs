@@ -12,6 +12,11 @@ namespace Escyug.LissBinder.Web.Models.Repositories
     {
         private readonly IDictionaryQueryProcessor _dictionaryQueryProcessor;
 
+        public DictionaryRepository(IDictionaryQueryProcessor dictionaryQueryProcessor)
+        {
+            _dictionaryQueryProcessor = dictionaryQueryProcessor;
+        }
+
         public async Task<IEnumerable<Drugs.DictionaryDrug>> FindByNameAsync(string drugName)
         {
             var drugsEntitiesList = await _dictionaryQueryProcessor.SelectByNameAsync(drugName);

@@ -13,11 +13,11 @@ namespace Escyug.LissBinder.Web.Api.Controllers
     [Authorize]
     public class BindingsController : ApiController
     {
-        private readonly IPharmacyDrugsRepository _pharmacyDrugRepository;
+        private readonly IBindingsRepository _bindingRepository;
 
-        public BindingsController(IPharmacyDrugsRepository pharmacyDrugRepository)
+        public BindingsController(IBindingsRepository bindingRepository)
         {
-            _pharmacyDrugRepository = pharmacyDrugRepository;
+            _bindingRepository = bindingRepository;
         }
 
         /**
@@ -30,16 +30,14 @@ namespace Escyug.LissBinder.Web.Api.Controllers
         [HttpPost]
         public async Task<IHttpActionResult>PostAsync([FromBody]Models.Binding binding)
         {
-            var isAdded = await _pharmacyDrugRepository.AddBindingAsync(binding);
+            //*** get it from context principal
+            var pharmacyId = 1;
 
-            if (isAdded)
-            {
-                return Ok();
-            }
-            else
-            {
-                return NotFound();
-            }
+            binding.SetPharmacy(pharmacyId);
+
+            await _bindingRepository.AddBindingAsync(binding);
+
+            return Ok();
         }
     }
 }

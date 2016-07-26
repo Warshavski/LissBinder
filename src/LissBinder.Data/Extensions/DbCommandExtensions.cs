@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Escyug.LissBinder.Data
+namespace Escyug.LissBinder.Data.Extensions
 {
     public static class DbCommandExtensions
     {
@@ -28,4 +28,6 @@ namespace Escyug.LissBinder.Data
             command.Parameters.Add(p);
         }
     }
+
+    
 }

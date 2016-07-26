@@ -34,12 +34,16 @@ namespace Escyug.LissBinder.Web.Api
             //--------------------------------------------
             container.Bind<IUserQueryProcessor>().To<UserQueryProcessor>();
             container.Bind<IDictionaryQueryProcessor>().To<DictionaryQueryProcessor>();
+            container.Bind<IPharmacyDrugsQueryProcessor>().To<PharmacyDrugsQueryProcessor>();
+            container.Bind<IBindingsQueryProcessor>().To<BindingsQueryProcessor>();
 
 
             // REPOSITORY SECTION
             //--------------------------------------------
             container.Bind<IUserStore<User>>().To<UserRepository>();
             container.Bind<IDictionaryRepository>().To<DictionaryRepository>();
+            container.Bind<IPharmacyDrugsRepository>().To<PharmacyDrugsRepository>();
+            container.Bind<IBindingsRepository>().To<BindingsRepository>();
 
 
             // SERVICES SECTION

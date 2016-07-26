@@ -46,7 +46,9 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Extensions\DbCommandExtensions.cs" />
     <Compile Include="DbContext.cs" />
+    <Compile Include="Extensions\IDataRecordExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryProcessors\IBindingsQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IDictionaryQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IPharmacyDrugsQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IQueryProcessor.cs" />

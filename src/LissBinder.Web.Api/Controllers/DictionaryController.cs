@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 
-using Escyug.LissBinder.Web.Models.Drugs;
-using Escyug.LissBinder.Web.Models.Repositories;
 using System.Threading.Tasks;
+
+using Escyug.LissBinder.Web.Models.Repositories;
+using System;
+using System.Text;
+
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class DictionaryController : ApiController
     {
-        private readonly IDictionaryDrugsRepository _dictionaryRepository;
+        private readonly IDictionaryRepository _dictionaryRepository;
 
-        public DictionaryController(IDictionaryDrugsRepository dictionaryRepository)
+        public DictionaryController(IDictionaryRepository dictionaryRepository)
         {
             _dictionaryRepository = dictionaryRepository;
         }
@@ -31,12 +29,13 @@ namespace Escyug.LissBinder.Web.Api.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetAsync(string name)
         {
-            var dictionary = await _dictionaryRepository.GetDrugsByNameAsync(name);
-            if (dictionary != null)
+            try
             {
+                var dictionary = await _dictionaryRepository.FindByNameAsync(name);
+
                 return Ok(dictionary);
             }
-            else
+            catch (ArgumentNullException)
             {
                 return NotFound();
             }

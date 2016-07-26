@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 using Escyug.LissBinder.Web.Models.Drugs;
 using Escyug.LissBinder.Web.Models.Repositories;
-
+using System;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class DrugsController : ApiController
     {
         private readonly IPharmacyDrugsRepository _pharmacyDrugsRepository;
@@ -28,16 +25,19 @@ namespace Escyug.LissBinder.Web.Api.Controllers
          * 
          * Returns pharmacy drugs
          */
-        [Route("api/drugs/{pharmacyId}/{name}")]
+        [Route("api/drugs/{name}")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetAsync(int pharmacyId, string name)
+        public async Task<IHttpActionResult> GetAsync(string name)
         {
-            var drugsList = await _pharmacyDrugsRepository.GetDrugsByNameAsync(name, pharmacyId);
-            if (drugsList != null && drugsList.Count() != 0)
+            //*** get it from context principal
+            var pharmacyId = 1;
+
+            try
             {
+                var drugsList = await _pharmacyDrugsRepository.FindByNameAsync(pharmacyId, name);
                 return Ok(drugsList);
             }
-            else
+            catch(ArgumentNullException)
             {
                 return NotFound();
             }
@@ -49,12 +49,15 @@ namespace Escyug.LissBinder.Web.Api.Controllers
          * 
          * Add list of drugs to the storage
          */
-        [Route("api/drugs/{pharmacyId}/")]
+        [Route("api/drugs/")]
         [HttpPost]
-        public async Task<IHttpActionResult> PostAsync(int pharmacyId, [FromBody]IEnumerable<PharmacyDrug> pharmacyDrugs)
+        public async Task<IHttpActionResult> PostAsync([FromBody]IEnumerable<PharmacyDrug> pharmacyDrugs)
         {
-            var rowsCopied = 
-                await _pharmacyDrugsRepository.AddDrugsAsync(pharmacyDrugs, pharmacyId);
+            //*** get it from context principal
+            var pharmacyId = 1;
+
+            var rowsCopied =
+                await _pharmacyDrugsRepository.ImportAsync(pharmacyId, pharmacyDrugs);
             if (rowsCopied != -1)
             {
                 return Ok(rowsCopied);

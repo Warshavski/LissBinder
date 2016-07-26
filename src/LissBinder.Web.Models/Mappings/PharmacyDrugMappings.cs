@@ -1,4 +1,6 @@
-﻿namespace Escyug.LissBinder.Web.Models.Mappings
+﻿using System.Collections.Generic;
+using System.Data;
+namespace Escyug.LissBinder.Web.Models.Mappings
 {
     internal static class PharmacyDrugMappings
     {
@@ -31,6 +33,49 @@
             drugEntity.ManufacturerCode = drugModel.ManufacturerCode;
 
             return drugEntity;
+        }
+
+        public static DataTable ModelToDataTable(IEnumerable<Models.Drugs.PharmacyDrug> drugsList, int pharmacyId)
+        {
+            /**
+           * code         - long
+           * name         - string
+           * producer     - string
+           * quantity     - decimal
+           * price        - decimal
+           * seria        - string
+           * barcode      - string
+           * prodcode     - int
+           * id_pharmacy  - int
+           */
+
+            var table = new DataTable();
+            table.Columns.Add("code", typeof(long));
+            table.Columns.Add("name", typeof(string));
+            table.Columns.Add("producer", typeof(string));
+            table.Columns.Add("quantity", typeof(decimal));
+            table.Columns.Add("price", typeof(decimal));
+            table.Columns.Add("seria", typeof(string));
+            table.Columns.Add("barcode", typeof(string));
+            table.Columns.Add("prodcode", typeof(int));
+            table.Columns.Add("id_pharmacy", typeof(int));
+
+            foreach (var drug in drugsList)
+            {
+                table.Rows.Add(
+                    drug.Code,
+                    drug.Name,
+                    drug.ManufacturerName,
+                    drug.Quantity,
+                    drug.Price,
+                    drug.Series,
+                    drug.Barcode,
+                    drug.ManufacturerCode,
+                    pharmacyId
+                    );
+            }
+
+            return table;
         }
     }
 }

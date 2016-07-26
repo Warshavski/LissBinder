@@ -8,6 +8,6 @@ namespace Escyug.LissBinder.Web.Models.Repositories
     public interface IPharmacyDrugsRepository
     {
         Task<IEnumerable<PharmacyDrug>> FindByNameAsync(int pharmacyId, string drugName);
-        Task<int> ImportAsync(IEnumerable<PharmacyDrug> drugsList);
+        Task<int> ImportAsync(int pharmacyId, IEnumerable<PharmacyDrug> drugsList);
     }
 }

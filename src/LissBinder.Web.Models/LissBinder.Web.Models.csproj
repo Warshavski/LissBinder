@@ -48,10 +48,13 @@
     <Compile Include="Binding.cs" />
     <Compile Include="Drugs\DictionaryDrug.cs" />
     <Compile Include="Drugs\PharmacyDrug.cs" />
+    <Compile Include="Mappings\BindingMappings.cs" />
     <Compile Include="Mappings\DictionaryMappings.cs" />
     <Compile Include="Mappings\PharmacyDrugMappings.cs" />
     <Compile Include="Mappings\UserMappings.cs" />
+    <Compile Include="Repositories\BindingsRepository.cs" />
     <Compile Include="Repositories\DictionaryRepository.cs" />
+    <Compile Include="Repositories\IBindingsRepository.cs" />
     <Compile Include="Repositories\IDictionaryRepository.cs" />
     <Compile Include="Repositories\IPharmacyDrugsRepository.cs" />
     <Compile Include="Repositories\PharmacyDrugsRepository.cs" />

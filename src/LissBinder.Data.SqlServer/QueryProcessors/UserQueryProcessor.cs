@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Escyug.LissBinder.Data.Entities;
+using Escyug.LissBinder.Data.Extensions;
 using Escyug.LissBinder.Data.QueryProcessors;
 
 namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
@@ -31,11 +32,11 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.OpenAsync();
-
                 using (var command = _context.CreateCommand(connection, commandText, commandType))
                 {
                     command.AddParameter("name", login);
+
+                    await connection.OpenAsync();
 
                     var users = await base.SelectEntityListAsync(command);
                     return users != null ? users.FirstOrDefault() : null;
@@ -50,11 +51,11 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.OpenAsync();
-
                 using (var command = _context.CreateCommand(connection, commandText, commandType))
                 {
                     command.AddParameter("id_user", id);
+
+                    await connection.OpenAsync();
 
                     var users = await base.SelectEntityListAsync(command);
                     return users.FirstOrDefault();
@@ -69,10 +70,10 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.OpenAsync();
-
                 using (var command = _context.CreateCommand(connection, commandText, commandType))
                 {
+                    await connection.OpenAsync();
+
                     var usersList = await base.SelectEntityListAsync(command);
                     return usersList;
                 }
@@ -95,8 +96,6 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
                  * 
                  */
 
-                await connection.OpenAsync();
-
                 using (var command = _context.CreateCommand(connection, commandText, commandType))
                 {
                     command.AddParameter("pharmacyId", entity.PharmacyId);
@@ -104,6 +103,8 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
                     command.AddParameter("name_description", entity.NameDescription);
                     command.AddParameter("hash", entity.PasswordHash);
                     //command.AddParameter("salt", entity.Salt);
+
+                    await connection.OpenAsync();
 
                     await command.ExecuteNonQueryAsync();
                 }

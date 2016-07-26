@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryProcessors\BaseQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\BindingsQueryProcessor.cs" />
     <Compile Include="QueryProcessors\DictionaryQueryProcessor.cs" />
     <Compile Include="QueryProcessors\PharmacyDrugsQueryProcessor.cs" />
     <Compile Include="QueryProcessors\UserQueryProcessor.cs" />

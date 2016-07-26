@@ -145,6 +145,10 @@
     <Compile Include="Controllers\AccountController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BindingsController.cs" />
+    <Compile Include="Controllers\DictionaryController.cs" />
+    <Compile Include="Controllers\DrugsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

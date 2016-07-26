@@ -38,9 +38,13 @@ namespace Escyug.LissBinder.Web.Models.Repositories
             return drugsList;
         }
 
-        public async Task<int> ImportAsync(IEnumerable<Drugs.PharmacyDrug> drugsList)
+        public async Task<int> ImportAsync(int pharmacyId, IEnumerable<Drugs.PharmacyDrug> drugsList)
         {
-            throw new NotImplementedException();
+            var drugsData = PharmacyDrugMappings.ModelToDataTable(drugsList, pharmacyId);
+
+            var rowsImport = await _drugsQueryProcessor.ImporDrugsAsync(pharmacyId, drugsData);
+
+            return rowsImport;
         }
     }
 }

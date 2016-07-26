@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using Escyug.LissBinder.Data.Entities;
+using System.Data;
 
 namespace Escyug.LissBinder.Data.QueryProcessors
 {
@@ -10,5 +11,6 @@ namespace Escyug.LissBinder.Data.QueryProcessors
     {
         Task<IEnumerable<PharmacyDrug>> SelectByNameAsync(int pharmacyId, string name);
         Task<int> ImporDrugsAsync(int pharmacyId, IEnumerable<PharmacyDrug> drugsList);
+        Task<int> ImporDrugsAsync(int pharmacyId, DataTable drugsData);
     }
 }

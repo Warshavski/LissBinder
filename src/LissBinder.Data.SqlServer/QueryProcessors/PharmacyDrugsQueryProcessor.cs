@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Escyug.LissBinder.Data.Entities;
+using Escyug.LissBinder.Data.Extensions;
 using Escyug.LissBinder.Data.QueryProcessors;
 
 namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
@@ -32,12 +33,12 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
 
             using (var connection = _context.CreateConnection())
             {
-                await connection.OpenAsync();
-
                 using (var command = _context.CreateCommand(connection, commandText, commandType))
                 {
                     command.AddParameter("pharmacyId", pharmacyId);
                     command.AddParameter("name", name);
+
+                    await connection.OpenAsync();
 
                     var pharmacyDrugsList = await base.SelectEntityListAsync(command);
 
@@ -81,6 +82,39 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
             }
         }
 
+        public async Task<int> ImporDrugsAsync(int pharmacyId, DataTable drugsData)
+        {
+            using (var connection = _context.CreateConnection())
+            {
+                await connection.OpenAsync();
+
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        await DeleteAllRowsAsync(pharmacyId, connection, transaction);
+
+                        var rowsTotal = drugsData.Rows.Count;
+
+                        await ExecuteBulkCopyAsync(drugsData, (SqlConnection)connection, (SqlTransaction)transaction);
+
+                        transaction.Commit();
+
+                        return rowsTotal;
+                    }
+                    catch (SqlException)
+                    {
+                        transaction.Rollback();
+                        return -1;
+                    }
+                    catch (DbException)
+                    {
+                        transaction.Rollback();
+                        return -1;
+                    }
+                }
+            }
+        }
 
         private async Task DeleteAllRowsAsync(int pharmacyId, DbConnection connection, DbTransaction transaction)
         {
@@ -175,14 +209,14 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
 
             var pharmacyDrug = new PharmacyDrug();
 
-            pharmacyDrug.Code = (long)record["code"];
-            pharmacyDrug.Name = (string)record["name"];
-            pharmacyDrug.ManufacturerName = (string)record["producer"];
-            pharmacyDrug.Quantity = (decimal)record["quantity"];
-            pharmacyDrug.Price = (decimal)record["price"];
-            pharmacyDrug.Series = (string)record["seria"];
-            pharmacyDrug.Barcode = (string)record["barcode"];
-            pharmacyDrug.ManufacturerCode = (int)record["prodcode"];
+            pharmacyDrug.Code = record.GetValueOrDefault<long>("code");
+            pharmacyDrug.Name = record.GetValueOrDefault<string>("name");
+            pharmacyDrug.ManufacturerName = record.GetValueOrDefault<string>("producer");
+            pharmacyDrug.Quantity = record.GetValueOrDefault<decimal>("quantity");
+            pharmacyDrug.Price = record.GetValueOrDefault<decimal>("price");
+            pharmacyDrug.Series = record.GetValueOrDefault<string>("seria");
+            pharmacyDrug.Barcode = record.GetValueOrDefault<string>("barcode");
+            pharmacyDrug.ManufacturerCode = record.GetValueOrDefault<int>("prodcode");
 
             return pharmacyDrug;
         }
