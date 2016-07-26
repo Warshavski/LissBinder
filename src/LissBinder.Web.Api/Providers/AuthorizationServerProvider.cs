@@ -34,7 +34,7 @@ namespace Escyug.LissBinder.Web.Api.Providers
             }
            
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim("id", user.Id));
+            identity.AddClaim(new Claim("id", user.PharmacyId.ToString()));
             identity.AddClaim(new Claim("sub", context.UserName));
             identity.AddClaim(new Claim("role", "user"));
 

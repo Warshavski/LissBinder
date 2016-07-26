@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
     [Authorize]
-    public class BindingsController : ApiController
+    public class BindingsController : AuthController
     {
         private readonly IBindingsRepository _bindingRepository;
 
@@ -31,7 +31,7 @@ namespace Escyug.LissBinder.Web.Api.Controllers
         public async Task<IHttpActionResult>PostAsync([FromBody]Models.Binding binding)
         {
             //*** get it from context principal
-            var pharmacyId = 1;
+            var pharmacyId = base.PharmacyClaim;
 
             binding.SetPharmacy(pharmacyId);
 

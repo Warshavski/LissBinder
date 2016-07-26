@@ -10,7 +10,7 @@ namespace Escyug.LissBinder.Presentation.Views
 {
     public interface ILoginView : IView
     {
-        event Func<Task> LoginExecuteAsync; 
+        event Func<Task> SignInAsync; 
 
         string Login { get; set; }
         string Password { get; set; }

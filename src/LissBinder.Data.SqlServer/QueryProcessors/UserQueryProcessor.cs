@@ -25,7 +25,7 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
 
         #region IUserQueryProcessor members
 
-        public async Task<User> SelectByNameAsync(string login)
+        public async Task<User> SelectByNameAsync(string name)
         {
             var commandText = "dbo.azure_liss_user_select_by_name";
             var commandType = CommandType.StoredProcedure;
@@ -34,7 +34,7 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
             {
                 using (var command = _context.CreateCommand(connection, commandText, commandType))
                 {
-                    command.AddParameter("name", login);
+                    command.AddParameter("name", name);
 
                     await connection.OpenAsync();
 
@@ -142,11 +142,11 @@ namespace Escyug.LissBinder.Data.SqlServer.QueryProcessors
              */
             var user = new User();
 
-            user.Id = (int)record["id_user"];
-            user.Name = (string)record["name"];
-            user.NameDescription = (string)record["name_description"];
-            user.PasswordHash = (string)record["hash"];
-            user.PharmacyId = (int)record["id_pharmacy"];
+            user.Id = record.GetValueOrDefault<int>("id_user");
+            user.Name = record.GetValueOrDefault<string>("name");
+            user.NameDescription = record.GetValueOrDefault<string>("name_description");
+            user.PasswordHash = record.GetValueOrDefault<string>("hash");
+            user.PharmacyId = record.GetValueOrDefault<int>("id_pharmacy");
             //user.Salt = (byte[])record["salt"];
 
             return user;

@@ -7,9 +7,11 @@
             var userId = userEntity.Id;
             var userName = userEntity.Name;
             var userNameDescription = userEntity.NameDescription;
+            var userPasswordHash = userEntity.PasswordHash;
             var pharmacyId = userEntity.PharmacyId;
 
-            return new Models.User(userId.ToString(), userName, userNameDescription, pharmacyId);
+            return new Models.User(userId.ToString(), userName, 
+                userNameDescription, pharmacyId, userPasswordHash);
         }
 
         //public static Data.Entities.User ModelToEntity(Models.User userModel, byte[] pwdHash, byte[] pwdSalt)

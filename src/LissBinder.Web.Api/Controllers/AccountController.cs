@@ -8,6 +8,7 @@ using Escyug.LissBinder.Web.Models;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
+    [Authorize]
     public class AccountController : ApiController
     {
         private readonly UserManager<User> _userManager;

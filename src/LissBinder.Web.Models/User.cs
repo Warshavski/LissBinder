@@ -18,8 +18,14 @@ namespace Escyug.LissBinder.Web.Models
 
         public string PasswordHash { get; private set; }
 
-        public User(string id, string userName, string login, int pharmacyId)
-            : this(userName, login, pharmacyId)
+        public User(string id, string userName, string nameDescription, int pharmacyId, string passwordHash)
+            : this(id, userName, nameDescription, pharmacyId)
+        {
+            PasswordHash = passwordHash;
+        }
+
+        public User(string id, string userName, string nameDescription, int pharmacyId)
+            : this(userName, nameDescription, pharmacyId)
         {
             Id = id;
         }

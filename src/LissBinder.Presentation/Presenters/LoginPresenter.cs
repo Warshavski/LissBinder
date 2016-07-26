@@ -20,14 +20,11 @@ namespace Escyug.LissBinder.Presentation.Presenters
         {
             _loginService = loginService;
 
-            View.LoginExecuteAsync += () => OnLoginExecuteAsync();
+            View.SignInAsync += () => OnSignInAsync(View.Login.Trim(), View.Password.Trim());
         }
 
-        private async Task OnLoginExecuteAsync()
+        private async Task OnSignInAsync(string login, string password)
         {
-            string login = View.Login.Trim();
-            string password = View.Password.Trim();
-
             if (string.Compare(login, string.Empty) != 0 &&
                 string.Compare(password, string.Empty) != 0)
             {

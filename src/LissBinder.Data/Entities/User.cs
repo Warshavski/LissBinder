@@ -15,9 +15,6 @@ namespace Escyug.LissBinder.Data.Entities
         // represents hash column
         public string PasswordHash { get; set; }
 
-        // represents salt column
-        //public byte[] Salt { get; set; }
-
         // represents liss_pharmacys.id_pharmacy column
         public int PharmacyId { get; set; }
     }

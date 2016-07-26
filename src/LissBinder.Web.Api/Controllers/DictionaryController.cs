@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class DictionaryController : ApiController
     {
         private readonly IDictionaryRepository _dictionaryRepository;

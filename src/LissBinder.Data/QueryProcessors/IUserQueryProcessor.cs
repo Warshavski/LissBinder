@@ -10,7 +10,7 @@ namespace Escyug.LissBinder.Data.QueryProcessors
 {
     public interface IUserQueryProcessor : IQueryProcessor<User>
     {
-        Task<User> SelectByNameAsync(string login);
+        Task<User> SelectByNameAsync(string name);
         Task<User> SelectByIdAsync(int id);
     }
 }
