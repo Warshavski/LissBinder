@@ -12,12 +12,15 @@ using Escyug.LissBinder.Models.Services.Exceptions;
 
 using Escyug.LissBinder.Presentation.Common;
 using Escyug.LissBinder.Presentation.Views;
+using Escyug.LissBinder.Models;
 
 namespace Escyug.LissBinder.Presentation.Presenters
 {
-    public class MainPresenter : BasePresenter<IMainView>
+    public class MainPresenter : BasePresenter<IMainView, User>
     {
         private string _lastSearchName;
+
+        private User _user;
 
         private readonly IDictionaryService _dictionaryService;
         private readonly IPharmacyService _pharmacyService;
@@ -27,7 +30,7 @@ namespace Escyug.LissBinder.Presentation.Presenters
             IPharmacyService pharmacyService) : base(view, appController)
         {
             _lastSearchName = string.Empty;
-
+            _user = null;
             
             // injected members
             //-------------------------
@@ -45,6 +48,16 @@ namespace Escyug.LissBinder.Presentation.Presenters
 
 
         //---------------------------------------------------------------------
+
+
+        public override void Run(User argument)
+        {
+            _user = argument;
+
+            View.Heading = _user.UserName;
+
+            View.Show();
+        }
 
 
         #region Presenter methods

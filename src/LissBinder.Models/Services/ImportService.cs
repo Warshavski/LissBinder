@@ -143,9 +143,9 @@ namespace Escyug.LissBinder.Models.Services
         /// <param name="tableName"></param>
         /// <param name="pharmacyId"></param>
         /// <returns></returns>
-        public async Task<bool> ImportAsync(string connectionString, string tableName, int pharmacyId)
+        public async Task<int> ImportAsync(string connectionString, string tableName)
         {
-            var rowsCopied = false;
+            var rowsCopied = 0;
 
             using (var connection = new OleDbConnection(connectionString))
             {
@@ -167,10 +167,12 @@ namespace Escyug.LissBinder.Models.Services
                             drugsList.Add(drug);
                         }
 
-                        var responseAddress = "api/drugs/" + pharmacyId;
+                        var responseAddress = "api/drugs/";
 
-                        rowsCopied = 
-                            await HttpHelper.PostEntityAsync<bool, List<PharmacyDrug>>(_apiUri, responseAddress, drugsList);
+                        var accessToken = ApiContext.Token.AccessToken;
+
+                        rowsCopied =
+                            await HttpHelper.PostEntityAsync<int, List<PharmacyDrug>>(_apiUri, responseAddress, accessToken, drugsList);
                     }
                 }  
             }
@@ -179,7 +181,7 @@ namespace Escyug.LissBinder.Models.Services
         }
 
         /// <summary>
-        /// Parse PharmacyDrug object from DbDataReader.
+        /// Parse PharmacyDrug object from DbDataRe ader.
         /// </summary>
         /// <param name="reader">DbDataReader</param>
         /// <returns>PharmacyDrug object.</returns>

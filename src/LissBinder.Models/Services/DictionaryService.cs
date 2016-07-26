@@ -20,11 +20,12 @@ namespace Escyug.LissBinder.Models.Services
         public async Task<IEnumerable<DictionaryDrug>> GetDrugsAsync(string drugName)
         {
             var responseAddress = "api/dictionary/" + drugName;
+            var accessToken = ApiContext.Token.AccessToken;
 
             try
             {
                 var dictionaryDrugsList =
-                    await HttpHelper.GetEntityAsync<IEnumerable<DictionaryDrug>>(_apiUri, responseAddress);
+                    await HttpHelper.GetEntityAsync<IEnumerable<DictionaryDrug>>(_apiUri, responseAddress, accessToken);
 
                 return dictionaryDrugsList;
             }

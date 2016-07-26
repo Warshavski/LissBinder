@@ -22,8 +22,9 @@ namespace Escyug.LissBinder.App.WinForms
 
             InitializeComponent();
 
-            this.button1.Click += async (sender, e) => 
-                await Invoker.InvokeAsync(LoginExecuteAsync);
+            this.buttonSignIn.Click += async (sender, e) => await Invoker.InvokeAsync(SignInAsync);
+
+            this.buttonCancel.Click += (sender, e) => { this.Close(); };
         }
 
 
@@ -50,17 +51,17 @@ namespace Escyug.LissBinder.App.WinForms
         #region ILoginView members
 
 
-        public event Func<Task> LoginExecuteAsync;
+        public event Func<Task> SignInAsync;
 
         public string Login
         {
             get
             {
-                return textBox1.Text;
+                return textBoxLogin.Text;
             }
             set
             {
-                textBox1.Text = value;
+                textBoxLogin.Text = value;
             }
         }
 
@@ -68,14 +69,25 @@ namespace Escyug.LissBinder.App.WinForms
         {
             get
             {
-                return textBox2.Text;
+                return textBoxPassword.Text;
             }
             set
             {
-                textBox2.Text = value;
+                textBoxPassword.Text = value;
             }
         }
 
+        public bool IsBusy 
+        {
+            get
+            {
+                return pictureBoxLoading.Visible;
+            }
+            set
+            {
+                pictureBoxLoading.Visible = value;
+            }
+        }
 
         #endregion ILoginView members
     }

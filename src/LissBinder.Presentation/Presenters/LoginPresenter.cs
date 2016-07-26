@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Escyug.LissBinder.Models.Services;
 
 using Escyug.LissBinder.Presentation.Common;
 using Escyug.LissBinder.Presentation.Views;
+using Escyug.LissBinder.Models;
 
 namespace Escyug.LissBinder.Presentation.Presenters
 {
-    public class LoginPresenter : BasePresenter<ILoginView>
+    public sealed class LoginPresenter : BasePresenter<ILoginView>
     {
         private readonly ILoginService _loginService;
 
@@ -30,7 +27,20 @@ namespace Escyug.LissBinder.Presentation.Presenters
             {
                 // call api auth method 
                 // create user and auth token
-                var token = await _loginService.SignInAsync(login, password);
+                View.IsBusy = true;
+
+                var user = await _loginService.SignInAsync(login, password);
+                if (user != null)
+                {
+                    AppController.Run<MainPresenter, User>(user);
+                    View.Close();
+                }
+                else
+                {
+                    View.Notify = "No such user";
+                }
+
+                View.IsBusy = false;    
             }
             else
             {

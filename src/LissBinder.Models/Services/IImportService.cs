@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Escyug.LissBinder.Models.Metadata;
@@ -24,6 +21,6 @@ namespace Escyug.LissBinder.Models.Services
         /// <param name="tableName">OleDb file table name.</param>
         /// <param name="pharmacyId">Pharmacy id.</param>
         /// <returns>Operation status.</returns>
-        Task<bool> ImportAsync(string connectionString, string tableName, int pharmacyId);
+        Task<int> ImportAsync(string connectionString, string tableName);
     }
 }

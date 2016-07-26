@@ -19,11 +19,14 @@ namespace Escyug.LissBinder.Models.Services
 
         public async Task<IEnumerable<PharmacyDrug>> GetDrugsAsync(string drugName)
         {
-            var responseAddress = "api/drugs/1/" + drugName;
+            var responseAddress = "api/drugs/" + drugName;
+
+            var accessToken = ApiContext.Token.AccessToken;
+
             try
             {
                 var pharmacyDrugsList =
-                    await HttpHelper.GetEntityAsync<List<PharmacyDrug>>(_apiUri, responseAddress);
+                    await HttpHelper.GetEntityAsync<List<PharmacyDrug>>(_apiUri, responseAddress, accessToken);
 
                 return pharmacyDrugsList;
             }

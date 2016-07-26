@@ -146,7 +146,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\AuthController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BindingsController.cs" />
     <Compile Include="Controllers\ClaimsController.cs" />
     <Compile Include="Controllers\DictionaryController.cs" />
@@ -163,6 +162,7 @@
     <Compile Include="Startup.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\UserInfo.cs" />
     <Compile Include="ViewModels\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>

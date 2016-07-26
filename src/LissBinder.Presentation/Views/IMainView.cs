@@ -35,5 +35,6 @@ namespace Escyug.LissBinder.Presentation.Views
 
         bool IsBinding { set; }
 
+        string Heading { get; set; }
     }
 }

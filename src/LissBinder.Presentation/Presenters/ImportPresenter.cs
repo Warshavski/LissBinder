@@ -69,15 +69,9 @@ namespace Escyug.LissBinder.Presentation.Presenters
 
         private async Task OnImportExecuteAsync(string connectionString, TableMetadata table)
         {
-            var operationResult = await _importService.ImportAsync(connectionString, table.Name, 1);
-            if (operationResult)
-            {
-                View.Notify = "Import complete.";
-            }
-            else
-            {
-                View.Error = "Error.";
-            }
+            var rowsCopied = await _importService.ImportAsync(connectionString, table.Name);
+            
+            View.Notify = rowsCopied.ToString();
         }
 
         private void OnShowColumnsMetadata(TableMetadata selectedTableMetadata)

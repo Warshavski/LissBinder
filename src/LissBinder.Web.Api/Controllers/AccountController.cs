@@ -5,11 +5,12 @@ using Microsoft.AspNet.Identity;
 
 using Escyug.LissBinder.Web.Api.ViewModels;
 using Escyug.LissBinder.Web.Models;
+using System;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
     [Authorize]
-    public class AccountController : ApiController
+    public class AccountController : AuthController
     {
         private readonly UserManager<User> _userManager;
 
@@ -18,9 +19,20 @@ namespace Escyug.LissBinder.Web.Api.Controllers
             _userManager = userManager;
         }
 
-        // POST api/Account/Register
+
+        //---------------------------------------------------------------------
+
+
+        #region Public(interface) api methods
+
+        /**
+         * POST: api/Account/Register
+         * 
+         * Creates and adds new user
+         */
         [AllowAnonymous]
         [Route("api/account/register")]
+        [HttpPost]
         public async Task<IHttpActionResult> Register(UserModel userModel)
         {
             if (!ModelState.IsValid)
@@ -42,7 +54,42 @@ namespace Escyug.LissBinder.Web.Api.Controllers
             return Ok();
         }
 
-      
+        /**
+         * GET: api/account/{name}
+         * 
+         * Get ueser account info
+         */
+        [Route("api/account/info")]
+        [HttpGet]
+        public async Task<IHttpActionResult> Info()
+        {
+            try
+            {
+                var user = await _userManager.FindByNameAsync(base.UserName);
+
+                var userInfo = new UserInfo(user);
+
+                return Ok(userInfo);
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound();
+            }
+        }
+
+        #endregion Public(interface) api methods
+
+
+        //---------------------------------------------------------------------
+
+
+        #region Helper methods
+
+        /// <summary>
+        /// Creates error description from...
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
         private IHttpActionResult GetErrorResult(IdentityResult result)
         {
             if (result == null)
@@ -71,5 +118,7 @@ namespace Escyug.LissBinder.Web.Api.Controllers
 
             return null;
         }
+
+        #endregion Helper methods
     }
 }

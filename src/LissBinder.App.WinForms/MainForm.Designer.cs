@@ -30,17 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.progressBoxDrugs = new System.Windows.Forms.PictureBox();
@@ -56,7 +57,6 @@
             this.dataGridViewDictionary = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.drugformColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -103,6 +103,12 @@
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
             this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
             // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.importToolStripMenuItem.Text = "Import";
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -129,13 +135,13 @@
             this.buttonSearch.Text = "Search";
             this.buttonSearch.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // textBoxSearch
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(11, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(367, 20);
-            this.textBox1.TabIndex = 5;
+            this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxSearch.Location = new System.Drawing.Point(11, 10);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(367, 20);
+            this.textBoxSearch.TabIndex = 5;
             // 
             // splitContainer1
             // 
@@ -149,14 +155,14 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel1.Controls.Add(this.buttonSearch);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.textBoxSearch);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.buttonBind);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Size = new System.Drawing.Size(773, 451);
-            this.splitContainer1.SplitterDistance = 242;
+            this.splitContainer1.SplitterDistance = 222;
             this.splitContainer1.TabIndex = 5;
             // 
             // panel1
@@ -169,7 +175,7 @@
             this.panel1.Controls.Add(this.dataGridViewDrugs);
             this.panel1.Location = new System.Drawing.Point(3, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(765, 198);
+            this.panel1.Size = new System.Drawing.Size(765, 178);
             this.panel1.TabIndex = 6;
             // 
             // progressBoxDrugs
@@ -186,6 +192,7 @@
             // dataGridViewDrugs
             // 
             this.dataGridViewDrugs.AllowUserToAddRows = false;
+            this.dataGridViewDrugs.AutoGenerateColumns = false;
             this.dataGridViewDrugs.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewDrugs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewDrugs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -197,20 +204,20 @@
             this.dataGridViewDrugs.MultiSelect = false;
             this.dataGridViewDrugs.Name = "dataGridViewDrugs";
             this.dataGridViewDrugs.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewDrugs.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            this.dataGridViewDrugs.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewDrugs.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            this.dataGridViewDrugs.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewDrugs.RowTemplate.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridViewDrugs.RowTemplate.ReadOnly = true;
             this.dataGridViewDrugs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewDrugs.Size = new System.Drawing.Size(763, 196);
+            this.dataGridViewDrugs.Size = new System.Drawing.Size(763, 176);
             this.dataGridViewDrugs.TabIndex = 7;
             // 
             // nameColumn
@@ -248,7 +255,7 @@
             // buttonBind
             // 
             this.buttonBind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonBind.Location = new System.Drawing.Point(9, 168);
+            this.buttonBind.Location = new System.Drawing.Point(9, 188);
             this.buttonBind.Name = "buttonBind";
             this.buttonBind.Size = new System.Drawing.Size(75, 23);
             this.buttonBind.TabIndex = 1;
@@ -266,7 +273,7 @@
             this.panel2.Controls.Add(this.dataGridViewDictionary);
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(765, 153);
+            this.panel2.Size = new System.Drawing.Size(765, 173);
             this.panel2.TabIndex = 0;
             // 
             // label1
@@ -283,7 +290,7 @@
             // 
             this.progressBoxDictionary.BackColor = System.Drawing.SystemColors.Window;
             this.progressBoxDictionary.Image = global::Escyug.LissBinder.App.WinForms.Properties.Resources._35__1_;
-            this.progressBoxDictionary.Location = new System.Drawing.Point(356, 50);
+            this.progressBoxDictionary.Location = new System.Drawing.Point(356, 65);
             this.progressBoxDictionary.Name = "progressBoxDictionary";
             this.progressBoxDictionary.Size = new System.Drawing.Size(50, 50);
             this.progressBoxDictionary.TabIndex = 13;
@@ -294,6 +301,7 @@
             // 
             this.dataGridViewDictionary.AllowUserToAddRows = false;
             this.dataGridViewDictionary.AllowUserToDeleteRows = false;
+            this.dataGridViewDictionary.AutoGenerateColumns = false;
             this.dataGridViewDictionary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -307,18 +315,18 @@
             this.dataGridViewDictionary.MultiSelect = false;
             this.dataGridViewDictionary.Name = "dataGridViewDictionary";
             this.dataGridViewDictionary.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewDictionary.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            this.dataGridViewDictionary.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewDictionary.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            this.dataGridViewDictionary.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewDictionary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewDictionary.Size = new System.Drawing.Size(763, 128);
+            this.dataGridViewDictionary.Size = new System.Drawing.Size(763, 148);
             this.dataGridViewDictionary.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn1
@@ -338,12 +346,6 @@
             this.drugformColumn.MinimumWidth = 200;
             this.drugformColumn.Name = "drugformColumn";
             this.drugformColumn.ReadOnly = true;
-            // 
-            // importToolStripMenuItem
-            // 
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.importToolStripMenuItem.Text = "Import";
             // 
             // MainForm
             // 
@@ -385,7 +387,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.Button buttonSearch;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem showDetailsToolStripMenuItem;

@@ -50,6 +50,8 @@ namespace Escyug.LissBinder.App.WinForms
 
             this.Resize += (sender, e) => CenterProgressBox();
 
+            this.splitContainer1.SplitterMoved += (sender, e) => CenterProgressBox();
+
             this.contextMenuStrip1.Items[0].Click += (sender, e) =>
                 Invoker.Invoke(DrugDetailsShow);
 
@@ -67,7 +69,8 @@ namespace Escyug.LissBinder.App.WinForms
         public new void Show()
         {
             _context.MainForm = this;
-            Application.Run(_context);
+            base.Show();
+            //Application.Run(_context);
         }
 
 
@@ -94,11 +97,11 @@ namespace Escyug.LissBinder.App.WinForms
         {
             get
             {
-                return textBox1.Text;
+                return textBoxSearch.Text;
             }
             set
             {
-                textBox1.Text = value;
+                textBoxSearch.Text = value;
             }
         }
 
@@ -146,8 +149,7 @@ namespace Escyug.LissBinder.App.WinForms
         {
             set 
             {
-                dataGridViewDrugs.Enabled = !value;
-                progressBoxDictionary.Visible = value; 
+                progressBoxDictionary.Visible = value;
             }
         }
 
@@ -157,6 +159,13 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
         public bool IsBinding { set { if (!value) dataGridViewDrugs.Refresh(); } }
+
+
+        public string Heading 
+        {
+            get { return this.Text; }
+            set { this.Text = value; }
+        }
 
         #endregion IMainView members
 

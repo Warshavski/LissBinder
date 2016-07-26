@@ -11,10 +11,23 @@ namespace Escyug.LissBinder.Web.Api.Controllers
         {
             get 
             {
-                var identity = User.Identity as ClaimsIdentity;
-                var pharmacyId = int.Parse(identity.Claims.FirstOrDefault(x => x.Type == "id").Value);
+                var pharmacyId = int.Parse(GetClaims().Claims.FirstOrDefault(x => x.Type == "id").Value);
                 return pharmacyId;
             }
+        }
+
+        protected string UserName
+        {
+            get
+            {
+                var userName = GetClaims().Claims.FirstOrDefault(x => x.Type == "sub").Value;
+                return userName;
+            }
+        }
+
+        private ClaimsIdentity GetClaims()
+        { 
+            return User.Identity as ClaimsIdentity;
         }
     }
 }
