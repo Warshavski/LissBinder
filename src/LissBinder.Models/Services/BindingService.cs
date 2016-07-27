@@ -10,11 +10,11 @@ namespace Escyug.LissBinder.Models.Services
 {
     public class BindingService : IBindingService
     {
-        private readonly string _apiUri;
+        private readonly ApiContext _apiContext;
 
-        public BindingService(string apiUri)
+        public BindingService(ApiContext apiContext)
         {
-            _apiUri = apiUri;
+            _apiContext = apiContext;
         }
 
         public async Task<bool> BindAsync(Binding binding)
@@ -34,10 +34,10 @@ namespace Escyug.LissBinder.Models.Services
             try
             {
                 var responseAddress = "api/bind";
-                var token = ApiContext.Token.AccessToken;
+                var token = _apiContext.Token.AccessToken;
 
                 var isBindSuccessful = await HttpHelper.PostEntityAsync<bool, Binding>(
-                    _apiUri, responseAddress, token, binding);
+                    _apiContext.ApiUri, responseAddress, token, binding);
 
                 return isBindSuccessful;
             }

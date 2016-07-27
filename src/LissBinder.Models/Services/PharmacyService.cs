@@ -11,23 +11,23 @@ namespace Escyug.LissBinder.Models.Services
 {
     public sealed class PharmacyService : IPharmacyService
     {
-        private readonly string _apiUri;
+        private readonly ApiContext _apiContext;
 
-        public PharmacyService(string apiUri)
+        public PharmacyService(ApiContext apiContext)
         {
-            _apiUri = apiUri;
+            _apiContext = apiContext;
         }
 
         public async Task<IEnumerable<PharmacyDrug>> GetDrugsAsync(string drugName)
         {
             var responseAddress = "api/drugs/" + drugName;
 
-            var accessToken = ApiContext.Token.AccessToken;
+            var accessToken = _apiContext.Token.AccessToken;
 
             try
             {
                 var pharmacyDrugsList =
-                    await HttpHelper.GetEntityAsync<List<PharmacyDrug>>(_apiUri, responseAddress, accessToken);
+                    await HttpHelper.GetEntityAsync<List<PharmacyDrug>>(_apiContext.ApiUri, responseAddress, accessToken);
 
                 return pharmacyDrugsList;
             }
@@ -46,7 +46,7 @@ namespace Escyug.LissBinder.Models.Services
             try
             {
                 var responseAddress = "api/bind";
-                var isBindSuccessful = await HttpHelper.PostEntityAsync<bool, Binding>(_apiUri, responseAddress, binding);
+                var isBindSuccessful = await HttpHelper.PostEntityAsync<bool, Binding>(_apiContext.ApiUri, responseAddress, binding);
 
                 return isBindSuccessful;
             }

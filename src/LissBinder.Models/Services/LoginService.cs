@@ -14,11 +14,11 @@ namespace Escyug.LissBinder.Models.Services
 {
     public class LoginService : ILoginService
     {
-        private readonly string _apiUri;
+        private readonly ApiContext _apiContext;
 
-        public LoginService(string apiUri)
+        public LoginService(ApiContext apiContext)
         {
-            _apiUri = apiUri;
+            _apiContext = apiContext;
         }
 
         public async Task<User> SignInAsync(string login, string password)
@@ -55,7 +55,7 @@ namespace Escyug.LissBinder.Models.Services
 
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(_apiUri);
+                    client.BaseAddress = new Uri(_apiContext.ApiUri);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(responseHeader));
 
@@ -63,8 +63,8 @@ namespace Escyug.LissBinder.Models.Services
                     if (wat.IsSuccessStatusCode)
                     {
                         var token = await wat.Content.ReadAsAsync<ServiceToken>();
-                        
-                        ApiContext.Token = token;
+
+                        _apiContext.Token = token;
 
                         return token;
                     }
@@ -93,7 +93,7 @@ namespace Escyug.LissBinder.Models.Services
 
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(_apiUri);
+                    client.BaseAddress = new Uri(_apiContext.ApiUri);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(responseHeader));
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);

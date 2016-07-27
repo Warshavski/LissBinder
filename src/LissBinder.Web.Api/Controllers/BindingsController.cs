@@ -43,7 +43,7 @@ namespace Escyug.LissBinder.Web.Api.Controllers
 
             await _bindingRepository.AddBindingAsync(binding);
 
-            return Ok();
+            return Ok(true);
         }
     }
 }

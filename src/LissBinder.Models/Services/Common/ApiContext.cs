@@ -2,9 +2,14 @@
 namespace Escyug.LissBinder.Models.Services.Common
 {
     //*** too bad design : remove static
-    internal static class ApiContext
+    public class ApiContext
     {
-        public static string ApiUri { get; set; }
-        public static ServiceToken Token { get; set; }
+        public string ApiUri { get; private set; }
+        public ServiceToken Token { get; set; }
+
+        public ApiContext(string apiUri)
+        {
+            ApiUri = apiUri;
+        }
     }
 }

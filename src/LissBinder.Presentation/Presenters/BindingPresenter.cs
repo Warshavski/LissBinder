@@ -56,6 +56,10 @@ namespace Escyug.LissBinder.Presentation.Presenters
                     var message = new BindingMessage(binding);
                     _eventAggregator.Publish<BindingMessage>(message);
                 }
+                else
+                {
+
+                }
             }
             catch (ServiceException ex)
             {

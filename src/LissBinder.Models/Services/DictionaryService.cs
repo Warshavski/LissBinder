@@ -11,22 +11,22 @@ namespace Escyug.LissBinder.Models.Services
 {
     public sealed class DictionaryService : IDictionaryService
     {
-        private readonly string _apiUri;
+        private readonly ApiContext _apiContext;
 
-        public DictionaryService(string apiUri)
+        public DictionaryService(ApiContext apiContext)
         {
-            _apiUri = apiUri;
+            _apiContext = apiContext;
         }
 
         public async Task<IEnumerable<DictionaryDrug>> GetDrugsAsync(string drugName)
         {
             var responseAddress = "api/dictionary/" + drugName;
-            var accessToken = ApiContext.Token.AccessToken;
+            var accessToken = _apiContext.Token.AccessToken;
 
             try
             {
                 var dictionaryDrugsList =
-                    await HttpHelper.GetEntityAsync<IEnumerable<DictionaryDrug>>(_apiUri, responseAddress, accessToken);
+                    await HttpHelper.GetEntityAsync<IEnumerable<DictionaryDrug>>(_apiContext.ApiUri, responseAddress, accessToken);
 
                 return dictionaryDrugsList;
             }

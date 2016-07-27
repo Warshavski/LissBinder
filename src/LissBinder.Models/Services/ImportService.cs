@@ -41,11 +41,11 @@ namespace Escyug.LissBinder.Models.Services
 
     public class ImportService : IImportService
     {
-        private readonly string _apiUri;
+        private readonly ApiContext _apiContext;
 
-        public ImportService(string apiUri)
+        public ImportService(ApiContext apiContext)
         {
-            _apiUri = apiUri;
+            _apiContext = apiContext;
         }
 
 
@@ -170,10 +170,10 @@ namespace Escyug.LissBinder.Models.Services
 
                         var responseAddress = "api/drugs/";
 
-                        var accessToken = ApiContext.Token.AccessToken;
+                        var accessToken = _apiContext.Token.AccessToken;
 
                         rowsCopied =
-                            await HttpHelper.PostEntityAsync<int, List<PharmacyDrug>>(_apiUri, responseAddress, accessToken, drugsList);
+                            await HttpHelper.PostEntityAsync<int, List<PharmacyDrug>>(_apiContext.ApiUri, responseAddress, accessToken, drugsList);
                     }
                 }  
             }

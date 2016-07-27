@@ -85,6 +85,7 @@ namespace Escyug.LissBinder.App.WinForms
             }
             set
             {
+                pictureBoxLogo.Visible = !value;
                 pictureBoxLoading.Visible = value;
             }
         }

@@ -11,6 +11,7 @@ using Escyug.LissBinder.Presentation.Common;
 using Escyug.LissBinder.Presentation.Views;
 using Escyug.LissBinder.Presentation.Presenters;
 using Escyug.LissBinder.Presentation.Utils.EventAggregator;
+using Escyug.LissBinder.Models.Services.Common;
 
 namespace Escyug.LissBinder.App.WinForms
 {
@@ -29,23 +30,41 @@ namespace Escyug.LissBinder.App.WinForms
             //Application.Run(new LoginForm());
 
             var apiUri = ConfigurationManager.ConnectionStrings["test"].ConnectionString;
-            var eventAggregator = new SimpleEventAggregator();
-
+            
             var controller = new ApplicationController(new LightInjectAdapter()).
-                RegisterView<ILoginView, LoginForm>().
-                RegisterView<IMainView, MainForm>().
-                RegisterView<IImportView, ImportForm>().
-                RegisterView<IDetailsView, DetailsForm>().
-                RegisterView<IBindingView, BindingForm>().
-                RegisterInstance<ILoginService>(new LoginService(apiUri)).
-                RegisterInstance<IDictionaryService>(new DictionaryService(apiUri)).
-                RegisterInstance<IPharmacyService>(new PharmacyService(apiUri)).
-                RegisterInstance<IImportService>(new ImportService(apiUri)).
-                RegisterInstance<IBindingService>(new BindingService(apiUri)).
-                RegisterInstance<IEventAggregator>(eventAggregator).
+                RegisterInstance<IEventAggregator>(new SimpleEventAggregator()).
                 RegisterInstance(new ApplicationContext());
 
+            ConfigureViews(controller);
+            ConfigureApiContext(controller);
+            ConfigureServices(controller);
+
             controller.Run<LoginPresenter>();
+        }
+
+        private static void ConfigureApiContext(IApplicationController controller)
+        {
+            var apiUri = ConfigurationManager.ConnectionStrings["test"].ConnectionString;
+            
+            controller.RegisterInstance(new ApiContext(apiUri));
+        }
+
+        private static void ConfigureViews(IApplicationController controller) 
+        {
+            controller.RegisterView<ILoginView, LoginForm>()
+                .RegisterView<IMainView, MainForm>()
+                .RegisterView<IImportView, ImportForm>()
+                .RegisterView<IDetailsView, DetailsForm>()
+                .RegisterView<IBindingView, BindingForm>();
+        }
+
+        private static void ConfigureServices(IApplicationController controller)
+        {
+            controller.RegisterService<ILoginService, LoginService>()
+                .RegisterService<IDictionaryService, DictionaryService>()
+                .RegisterService<IPharmacyService, PharmacyService>()
+                .RegisterService<IImportService, ImportService>()
+                .RegisterService<IBindingService, BindingService>();
         }
     }
 }

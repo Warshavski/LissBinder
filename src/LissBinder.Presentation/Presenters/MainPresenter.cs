@@ -139,43 +139,19 @@ namespace Escyug.LissBinder.Presentation.Presenters
         //*** create binding presenter
         private async Task OnDrugBindAsync(PharmacyDrug pharmacyDrug, DictionaryDrug dictionaryDrug)
         {
-            var bindingSubscription = 
+            if (pharmacyDrug != null && dictionaryDrug != null)
+            {
+                var bindingSubscription =
                 _eventAggregator.Subscribe<BindingMessage>(OnBindingComlete);
 
-            var binding = new Binding(pharmacyDrug, dictionaryDrug);
+                var binding = new Binding(pharmacyDrug, dictionaryDrug);
 
-            AppController.Run<BindingPresenter, Binding>(binding);
-            /*
-            View.IsBinding = true;
-
-            try
-            {
-                var isBindSuccessful =
-                    await _pharmacyService.BindPharmacyDrugAsync(pharmacyDrug, dictionaryDrug, 1);
-
-                if (isBindSuccessful)
-                {
-                    View.Notify = "Binding done";
-
-                    //*** create separate method
-                    var newList = View.PharmacyDrugs;
-                    View.PharmacyDrugs = null;
-
-                    newList.RemoveAll(x => x.Code == pharmacyDrug.Code);
-                    View.PharmacyDrugs = newList;
-                    //***  
-                }
+                AppController.Run<BindingPresenter, Binding>(binding);
             }
-
-            catch (ServiceException ex)
+            else
             {
-                View.Error = ex.Message;
+                View.Notify = "Select drug for binding first!";
             }
-            finally
-            {
-                View.IsBinding = false;
-            }
-             */
         }
 
         private void OnBindingComlete(BindingMessage bindingMessage)
