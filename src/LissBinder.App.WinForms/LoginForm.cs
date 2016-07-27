@@ -90,5 +90,10 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
         #endregion ILoginView members
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

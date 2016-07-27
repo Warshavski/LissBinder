@@ -150,6 +150,7 @@ namespace Escyug.LissBinder.App.WinForms
             set 
             {
                 progressBoxDictionary.Visible = value;
+                dataGridViewDictionary.Enabled = !value;
             }
         }
 

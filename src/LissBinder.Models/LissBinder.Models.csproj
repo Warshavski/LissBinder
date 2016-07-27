@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\ApiContext.cs" />
-    <Compile Include="ServiceToken.cs" />
+    <Compile Include="Services\Common\ApiContext.cs" />
+    <Compile Include="Services\BindingService.cs" />
+    <Compile Include="Services\IBindingService.cs" />
+    <Compile Include="Services\Common\ServiceToken.cs" />
     <Compile Include="Binding.cs" />
     <Compile Include="Drugs\DictionaryDrug.cs" />
     <Compile Include="Drugs\PharmacyDrug.cs" />

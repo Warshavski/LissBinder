@@ -6,36 +6,45 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
+using Escyug.LissBinder.Models;
 using Escyug.LissBinder.Models.Drugs;
 using Escyug.LissBinder.Models.Services;
 using Escyug.LissBinder.Models.Services.Exceptions;
 
 using Escyug.LissBinder.Presentation.Common;
 using Escyug.LissBinder.Presentation.Views;
-using Escyug.LissBinder.Models;
+using Escyug.LissBinder.Presentation.Utils.EventAggregator;
+using Escyug.LissBinder.Presentation.Messages;
 
 namespace Escyug.LissBinder.Presentation.Presenters
 {
     public class MainPresenter : BasePresenter<IMainView, User>
     {
+        private User _user;
         private string _lastSearchName;
 
-        private User _user;
+        private readonly IEventAggregator _eventAggregator;
 
         private readonly IDictionaryService _dictionaryService;
         private readonly IPharmacyService _pharmacyService;
 
         public MainPresenter(IMainView view, IApplicationController appController, 
             IDictionaryService dictionaryService,
-            IPharmacyService pharmacyService) : base(view, appController)
+            IPharmacyService pharmacyService,
+            IEventAggregator eventAggregator) : base(view, appController)
         {
-            _lastSearchName = string.Empty;
+            // class globals initialization
+            //-------------------------
             _user = null;
+            _lastSearchName = string.Empty;
             
+
             // injected members
             //-------------------------
+            _eventAggregator = eventAggregator;
             _dictionaryService = dictionaryService;
             _pharmacyService = pharmacyService;
+
             
             // events subscription
             //-------------------------
@@ -45,9 +54,6 @@ namespace Escyug.LissBinder.Presentation.Presenters
             View.DrugDetailsShow += () => OnDrugDetailsShow(View.SelectedPharmacyDrug);
             View.ImportShow += () => OnImportShow();
         }
-
-
-        //---------------------------------------------------------------------
 
 
         public override void Run(User argument)
@@ -133,6 +139,13 @@ namespace Escyug.LissBinder.Presentation.Presenters
         //*** create binding presenter
         private async Task OnDrugBindAsync(PharmacyDrug pharmacyDrug, DictionaryDrug dictionaryDrug)
         {
+            var bindingSubscription = 
+                _eventAggregator.Subscribe<BindingMessage>(OnBindingComlete);
+
+            var binding = new Binding(pharmacyDrug, dictionaryDrug);
+
+            AppController.Run<BindingPresenter, Binding>(binding);
+            /*
             View.IsBinding = true;
 
             try
@@ -162,8 +175,19 @@ namespace Escyug.LissBinder.Presentation.Presenters
             {
                 View.IsBinding = false;
             }
+             */
         }
 
+        private void OnBindingComlete(BindingMessage bindingMessage)
+        {
+            var pharmacyDrugCode = bindingMessage.Binding.PharmacyDrugCode;
+
+            var newList = View.PharmacyDrugs;
+            View.PharmacyDrugs = null;
+
+            newList.RemoveAll(x => x.Code == pharmacyDrugCode);
+            View.PharmacyDrugs = newList;
+        }
 
         private void OnDrugDetailsShow(PharmacyDrug pharmacyDrug)
         {
@@ -176,6 +200,7 @@ namespace Escyug.LissBinder.Presentation.Presenters
         }
 
         #endregion Presenter methods
+        //---------------------------------------------------------------------
 
     }
 }

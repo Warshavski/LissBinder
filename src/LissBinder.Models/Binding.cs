@@ -1,5 +1,6 @@
 ﻿
 using Escyug.LissBinder.Models.Drugs;
+
 namespace Escyug.LissBinder.Models
 {
     public sealed class Binding
@@ -18,7 +19,25 @@ namespace Escyug.LissBinder.Models
 
         public int PharmacyId { get; private set; }
 
-        public Binding(long pharmacyDrugCode, int pharmacyDrugProdCode, 
+        //*** use call of the constructor
+        public Binding(PharmacyDrug pharmacyDrug, DictionaryDrug dictionaryDrug, int pharmacyId)
+            : this (pharmacyDrug, dictionaryDrug)
+        {
+            PharmacyId = pharmacyId;
+        }
+
+        //*** use call of the constructor
+        public Binding(PharmacyDrug pharmacyDrug, DictionaryDrug dictionaryDrug)
+        {
+            PharmacyDrugCode = pharmacyDrug.Code;
+            PharmacyDrugProdCode = pharmacyDrug.ManufacturerCode;
+            DescriptionId = dictionaryDrug.DescriptionId;
+            DrugformId = dictionaryDrug.DrugformId;
+            NomenId = dictionaryDrug.NomenId;
+            PrepId = dictionaryDrug.PrepId;
+        }
+
+        public Binding(long pharmacyDrugCode, int pharmacyDrugProdCode,
             int descriptionId, int drugformId, int nomenId, int prepId, int pharmacyId)
         {
             PharmacyDrugCode = pharmacyDrugCode;
@@ -27,18 +46,6 @@ namespace Escyug.LissBinder.Models
             DrugformId = drugformId;
             NomenId = nomenId;
             PrepId = prepId;
-            PharmacyId = pharmacyId;
-        }
-
-        //*** use call of the constructor
-        public Binding(PharmacyDrug pharmacyDrug, DictionaryDrug dictionaryDrug, int pharmacyId)
-        {
-            PharmacyDrugCode = pharmacyDrug.Code;
-            PharmacyDrugProdCode = pharmacyDrug.ManufacturerCode;
-            DescriptionId = dictionaryDrug.DescriptionId;
-            DrugformId = dictionaryDrug.DrugformId;
-            NomenId = dictionaryDrug.NomenId;
-            PrepId = dictionaryDrug.PrepId;
             PharmacyId = pharmacyId;
         }
     }

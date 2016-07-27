@@ -23,9 +23,9 @@ namespace Escyug.LissBinder.App.Console
 
         private static void GenerateCredentials(string password)
         {
-            var salt = Security.GenerateSalt();
+            var salt = Hasher.GenerateSalt();
             var bytePass = Encoding.UTF8.GetBytes(password);
-            var passHash = Security.GenerateSaltedHash(bytePass, salt);
+            var passHash = Hasher.GenerateSaltedHash(bytePass, salt);
 
             System.Console.WriteLine("salt: " + Encoding.UTF8.GetString(salt));
             System.Console.WriteLine("hash: " + Encoding.UTF8.GetString(passHash));

@@ -2,7 +2,7 @@
 
 namespace Escyug.LissBinder.Common.Utils
 {
-    public static class Security
+    public static class Hasher
     {
         private const int DEFAULT_SALT_LENGHT_LIMIT = 32;
 
@@ -15,6 +15,11 @@ namespace Escyug.LissBinder.Common.Utils
             return GenerateSalt(DEFAULT_SALT_LENGHT_LIMIT);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="maximumSaltLength"></param>
+        /// <returns></returns>
         public static byte[] GenerateSalt(int maximumSaltLength)
         {
             var salt = new byte[maximumSaltLength];
@@ -25,8 +30,6 @@ namespace Escyug.LissBinder.Common.Utils
 
             return salt; 
         }
-
-
 
         /// <summary>
         /// 
@@ -53,7 +56,12 @@ namespace Escyug.LissBinder.Common.Utils
             return algorithm.ComputeHash(plainTextWithSaltBytes);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array1"></param>
+        /// <param name="array2"></param>
+        /// <returns></returns>
         public static bool CompareByteArrays(byte[] array1, byte[] array2)
         {
             if (array1.Length != array2.Length)
@@ -71,7 +79,5 @@ namespace Escyug.LissBinder.Common.Utils
 
             return true;
         }
-
-
     }
 }

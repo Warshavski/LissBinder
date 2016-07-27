@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Linq.Expressions;
+
 namespace Escyug.LissBinder.Presentation.Common
 {
     public sealed class ApplicationController : IApplicationController
@@ -13,8 +14,7 @@ namespace Escyug.LissBinder.Presentation.Common
             _container.RegisterInstance<IApplicationController>(this);
         }
 
-
-
+      
         // IOC CONTAINER
         //---------------------------------------------------------------------
 
@@ -51,7 +51,6 @@ namespace Escyug.LissBinder.Presentation.Common
             return this;
         }
 
-       
 
         // PRESENTER WORKFLOW
         //---------------------------------------------------------------------
@@ -78,6 +77,24 @@ namespace Escyug.LissBinder.Presentation.Common
 
             var presenter = _container.Resolve<TPresenter>();
             presenter.Run(argument);
+        }
+
+        public void Run<TPresenter, TArgument1, TArgument2>(TArgument1 argument1, TArgument2 argument2)
+            where TPresenter : class, IPresenter<TArgument1, TArgument2>
+        {
+            if (!_container.IsRegistered<TPresenter>())
+            {
+                _container.Register<TPresenter>();
+            }
+
+            var presenter = _container.Resolve<TPresenter>();
+            presenter.Run(argument1, argument2);
+        }
+
+
+        public void Run<TPresenter, TArgument1, TArgument2>(TArgument1 argument1, TArgument1 argument2) where TPresenter : class, IPresenter<TArgument1, TArgument2>
+        {
+            throw new NotImplementedException();
         }
     }
 }

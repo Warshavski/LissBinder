@@ -33,4 +33,19 @@ namespace Escyug.LissBinder.Presentation.Common
 
         public abstract void Run(TArgument argument);
     }
+
+    public abstract class BasePresenter<TView, TArgument1, TArgument2> : IPresenter<TArgument1, TArgument2>
+        where TView : IView
+    {
+        protected TView View { get; private set; }
+        protected IApplicationController AppController { get; private set; }
+
+        protected BasePresenter(TView view, IApplicationController appController)
+        {
+            View = view;
+            AppController = appController;
+        }
+
+        public abstract void Run(TArgument1 argument1, TArgument2 argument2);
+    }
 }
