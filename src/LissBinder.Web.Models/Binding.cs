@@ -18,16 +18,7 @@ namespace Escyug.LissBinder.Web.Models
         public int PharmacyId { get; private set; }
 
         public Binding(long pharmacyDrugCode, int pharmacyDrugProdCode,
-           int descriptionId, int drugformId, int nomenId, int prepId, int pharmacyId)
-            : this(pharmacyDrugCode, pharmacyDrugProdCode, descriptionId,
-            drugformId, nomenId, prepId)
-        {
-
-            PharmacyId = pharmacyId;
-        }
-
-        public Binding(long pharmacyDrugCode, int pharmacyDrugProdCode, 
-            int descriptionId, int drugformId, int nomenId, int prepId)
+           int descriptionId, int drugformId, int nomenId, int prepId, int pharmacyId = 1)
         {
             PharmacyDrugCode = pharmacyDrugCode;
             PharmacyDrugProdCode = pharmacyDrugProdCode;
@@ -35,6 +26,7 @@ namespace Escyug.LissBinder.Web.Models
             DrugformId = drugformId;
             NomenId = nomenId;
             PrepId = prepId;
+            PharmacyId = pharmacyId;
         }
 
         public void SetPharmacy(int pharmacyId)

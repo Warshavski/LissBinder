@@ -7,6 +7,7 @@ using System.Web.Http;
 
 using Escyug.LissBinder.Web.Models.Repositories;
 using System.Threading.Tasks;
+using Escyug.LissBinder.Web.Models;
 
 namespace Escyug.LissBinder.Web.Api.Controllers
 {
@@ -28,8 +29,13 @@ namespace Escyug.LissBinder.Web.Api.Controllers
          */
         [Route("api/bind")]
         [HttpPost]
-        public async Task<IHttpActionResult>PostAsync([FromBody]Models.Binding binding)
+        public async Task<IHttpActionResult>PostAsync([FromBody]Binding binding)
         {
+            if (binding == null)
+            {
+                return BadRequest();
+            }
+
             //*** get it from context principal
             var pharmacyId = base.PharmacyClaim;
 
