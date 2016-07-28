@@ -28,32 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonSignIn = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.textBoxLogin = new System.Windows.Forms.TextBox();
             this.labelLogin = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelPictureBox = new System.Windows.Forms.Panel();
+            this.buttonSignIn = new System.Windows.Forms.Button();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.pictureBoxLoading = new System.Windows.Forms.PictureBox();
-            this.panel1.SuspendLayout();
+            this.panelPictureBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoading)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonSignIn
-            // 
-            this.buttonSignIn.Location = new System.Drawing.Point(145, 121);
-            this.buttonSignIn.Name = "buttonSignIn";
-            this.buttonSignIn.Size = new System.Drawing.Size(75, 23);
-            this.buttonSignIn.TabIndex = 16;
-            this.buttonSignIn.Text = "Вход";
-            this.buttonSignIn.UseVisualStyleBackColor = true;
-            // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.buttonCancel.Location = new System.Drawing.Point(226, 121);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -73,6 +66,7 @@
             // labelPassword
             // 
             this.labelPassword.AutoSize = true;
+            this.labelPassword.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelPassword.Location = new System.Drawing.Point(98, 57);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.Size = new System.Drawing.Size(54, 13);
@@ -90,22 +84,34 @@
             // labelLogin
             // 
             this.labelLogin.AutoSize = true;
+            this.labelLogin.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelLogin.Location = new System.Drawing.Point(98, 15);
             this.labelLogin.Name = "labelLogin";
             this.labelLogin.Size = new System.Drawing.Size(47, 13);
             this.labelLogin.TabIndex = 18;
             this.labelLogin.Text = "Логин : ";
             // 
-            // panel1
+            // panelPictureBox
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.pictureBoxLogo);
-            this.panel1.Controls.Add(this.pictureBoxLoading);
-            this.panel1.Location = new System.Drawing.Point(22, 32);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(57, 57);
-            this.panel1.TabIndex = 20;
+            this.panelPictureBox.BackColor = System.Drawing.SystemColors.Window;
+            this.panelPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelPictureBox.Controls.Add(this.pictureBoxLogo);
+            this.panelPictureBox.Controls.Add(this.pictureBoxLoading);
+            this.panelPictureBox.Location = new System.Drawing.Point(22, 32);
+            this.panelPictureBox.Name = "panelPictureBox";
+            this.panelPictureBox.Size = new System.Drawing.Size(57, 57);
+            this.panelPictureBox.TabIndex = 20;
+            // 
+            // buttonSignIn
+            // 
+            this.buttonSignIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSignIn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonSignIn.Location = new System.Drawing.Point(145, 121);
+            this.buttonSignIn.Name = "buttonSignIn";
+            this.buttonSignIn.Size = new System.Drawing.Size(75, 23);
+            this.buttonSignIn.TabIndex = 16;
+            this.buttonSignIn.Text = "Вход";
+            this.buttonSignIn.UseVisualStyleBackColor = true;
             // 
             // pictureBoxLogo
             // 
@@ -140,7 +146,7 @@
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(314, 155);
             this.ControlBox = false;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelPictureBox);
             this.Controls.Add(this.buttonSignIn);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxPassword);
@@ -154,8 +160,7 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login form";
-            this.Load += new System.EventHandler(this.LoginForm_Load);
-            this.panel1.ResumeLayout(false);
+            this.panelPictureBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoading)).EndInit();
             this.ResumeLayout(false);
@@ -171,7 +176,7 @@
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.TextBox textBoxLogin;
         private System.Windows.Forms.Label labelLogin;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelPictureBox;
         private System.Windows.Forms.PictureBox pictureBoxLoading;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
 

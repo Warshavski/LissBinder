@@ -15,10 +15,10 @@ namespace Escyug.LissBinder.Presentation.Presenters
 {
     public sealed class ImportPresenter : BasePresenter<IImportView>
     {
-        private readonly IImportService _importService;
+        private readonly IDataImportService _importService;
 
         public ImportPresenter(IImportView view, IApplicationController appController,
-            IImportService importService) : base(view, appController)
+            IDataImportService importService) : base(view, appController)
         {
             _importService = importService;
 

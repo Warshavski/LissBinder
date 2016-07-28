@@ -43,6 +43,17 @@ namespace Escyug.LissBinder.App.WinForms
             }
         }
 
+        /// <summary>
+        /// Show warning message
+        /// </summary>
+        public string Warning
+        {
+            set
+            {
+                MessageBox.Show(value, "Application warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
         #endregion IView members
 

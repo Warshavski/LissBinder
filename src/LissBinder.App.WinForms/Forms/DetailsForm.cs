@@ -11,32 +11,22 @@ namespace Escyug.LissBinder.App.WinForms
         {
             InitializeComponent();
 
-            this.buttonClose.Click += (sender, e) => Invoker.Invoke(CloseForm);
+            this.buttonClose.Click += (sender, e) => { this.Close(); };
         }
 
 
-        //---------------------------------------------------------------------
-
-
         #region IView members 
-
        
         public new void Show()
         {
             ShowDialog();
         }
 
-
         #endregion IView members
-
-
         //---------------------------------------------------------------------
 
 
         #region IDetailsView members
-
-
-        public event Action CloseForm;
 
         public string DrugName
         {
@@ -68,8 +58,8 @@ namespace Escyug.LissBinder.App.WinForms
             set { this.labelBarcode.Text = value; }
         }
 
-
         #endregion IDetailsView members
+        //---------------------------------------------------------------------
 
 
     }

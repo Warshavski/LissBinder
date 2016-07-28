@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -28,28 +22,20 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
 
-
-        //---------------------------------------------------------------------
-
-
         #region IView member
 
-        
         public new void Show()
         {
             _context.MainForm = this;
             Application.Run(_context);
         }
 
-
         #endregion IView member
-
-
         //---------------------------------------------------------------------
 
 
-        #region ILoginView members
 
+        #region ILoginView members
 
         public event Func<Task> SignInAsync;
 
@@ -91,10 +77,7 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
         #endregion ILoginView members
+        //---------------------------------------------------------------------
 
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

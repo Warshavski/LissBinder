@@ -9,8 +9,6 @@ namespace Escyug.LissBinder.Models
 
         public int PharmacyId { get; private set; }
         
-        //public ServiceToken Token {get; private set;}
-
         public User(int userId, string userName, int pharmacyId)
         {
             UserId = userId;

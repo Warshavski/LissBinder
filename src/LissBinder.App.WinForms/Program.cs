@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Escyug.LissBinder.Models.Services;
+using Escyug.LissBinder.Models.Services.Common;
 
 using Escyug.LissBinder.Presentation.Common;
-using Escyug.LissBinder.Presentation.Views;
 using Escyug.LissBinder.Presentation.Presenters;
 using Escyug.LissBinder.Presentation.Utils.EventAggregator;
-using Escyug.LissBinder.Models.Services.Common;
+using Escyug.LissBinder.Presentation.Views;
 
 namespace Escyug.LissBinder.App.WinForms
 {
-    static class Program
+    internal static class Program
     {
-        public static readonly ApplicationContext Context = new ApplicationContext();
+        internal static readonly ApplicationContext Context = new ApplicationContext();
 
         /// <summary>
         /// Главная точка входа для приложения.
@@ -27,13 +24,10 @@ namespace Escyug.LissBinder.App.WinForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new LoginForm());
-
-            var apiUri = ConfigurationManager.ConnectionStrings["test"].ConnectionString;
             
-            var controller = new ApplicationController(new LightInjectAdapter()).
-                RegisterInstance<IEventAggregator>(new SimpleEventAggregator()).
-                RegisterInstance(new ApplicationContext());
+            var controller = new ApplicationController(new LightInjectAdapter())
+                .RegisterInstance<IEventAggregator>(new SimpleEventAggregator())
+                .RegisterInstance(new ApplicationContext());
 
             ConfigureViews(controller);
             ConfigureApiContext(controller);
@@ -44,7 +38,9 @@ namespace Escyug.LissBinder.App.WinForms
 
         private static void ConfigureApiContext(IApplicationController controller)
         {
+            #if DEBUG
             var apiUri = ConfigurationManager.ConnectionStrings["test"].ConnectionString;
+            #endif
             
             controller.RegisterInstance(new ApiContext(apiUri));
         }
@@ -63,7 +59,7 @@ namespace Escyug.LissBinder.App.WinForms
             controller.RegisterService<ILoginService, LoginService>()
                 .RegisterService<IDictionaryService, DictionaryService>()
                 .RegisterService<IPharmacyService, PharmacyService>()
-                .RegisterService<IImportService, ImportService>()
+                .RegisterService<IDataImportService, DataImportService>()
                 .RegisterService<IBindingService, BindingService>();
         }
     }

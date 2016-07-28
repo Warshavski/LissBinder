@@ -25,5 +25,10 @@ namespace Escyug.LissBinder.Presentation.Common
         /// Set notify message
         /// </summary>
         string Notify { set; }
+
+        /// <summary>
+        /// Set warning message
+        /// </summary>
+        string Warning { set; }
     }
 }

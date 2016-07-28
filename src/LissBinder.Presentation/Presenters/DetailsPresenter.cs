@@ -11,7 +11,7 @@ namespace Escyug.LissBinder.Presentation.Presenters
         public DetailsPresenter(IDetailsView view, IApplicationController appController)
             : base (view, appController)
         {
-            View.CloseForm += () => OnFormClose();
+            
         }
 
         public override void Run(PharmacyDrug argument)
@@ -28,11 +28,6 @@ namespace Escyug.LissBinder.Presentation.Presenters
             View.Quantity = drug.Quantity.ToString();
             View.Price = string.Format("{0:C}", drug.Price);
             View.Barcode = drug.Barcode;
-        }
-
-        private void OnFormClose()
-        {
-            View.Close();
         }
     }
 }

@@ -5,7 +5,7 @@ using Escyug.LissBinder.Models.Metadata;
 
 namespace Escyug.LissBinder.Models.Services
 {
-    public interface IImportService
+    public interface IDataImportService
     {
         /// <summary>
         /// Get file metadata

@@ -39,11 +39,11 @@ namespace Escyug.LissBinder.Models.Services
         }
     }
 
-    public class ImportService : IImportService
+    public class DataImportService : IDataImportService
     {
         private readonly ApiContext _apiContext;
 
-        public ImportService(ApiContext apiContext)
+        public DataImportService(ApiContext apiContext)
         {
             _apiContext = apiContext;
         }
@@ -182,7 +182,7 @@ namespace Escyug.LissBinder.Models.Services
         }
 
         /// <summary>
-        /// Parse PharmacyDrug object from DbDataRe ader.
+        /// Parse PharmacyDrug object from DbDataReader.
         /// </summary>
         /// <param name="reader">DbDataReader</param>
         /// <returns>PharmacyDrug object.</returns>

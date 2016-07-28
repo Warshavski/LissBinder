@@ -46,6 +46,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(20, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 13);
@@ -55,6 +57,7 @@
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.buttonClose.Location = new System.Drawing.Point(485, 208);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
@@ -65,6 +68,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(17, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 13);
@@ -74,6 +79,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(67, 80);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
@@ -83,6 +90,8 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.Location = new System.Drawing.Point(72, 140);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 13);
@@ -92,6 +101,8 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(39, 110);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
@@ -101,6 +112,8 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.Location = new System.Drawing.Point(49, 170);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(62, 13);
@@ -110,6 +123,7 @@
             // labelName
             // 
             this.labelName.AutoSize = true;
+            this.labelName.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelName.Location = new System.Drawing.Point(115, 20);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(83, 13);
@@ -119,6 +133,7 @@
             // labelManufacturer
             // 
             this.labelManufacturer.AutoSize = true;
+            this.labelManufacturer.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelManufacturer.Location = new System.Drawing.Point(115, 50);
             this.labelManufacturer.Name = "labelManufacturer";
             this.labelManufacturer.Size = new System.Drawing.Size(148, 13);
@@ -128,6 +143,7 @@
             // labelSeries
             // 
             this.labelSeries.AutoSize = true;
+            this.labelSeries.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelSeries.Location = new System.Drawing.Point(117, 80);
             this.labelSeries.Name = "labelSeries";
             this.labelSeries.Size = new System.Drawing.Size(84, 13);
@@ -137,6 +153,7 @@
             // labelQuantity
             // 
             this.labelQuantity.AutoSize = true;
+            this.labelQuantity.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelQuantity.Location = new System.Drawing.Point(117, 110);
             this.labelQuantity.Name = "labelQuantity";
             this.labelQuantity.Size = new System.Drawing.Size(94, 13);
@@ -146,6 +163,7 @@
             // labelPrice
             // 
             this.labelPrice.AutoSize = true;
+            this.labelPrice.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelPrice.Location = new System.Drawing.Point(117, 140);
             this.labelPrice.Name = "labelPrice";
             this.labelPrice.Size = new System.Drawing.Size(80, 13);
@@ -155,6 +173,7 @@
             // labelBarcode
             // 
             this.labelBarcode.AutoSize = true;
+            this.labelBarcode.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelBarcode.Location = new System.Drawing.Point(117, 170);
             this.labelBarcode.Name = "labelBarcode";
             this.labelBarcode.Size = new System.Drawing.Size(96, 13);
@@ -182,7 +201,7 @@
             this.MinimumSize = new System.Drawing.Size(580, 270);
             this.Name = "DetailsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "DetailsViewForm";
+            this.Text = "Drug details";
             this.ResumeLayout(false);
             this.PerformLayout();
 

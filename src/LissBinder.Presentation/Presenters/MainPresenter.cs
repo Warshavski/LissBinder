@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 using Escyug.LissBinder.Models;
@@ -50,7 +46,7 @@ namespace Escyug.LissBinder.Presentation.Presenters
             //-------------------------
             View.DrugsSearchAsync += () => OnDrugsSearchAsync(View.SearchDrugName);
             View.DictionarySearchAsync += () => OnDictionarySearchAsync(View.SelectedPharmacyDrug);
-            View.DrugBindAsync += () => OnDrugBindAsync(View.SelectedPharmacyDrug, View.SelectedDictionaryDrug);
+            View.DrugBind += () => OnDrugBind(View.SelectedPharmacyDrug, View.SelectedDictionaryDrug);
             View.DrugDetailsShow += () => OnDrugDetailsShow(View.SelectedPharmacyDrug);
             View.ImportShow += () => OnImportShow();
         }
@@ -70,7 +66,7 @@ namespace Escyug.LissBinder.Presentation.Presenters
 
         private async Task OnDrugsSearchAsync(string drugName)
         {
-            if (String.Compare(drugName.Trim(), string.Empty) != 0)
+            if (string.Compare(drugName.Trim(), string.Empty) != 0)
             {
                 View.IsDrugsSearch = true;
                
@@ -80,7 +76,6 @@ namespace Escyug.LissBinder.Presentation.Presenters
 
                     if (pharmacyDrugsList != null)
                     {
-                        //View.PharmacyDrugs = null;
                         View.PharmacyDrugs = pharmacyDrugsList.ToList();
                     }
                     else
@@ -117,7 +112,6 @@ namespace Escyug.LissBinder.Presentation.Presenters
                     
                     if (dictionaryDrugsList != null)
                     {
-                        //View.DictionaryDrugs = null;
                         View.DictionaryDrugs = dictionaryDrugsList;
 
                         _lastSearchName = searchName;
@@ -134,15 +128,12 @@ namespace Escyug.LissBinder.Presentation.Presenters
             }
         }
 
-       
-
-        //*** create binding presenter
-        private async Task OnDrugBindAsync(PharmacyDrug pharmacyDrug, DictionaryDrug dictionaryDrug)
+        private void OnDrugBind(PharmacyDrug pharmacyDrug, DictionaryDrug dictionaryDrug)
         {
             if (pharmacyDrug != null && dictionaryDrug != null)
             {
                 var bindingSubscription =
-                _eventAggregator.Subscribe<BindingMessage>(OnBindingComlete);
+                    _eventAggregator.Subscribe<BindingMessage>(OnBindingComplete);
 
                 var binding = new Binding(pharmacyDrug, dictionaryDrug);
 
@@ -154,7 +145,7 @@ namespace Escyug.LissBinder.Presentation.Presenters
             }
         }
 
-        private void OnBindingComlete(BindingMessage bindingMessage)
+        private void OnBindingComplete(BindingMessage bindingMessage)
         {
             var pharmacyDrugCode = bindingMessage.Binding.PharmacyDrugCode;
 

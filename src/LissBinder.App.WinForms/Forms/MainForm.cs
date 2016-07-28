@@ -21,8 +21,7 @@ namespace Escyug.LissBinder.App.WinForms
             this.buttonSearch.Click += async (sender, e) =>
                 await Invoker.InvokeAsync(DrugsSearchAsync);
 
-            this.buttonBind.Click += async (sender, e) =>
-                await Invoker.InvokeAsync(DrugBindAsync);
+            this.buttonBind.Click += (sender, e) => Invoker.Invoke(DrugBind);
 
             this.dataGridViewDrugs.CellClick += async (sender, e) =>
                 await Invoker.InvokeAsync(DictionarySearchAsync);
@@ -60,11 +59,10 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
       
-        //---------------------------------------------------------------------
+      
 
 
         #region IView members
-
 
         public new void Show()
         {
@@ -73,25 +71,21 @@ namespace Escyug.LissBinder.App.WinForms
             //Application.Run(_context);
         }
 
-
         #endregion
-
-
         //---------------------------------------------------------------------
 
 
         #region IMainView members
 
-
-        public event Func<Task> DrugsSearchAsync;
-
         public event Action DrugDetailsShow;
 
         public event Action ImportShow;
 
+        public event Action DrugBind;
+
         public event Func<Task> DictionarySearchAsync;
 
-        public event Func<Task> DrugBindAsync;
+        public event Func<Task> DrugsSearchAsync;
 
         public string SearchDrugName
         {
@@ -159,9 +153,7 @@ namespace Escyug.LissBinder.App.WinForms
             set { progressBoxDrugs.Visible = value; }
         }
 
-        public bool IsBinding { set { if (!value) dataGridViewDrugs.Refresh(); } }
-
-
+        
         public string Heading 
         {
             get { return this.Text; }
@@ -169,8 +161,6 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
         #endregion IMainView members
-
-
         //---------------------------------------------------------------------
 
 
@@ -198,6 +188,6 @@ namespace Escyug.LissBinder.App.WinForms
         }
 
         #endregion Helper methods 
-
+        //---------------------------------------------------------------------
     }
 }

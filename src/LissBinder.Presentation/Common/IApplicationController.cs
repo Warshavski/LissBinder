@@ -70,14 +70,5 @@ namespace Escyug.LissBinder.Presentation.Common
         /// <param name="argument"></param>
         void Run<TPresenter, TArgument>(TArgument argument)
              where TPresenter : class, IPresenter<TArgument>;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TPresenter"></typeparam>
-        /// <typeparam name="TArgument"></typeparam>
-        /// <param name="argument"></param>
-        void Run<TPresenter, TArgument1, TArgument2>(TArgument1 argument1, TArgument1 argument2)
-             where TPresenter : class, IPresenter<TArgument1, TArgument2>;
     }
 }

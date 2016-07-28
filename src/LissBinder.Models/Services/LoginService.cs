@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 using Escyug.LissBinder.Models.Services.Exceptions;
-using Escyug.LissBinder.Models.Utils;
 using Escyug.LissBinder.Models.Services.Common;
 
 namespace Escyug.LissBinder.Models.Services
