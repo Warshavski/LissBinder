@@ -67,8 +67,8 @@
     <Compile Include="Services\PharmacyService.cs" />
     <Compile Include="Utils\HttpHelper.cs" />
     <Compile Include="Services\IDictionaryService.cs" />
-    <Compile Include="Services\IImportService.cs" />
-    <Compile Include="Services\ImportService.cs" />
+    <Compile Include="Services\IDataImportService.cs" />
+    <Compile Include="Services\DataImportService.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

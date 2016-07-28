@@ -50,62 +50,62 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BindingForm.cs">
+    <Compile Include="Forms\BindingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BindingForm.Designer.cs">
+    <Compile Include="Forms\BindingForm.Designer.cs">
       <DependentUpon>BindingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Invoker.cs" />
     <Compile Include="LightInjectAdapter.cs" />
-    <Compile Include="DetailsForm.cs">
+    <Compile Include="Forms\DetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DetailsForm.Designer.cs">
+    <Compile Include="Forms\DetailsForm.Designer.cs">
       <DependentUpon>DetailsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImportForm.cs">
+    <Compile Include="Forms\ImportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImportForm.Designer.cs">
+    <Compile Include="Forms\ImportForm.Designer.cs">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BaseForm.cs">
+    <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BaseForm.Designer.cs">
+    <Compile Include="Forms\BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BindingForm.resx">
+    <EmbeddedResource Include="Forms\BindingForm.resx">
       <DependentUpon>BindingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DetailsForm.resx">
+    <EmbeddedResource Include="Forms\DetailsForm.resx">
       <DependentUpon>DetailsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImportForm.resx">
+    <EmbeddedResource Include="Forms\ImportForm.resx">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BaseForm.resx">
+    <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -156,6 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\esc_cube.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\15.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
