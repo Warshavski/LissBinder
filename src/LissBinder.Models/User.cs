@@ -3,14 +3,17 @@ namespace Escyug.LissBinder.Models
 {
     public class User
     {
-        public int Id { get; private set; }
+        public int UserId { get; private set; }
 
-        public string Name { get; private set; }
+        public string UserName { get; private set; }
 
-        public User(int userId, string userName)
+        public int PharmacyId { get; private set; }
+        
+        public User(int userId, string userName, int pharmacyId)
         {
-            Id = userId;
-            Name = userName;
+            UserId = userId;
+            UserName = userName;
+            PharmacyId = pharmacyId;
         }
     }
 }

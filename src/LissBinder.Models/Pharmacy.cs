@@ -24,15 +24,15 @@ namespace Escyug.LissBinder.Models
 
         #endregion Properties
 
-        public Pharmacy(int pharmacyId, string pharmacyName, string pharmacyAddress,
-            int drugReservTime, string pharmacyPhoneNumber, string pharmacyWorktime)
+        public Pharmacy(int id, string name, string address,
+            int reservTime, string phoneNumber, string worktime)
         {
-            Id = pharmacyId;
-            Name = pharmacyName;
-            Address = pharmacyAddress;
-            ReservTime = drugReservTime;
-            PhoneNumber = pharmacyPhoneNumber;
-            WorkTime = pharmacyWorktime;
+            Id = id;
+            Name = name;
+            Address = address;
+            ReservTime = reservTime;
+            PhoneNumber = phoneNumber;
+            WorkTime = worktime;
         }
     }
 }

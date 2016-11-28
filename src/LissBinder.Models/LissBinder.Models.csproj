@@ -30,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\lib\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\lib\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,28 +48,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\Common\ApiContext.cs" />
+    <Compile Include="Services\BindingService.cs" />
+    <Compile Include="Services\IBindingService.cs" />
+    <Compile Include="Services\Common\ServiceToken.cs" />
+    <Compile Include="Binding.cs" />
     <Compile Include="Drugs\DictionaryDrug.cs" />
     <Compile Include="Drugs\PharmacyDrug.cs" />
-    <Compile Include="Mappings\DictionaryDrugMappings.cs" />
-    <Compile Include="Mappings\PharmacyDrugMappings.cs" />
-    <Compile Include="Mappings\PharmacyMappings.cs" />
-    <Compile Include="Mappings\UserMappings.cs" />
+    <Compile Include="Metadata\ColumnMetadata.cs" />
+    <Compile Include="Metadata\TableMetadata.cs" />
     <Compile Include="Pharmacy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\DictionaryDrugsRepository.cs" />
-    <Compile Include="Repositories\IDictionaryDrugsRepository.cs" />
-    <Compile Include="Repositories\IPharmacyDrugsRepository.cs" />
-    <Compile Include="Repositories\IPharmacyRepository.cs" />
-    <Compile Include="Repositories\IUserRepository.cs" />
-    <Compile Include="Repositories\PharmacyDrugsRepository.cs" />
-    <Compile Include="Repositories\PharmacyRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Services\DictionaryService.cs" />
+    <Compile Include="Services\Exceptions\ServiceException.cs" />
     <Compile Include="Services\ILoginService.cs" />
-    <Compile Include="Services\SimpleLoginService.cs" />
+    <Compile Include="Services\IPharmacyService.cs" />
+    <Compile Include="Services\LoginService.cs" />
+    <Compile Include="Services\PharmacyService.cs" />
+    <Compile Include="Utils\HttpHelper.cs" />
+    <Compile Include="Services\IDictionaryService.cs" />
+    <Compile Include="Services\IDataImportService.cs" />
+    <Compile Include="Services\DataImportService.cs" />
     <Compile Include="User.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Repositories\todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LissBinder.Data.SqlServer\LissBinder.Data.SqlServer.csproj">
@@ -72,6 +81,10 @@
       <Name>LissBinder.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

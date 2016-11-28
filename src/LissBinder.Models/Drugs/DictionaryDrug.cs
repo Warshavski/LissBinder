@@ -1,6 +1,8 @@
-﻿
+﻿using System;
+
 namespace Escyug.LissBinder.Models.Drugs
 {
+    //[Serializable]
     public class DictionaryDrug
     {
         public string Name { get; private set; }
@@ -15,14 +17,14 @@ namespace Escyug.LissBinder.Models.Drugs
 
         public int DrugformId { get; private set; }
 
-        public DictionaryDrug(string drugName, string drugformDescription, 
-            int nomenId, int prepId, int descId, int drugformId)
+        public DictionaryDrug(string name, string drugformDescription,
+            int nomenId, int prepId, int descriptionId, int drugformId)
         {
-            Name = drugName;
+            Name = name;
             DrugformDescription = drugformDescription;
             NomenId = nomenId;
             PrepId = prepId;
-            DescriptionId = descId;
+            DescriptionId = descriptionId;
             DrugformId = drugformId;
         }
     }

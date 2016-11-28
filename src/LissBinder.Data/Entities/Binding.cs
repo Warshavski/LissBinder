@@ -19,5 +19,7 @@ namespace Escyug.LissBinder.Data.Entities
         public int NomenId { get; set; }
 
         public int PrepId { get; set; }
+
+        public int PharmacyId { get; set; }
     }
 }
